@@ -226,6 +226,10 @@
   .staff-mode .staff-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;color:var(--gold2)}
   @media(max-width:600px){.staff-mode #ownerOv{padding:0}.staff-mode #ownerOv .modal{border-radius:0;border:0;min-height:100vh}}
 
+  .bkc.pending{outline:1.5px dashed var(--gold2);outline-offset:-2px}
+  .btn-ok{background:#1f7a45;color:#f2fff6}
+  .btn-ok:hover{background:#24904f}
+  .wa-prev{background:#0b3d2e;color:#e8f5ee;border-radius:12px 12px 12px 4px;padding:12px 14px;font-size:14px;line-height:1.45;max-width:420px;margin-top:6px}
   .concept{background:var(--red);color:var(--on-red);text-align:center;font-size:12px;font-weight:600;padding:6px 12px}
 
   @media(max-width:860px){
@@ -389,10 +393,10 @@ const T = {
     s1:"Çfarë shërbimi dëshironi?",s2:"Zgjidhni berberin",s3:"Zgjidhni ditën dhe orën",s4:"Të dhënat tuaja",
     any:"Cilido berber i lirë",anySub:"Termini më i shpejtë",
     free:"E lirë",taken:"E zënë",noSlots:"Nuk ka orare të lira për këtë ditë.",
-    name:"Emri dhe mbiemri",tel:"Numri i telefonit",notes:"Shënim (opsional)",
+    name:"Emri dhe mbiemri",tel:"Numri i telefonit (WhatsApp)",notes:"Shënim (opsional)",
     sum:{svc:"Shërbimi",barber:"Berberi",when:"Kur",price:"Çmimi"},
     errName:"Ju lutem shkruani emrin dhe një numër telefoni të vlefshëm.",
-    doneH:"Termini u rezervua!",doneP:"Do të merrni konfirmim me SMS. Ju lutem ejani 5 minuta më herët.",
+    doneH:"Kërkesa u dërgua!",doneP:"Berberi do ta konfirmojë terminin së shpejti, do të merrni mesazh në WhatsApp.",
     doneBtn:"Mbyll",cancelInfo:"Për ta anuluar, telefononi +383 44 907 755.",
     min:"min",
     svcs:[["Prerje klasike","Prerje me gërshërë dhe makinë, larje dhe stilim."],["Fade","Skin fade ose low/mid/high fade me detaje të pastra."],["Rregullim mjekre","Formësim, konturim me brisk dhe vaj mjekre."],["Prerje + mjekër","Paketa e plotë: prerje dhe rregullim mjekre."],["Rruajtje me brisk","Peshqir i nxehtë, brisk klasik dhe balsam."],["Prerje për fëmijë","Për fëmijë deri në 12 vjeç."]],
@@ -409,7 +413,8 @@ const T = {
     save:"Ruaj",noTimes:"Nuk ka kohë të lirë për këtë berber në këtë ditë.",
     saved:"U ruajt, ora tani shfaqet e zënë online",deleted:"Rezervimi u fshi, ora u lirua",
     del:"Fshij rezervimin",dClient:"Klienti",dSrc:"Burimi",
-    walkinName:"Klient pa termin",breakName:"Pauzë",resetDemo:"Rivendos të dhënat demo",resetDone:"Të dhënat demo u rivendosën",
+    walkinName:"Klient pa termin",breakName:"Pauzë",
+    stL:"Statusi",stPending:"Në pritje",stConfirmed:"Konfirmuar",clientLang:"Gjuha e klientit",confirmBtn:"Konfirmo & dërgo në WhatsApp",declineBtn:"Refuzo",resend:"Dërgo sërish konfirmimin",msgIn:"Mesazhi do të jetë në",confirmedToast:"U konfirmua, WhatsApp u hap me mesazhin",declinedToast:"U refuzua, ora u lirua",msgOk:"Përshëndetje {name}! ✂️ Termini juaj në Barbershop Bingo është konfirmuar.\n\n📅 {date} · {time}\n💈 {service} te {barber}\n📍 Rr. Kerem Lewton, Prishtinë\n\nJu lutem ejani 5 minuta më herët. Për ndryshime: +383 44 907 755",msgNo:"Përshëndetje {name}, na vjen keq, termini {date} · {time} te {barber} nuk është më i lirë. Ju lutem zgjidhni një orë tjetër në faqen tonë ose na telefononi: +383 44 907 755. Barbershop Bingo",resetDemo:"Rivendos të dhënat demo",resetDone:"Të dhënat demo u rivendosën",
     nNew:"Rezervim i ri online",nH:"Njoftimet",nEmpty:"Nuk ka njoftime ende.",nNow:"tani",nView:"Shiko",nBadge:"E RE",nInfo:"Barberi merr njoftim në telefon për çdo rezervim online."
   },
   en:{
@@ -431,10 +436,10 @@ const T = {
     s1:"Which service would you like?",s2:"Choose your barber",s3:"Pick a day and time",s4:"Your details",
     any:"Any available barber",anySub:"Fastest appointment",
     free:"Free",taken:"Taken",noSlots:"No free times left for this day.",
-    name:"Full name",tel:"Phone number",notes:"Note (optional)",
+    name:"Full name",tel:"Phone number (WhatsApp)",notes:"Note (optional)",
     sum:{svc:"Service",barber:"Barber",when:"When",price:"Price"},
     errName:"Please enter your name and a valid phone number.",
-    doneH:"You're booked!",doneP:"You'll get an SMS confirmation. Please arrive 5 minutes early.",
+    doneH:"Request sent!",doneP:"Your barber will confirm shortly. You'll get a WhatsApp message.",
     doneBtn:"Close",cancelInfo:"To cancel, call +383 44 907 755.",
     min:"min",
     svcs:[["Classic haircut","Scissor and clipper cut, wash and styling."],["Fade","Skin fade or low/mid/high fade with sharp detailing."],["Beard trim","Shaping, straight-razor line-up and beard oil."],["Haircut + beard","The full package: haircut and beard trim."],["Straight-razor shave","Hot towel, classic razor and balm."],["Kids' haircut","For children up to 12."]],
@@ -450,7 +455,8 @@ const T = {
     save:"Save",noTimes:"No free time for this barber on this day.",
     saved:"Saved, that time now shows as busy online",deleted:"Booking deleted, the time is free again",
     del:"Delete booking",dClient:"Client",dSrc:"Source",
-    walkinName:"Walk-in client",breakName:"Break",resetDemo:"Reset demo data",resetDone:"Demo data reset",
+    walkinName:"Walk-in client",breakName:"Break",
+    stL:"Status",stPending:"Waiting",stConfirmed:"Confirmed",clientLang:"Client's language",confirmBtn:"Confirm & send on WhatsApp",declineBtn:"Decline",resend:"Send confirmation again",msgIn:"The message will be in",confirmedToast:"Confirmed, WhatsApp opened with the message",declinedToast:"Declined, the time is free again",msgOk:"Hi {name}! ✂️ Your appointment at Barbershop Bingo is confirmed.\n\n📅 {date} · {time}\n💈 {service} with {barber}\n📍 Rr. Kerem Lewton, Prishtina\n\nPlease arrive 5 minutes early. To change it: +383 44 907 755",msgNo:"Hi {name}, sorry, the time {date} · {time} with {barber} is no longer available. Please pick another time on our website or call us: +383 44 907 755. Barbershop Bingo",resetDemo:"Reset demo data",resetDone:"Demo data reset",
     nNew:"New online booking",nH:"Notifications",nEmpty:"No notifications yet.",nNow:"now",nView:"View",nBadge:"NEW",nInfo:"The barber gets a phone notification for every online booking."
   },
   de:{
@@ -472,10 +478,10 @@ const T = {
     s1:"Welche Leistung möchtest du?",s2:"Wähle deinen Barber",s3:"Tag und Uhrzeit wählen",s4:"Deine Daten",
     any:"Beliebiger freier Barber",anySub:"Schnellster Termin",
     free:"Frei",taken:"Belegt",noSlots:"Für diesen Tag sind keine Zeiten mehr frei.",
-    name:"Vor- und Nachname",tel:"Telefonnummer",notes:"Anmerkung (optional)",
+    name:"Vor- und Nachname",tel:"Telefonnummer (WhatsApp)",notes:"Anmerkung (optional)",
     sum:{svc:"Leistung",barber:"Barber",when:"Wann",price:"Preis"},
     errName:"Bitte Namen und eine gültige Telefonnummer eingeben.",
-    doneH:"Termin gebucht!",doneP:"Du erhältst eine SMS-Bestätigung. Bitte 5 Minuten früher da sein.",
+    doneH:"Anfrage gesendet!",doneP:"Dein Barber bestätigt den Termin in Kürze. Du bekommst eine WhatsApp-Nachricht.",
     doneBtn:"Schließen",cancelInfo:"Zum Stornieren: +383 44 907 755.",
     min:"Min.",
     svcs:[["Klassischer Haarschnitt","Schere und Maschine, Waschen und Styling."],["Fade","Skin Fade oder Low/Mid/High Fade mit sauberen Konturen."],["Bartpflege","Formen, Konturen mit dem Messer und Bartöl."],["Haarschnitt + Bart","Das Komplettpaket: Haarschnitt und Bartpflege."],["Rasur mit dem Messer","Heißes Tuch, klassisches Messer und Balsam."],["Kinderhaarschnitt","Für Kinder bis 12 Jahre."]],
@@ -491,11 +497,13 @@ const T = {
     save:"Speichern",noTimes:"Keine freie Zeit für diesen Barber an diesem Tag.",
     saved:"Gespeichert, die Zeit ist online jetzt belegt",deleted:"Termin gelöscht, die Zeit ist wieder frei",
     del:"Termin löschen",dClient:"Kunde",dSrc:"Quelle",
-    walkinName:"Laufkunde",breakName:"Pause",resetDemo:"Demo-Daten zurücksetzen",resetDone:"Demo-Daten zurückgesetzt",
+    walkinName:"Laufkunde",breakName:"Pause",
+    stL:"Status",stPending:"Wartet",stConfirmed:"Bestätigt",clientLang:"Sprache des Kunden",confirmBtn:"Bestätigen & per WhatsApp senden",declineBtn:"Ablehnen",resend:"Bestätigung erneut senden",msgIn:"Die Nachricht ist auf",confirmedToast:"Bestätigt, WhatsApp mit der Nachricht geöffnet",declinedToast:"Abgelehnt, die Zeit ist wieder frei",msgOk:"Hallo {name}! ✂️ Dein Termin bei Barbershop Bingo ist bestätigt.\n\n📅 {date} · {time}\n💈 {service} bei {barber}\n📍 Rr. Kerem Lewton, Prishtina\n\nBitte 5 Minuten früher da sein. Für Änderungen: +383 44 907 755",msgNo:"Hallo {name}, leider ist der Termin {date} · {time} bei {barber} nicht mehr frei. Bitte wähle eine andere Zeit auf unserer Website oder ruf uns an: +383 44 907 755. Barbershop Bingo",resetDemo:"Demo-Daten zurücksetzen",resetDone:"Demo-Daten zurückgesetzt",
     nNew:"Neue Online-Buchung",nH:"Benachrichtigungen",nEmpty:"Noch keine Benachrichtigungen.",nNow:"jetzt",nView:"Ansehen",nBadge:"NEU",nInfo:"Der Barber bekommt für jede Online-Buchung eine Push-Nachricht aufs Handy."
   }
 };
 const LOC={sq:"sq-AL",en:"en-GB",de:"de-DE"};
+const LANG_NAME={sq:"Shqip",en:"English",de:"Deutsch"};
 // sample price (€) & duration (min)
 const SVC=[[8,30],[10,40],[5,20],[13,50],[7,30],[6,25]];
 const BARBERS=[{n:"Albin",i:"A"},{n:"Redon",i:"R"},{n:"Loris",i:"L"}];
@@ -530,7 +538,7 @@ function seed(){
     BARBERS.forEach((_,b)=>{
       for(let i=0;i<TIMES.length;i++){
         if(rnd()<0.3){const svc=Math.floor(rnd()*SVC.length),len=slotsLen(svc);
-          if(canFit(b,day,i,len,false)){bookings.push({id:nextId++,barber:b,day,slot:i,len,svc,name:names[Math.floor(rnd()*names.length)],tel:"+383 4"+Math.floor(rnd()*9)+" "+String(Math.floor(rnd()*900)+100)+" "+String(Math.floor(rnd()*900)+100),src:srcs[Math.floor(rnd()*srcs.length)],notes:""});i+=len-1}}
+          if(canFit(b,day,i,len,false)){bookings.push({id:nextId++,barber:b,day,slot:i,len,svc,name:names[Math.floor(rnd()*names.length)],tel:"+383 4"+Math.floor(rnd()*9)+" "+String(Math.floor(rnd()*900)+100)+" "+String(Math.floor(rnd()*900)+100),src:srcs[Math.floor(rnd()*srcs.length)],notes:"",status:rnd()<0.25?"pending":"confirmed",lang:["sq","sq","sq","en","de"][Math.floor(rnd()*5)]});i+=len-1}}
       }
       if(rnd()<0.6){const i=6+Math.floor(rnd()*4);if(canFit(b,day,i,1,false))bookings.push({id:nextId++,barber:b,day,slot:i,len:1,svc:null,name:"",tel:"",src:"brk",notes:""})}
     });
@@ -649,7 +657,7 @@ function go(dir){
     const len=slotsLen(st.svc);
     const barber=st.barber===-1?BARBERS.findIndex((_,b)=>canFit(b,st.day,st.time,len)):st.barber;
     if(barber<0||!canFit(barber,st.day,st.time,len)){st.step=2;st.time=null;renderStep();return}
-    const b={id:nextId++,barber,day:st.day,slot:st.time,len,svc:st.svc,name:st.name.trim(),tel:st.tel.trim(),notes:st.notes,src:"web"};
+    const b={id:nextId++,barber,day:st.day,slot:st.time,len,svc:st.svc,name:st.name.trim(),tel:st.tel.trim(),notes:st.notes,src:"web",status:"pending",lang};
     bookings.push(b);persist();st.done=b;renderStep();notify(b);return;
   }
   let s=st.step+dir;
@@ -688,6 +696,23 @@ function markRead(id){notifs.forEach(n=>{if(n.bid===id)n.read=true});persist()}
 function mine(b){return adm.user===-1||adm.user===null||b.barber===adm.user}
 function unread(){return notifs.filter(n=>!n.read&&bookings.some(b=>b.id===n.bid&&mine(b))).length}
 function isNew(id){return notifs.some(n=>n.bid===id&&!n.read)}
+
+
+/* ---------- confirming bookings to the client ---------- */
+function waNumber(tel){let d=String(tel).replace(/[^\d+]/g,'');if(d.startsWith('+'))d=d.slice(1);else if(d.startsWith('00'))d=d.slice(2);else if(d.startsWith('0'))d='383'+d.slice(1);return d}
+function clientMsg(b,kind){
+  const L=b.lang||'sq',T2=T[L];
+  return T2[kind==='ok'?'msgOk':'msgNo']
+    .replace('{name}',b.name.split(' ')[0]).replace('{barber}',BARBERS[b.barber].n)
+    .replace('{date}',fromKey(b.day).toLocaleDateString(LOC[L],{weekday:'long',day:'numeric',month:'long'}))
+    .replace('{time}',TIMES[b.slot]).replace('{service}',T2.svcs[b.svc][0]);
+}
+function openWhatsApp(b,kind){
+  const url='https://wa.me/'+waNumber(b.tel)+'?text='+encodeURIComponent(clientMsg(b,kind));
+  window.__lastWa=url; try{window.open(url,'_blank')}catch(e){}
+}
+function confirmBooking(id){const b=bookings.find(x=>x.id===id);if(!b)return;b.status='confirmed';markRead(id);persist();openWhatsApp(b,'ok');renderAdmin();toast(t('confirmedToast'))}
+function declineBooking(id){const b=bookings.find(x=>x.id===id);if(!b)return;openWhatsApp(b,'no');bookings=bookings.filter(x=>x.id!==id);persist();adm.view='grid';renderAdmin();toast(t('declinedToast'))}
 
 /* ---------- staff panel ---------- */
 let adm={auth:false,user:null,pick:null,day:null,view:'grid',sel:null,f:{}};
@@ -763,9 +788,19 @@ function renderAdmin(){
         <div><span>${t('dClient')}</span><b>${esc(b.name)||'–'}</b></div>
         <div><span>${t('phone')}</span><b>${b.tel?`<a href="tel:${esc(b.tel.replace(/\s/g,''))}" style="color:var(--gold2)">${esc(b.tel)}</a>`:'–'}</b></div>`}
         <div><span>${t('dSrc')}</span><b>${t('src')[b.src]}</b></div>
+        ${b.src==='web'?`<div><span>${t('stL')}</span><b style="color:${b.status==='pending'?'var(--gold2)':'var(--ok)'}">${b.status==='pending'?'⏳ '+t('stPending'):'✓ '+t('stConfirmed')}</b></div>
+        <div><span>${t('clientLang')}</span><b>${LANG_NAME[b.lang||'sq']}</b></div>`:''}
         ${b.notes?`<div><span>${t('notes')}</span><b>${esc(b.notes)}</b></div>`:''}
       </div>
-      <button class="btn btn-danger" style="margin-top:16px" onclick="delBooking(${b.id})">${t('del')}</button>`;
+      ${b.src==='web'&&b.status==='pending'?`
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:16px">
+          <button class="btn btn-ok" onclick="confirmBooking(${b.id})">✓ ${t('confirmBtn')}</button>
+          <button class="btn btn-danger" onclick="declineBooking(${b.id})">✕ ${t('declineBtn')}</button>
+        </div>
+        <p class="note" style="margin-top:8px">${t('msgIn')} <b style="font-style:normal">${LANG_NAME[b.lang||'sq']}</b>:</p>
+        <div class="wa-prev">${esc(clientMsg(b,'ok')).replace(/\n/g,'<br>')}</div>`
+      :`${b.src==='web'&&b.tel?`<button class="owner-link" style="margin-top:14px;display:block" onclick="openWhatsApp(bookings.find(x=>x.id===${b.id}),'ok')">${t('resend')} (WhatsApp · ${LANG_NAME[b.lang||'sq']})</button>`:''}
+      <button class="btn btn-danger" style="margin-top:16px" onclick="delBooking(${b.id})">${t('del')}</button>`}`;
     return;
   }
   if(adm.view==='form'){
@@ -804,9 +839,9 @@ function renderAdmin(){
       const bk=covering(b,adm.day,idx);
       if(bk){
         if(bk.slot!==idx)return; // covered by rowspan above
-        const label=bk.src==='brk'?t('breakName'):esc(bk.name)||t('src')[bk.src];
+        const label=(bk.status==='pending'?'⏳ ':'')+(bk.src==='brk'?t('breakName'):esc(bk.name)||t('src')[bk.src]);
         const sub=bk.src==='brk'?'':`${t('svcs')[bk.svc][0]} · ${t('src')[bk.src]}`;
-        rows+=`<td rowspan="${bk.len}"><button class="bkc src-${bk.src} ${isNew(bk.id)?'new':''}" onclick="adm.sel=${bk.id};adm.view='detail';markRead(${bk.id});renderAdmin()"><b>${isNew(bk.id)?`<span class='nb'>${t('nBadge')}</span>`:''}${label}</b><span>${sub}</span></button></td>`;
+        rows+=`<td rowspan="${bk.len}"><button class="bkc src-${bk.src} ${isNew(bk.id)?'new':''} ${bk.status==='pending'?'pending':''}" onclick="adm.sel=${bk.id};adm.view='detail';markRead(${bk.id});renderAdmin()"><b>${isNew(bk.id)?`<span class='nb'>${t('nBadge')}</span>`:''}${label}</b><span>${sub}</span></button></td>`;
       }else if(isPast(adm.day,idx)){
         rows+=`<td><div class="cell-past"></div></td>`;
       }else{
