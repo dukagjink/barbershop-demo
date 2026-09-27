@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <title>Barbershop Bingo — Redesign Concept</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -168,6 +169,7 @@
   .abar .btn{padding:9px 16px;font-size:14px}
   .agrid{overflow-x:auto;border:1px solid var(--line);border-radius:12px;max-height:60vh;overflow-y:auto}
   .agrid table{width:100%;min-width:540px;border-collapse:collapse;table-layout:fixed}
+  .agrid table.one{min-width:0}
   .agrid th{position:sticky;top:0;background:var(--bg2);z-index:2;padding:10px 6px;font-size:14px;border-bottom:1px solid var(--line);text-align:left}
   .agrid th:first-child,.agrid td:first-child{width:62px;color:var(--muted);font-size:12px;text-align:center}
   .agrid td{border-bottom:1px solid #262b36;border-left:1px solid #262b36;height:42px;padding:3px;vertical-align:top}
@@ -214,6 +216,15 @@
   .nitem{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;text-align:left;color:var(--text);font:inherit;width:100%}
   .nitem.unread{border-color:var(--gold)}
   .nitem small{color:var(--muted);display:block}
+
+  /* staff page (index.html#staff): public site hidden, panel is the page */
+  body.staff-mode>.concept,body.staff-mode>header,body.staff-mode>main,body.staff-mode>footer,body.staff-mode>.mbook,body.staff-mode>#bookOv{display:none!important}
+  .staff-mode #ownerOv{position:static;display:flex;background:none;backdrop-filter:none;min-height:100vh;align-items:flex-start;padding:28px 16px}
+  .staff-mode #ownerOv .modal{max-height:none;border-radius:20px}
+  .staff-mode #ownerOv .x{display:none}
+  .staff-top{display:none}
+  .staff-mode .staff-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;color:var(--gold2)}
+  @media(max-width:600px){.staff-mode #ownerOv{padding:0}.staff-mode #ownerOv .modal{border-radius:0;border:0;min-height:100vh}}
 
   .concept{background:var(--red);color:var(--on-red);text-align:center;font-size:12px;font-weight:600;padding:6px 12px}
 
@@ -327,7 +338,6 @@
 <footer>
   <div class="wrap">
     <div style="display:flex;align-items:center;gap:14px"><svg class="" viewBox="0 0 201.1578 117.48099" fill="currentColor" style="color:var(--gold);height:34px;width:auto" aria-hidden="true"><use href="#bingo-wordmark"/></svg><span>© Barbershop Bingo · Prishtinë</span></div>
-    <button class="owner-link" onclick="openOwner()" data-i="ownerLink"></button>
   </div>
 </footer>
 
@@ -350,6 +360,7 @@
 <!-- Staff panel -->
 <div class="overlay" id="ownerOv" onclick="if(event.target===this)closeAll()">
   <div class="modal wide" role="dialog" aria-modal="true">
+    <div class="staff-top"><svg viewBox="0 0 201.1578 117.48099" fill="currentColor" style="height:36px;width:auto" aria-hidden="true"><use href="#bingo-wordmark"/></svg><div class="lang" role="group" aria-label="Language"><button data-l="sq">SQ</button><button data-l="en">EN</button><button data-l="de">DE</button></div></div>
     <div class="m-head"><h3 id="admTitle"></h3><button class="x" onclick="closeAll()" aria-label="Close">×</button></div>
     <div id="ownerBody" style="margin-top:12px"></div>
   </div>
@@ -388,7 +399,7 @@ const T = {
     days:["E hënë","E martë","E mërkurë","E enjte","E premte","E shtunë","E diel"],
     today:"Sot",
     /* staff panel */
-    admH:"Paneli i stafit",pinH:"Hyni me PIN-in e stafit",pinHint:"PIN demo: 1234",pinBtn:"Hyr",pinErr:"PIN i gabuar",
+    admH:"Paneli i stafit",pinH:"Kush jeni?",pinFor:"PIN-i për",owner:"Pronari",ownerSub:"Të gjithë berberët",pinHint:"PIN demo: Albin 1111 · Redon 2222 · Loris 3333 · Pronari 1234",switchU:"Ndërro",nBk:"rezervime",myPanel:"Paneli im",pinBtn:"Hyr",pinErr:"PIN i gabuar",
     addBk:"+ Shto rezervim",logout:"Dil",time:"Ora",
     src:{web:"Online",phone:"Telefon",walkin:"Pa termin",insta:"Instagram",brk:"Pauzë / e bllokuar"},
     admNote:"Çdo rezervim që shtoni këtu shfaqet menjëherë si i zënë në faqe.",
@@ -398,7 +409,7 @@ const T = {
     save:"Ruaj",noTimes:"Nuk ka kohë të lirë për këtë berber në këtë ditë.",
     saved:"U ruajt, ora tani shfaqet e zënë online",deleted:"Rezervimi u fshi, ora u lirua",
     del:"Fshij rezervimin",dClient:"Klienti",dSrc:"Burimi",
-    walkinName:"Klient pa termin",breakName:"Pauzë",
+    walkinName:"Klient pa termin",breakName:"Pauzë",resetDemo:"Rivendos të dhënat demo",resetDone:"Të dhënat demo u rivendosën",
     nNew:"Rezervim i ri online",nH:"Njoftimet",nEmpty:"Nuk ka njoftime ende.",nNow:"tani",nView:"Shiko",nBadge:"E RE",nInfo:"Barberi merr njoftim në telefon për çdo rezervim online."
   },
   en:{
@@ -429,7 +440,7 @@ const T = {
     svcs:[["Classic haircut","Scissor and clipper cut, wash and styling."],["Fade","Skin fade or low/mid/high fade with sharp detailing."],["Beard trim","Shaping, straight-razor line-up and beard oil."],["Haircut + beard","The full package: haircut and beard trim."],["Straight-razor shave","Hot towel, classic razor and balm."],["Kids' haircut","For children up to 12."]],
     days:["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
     today:"Today",
-    admH:"Staff panel",pinH:"Sign in with the staff PIN",pinHint:"Demo PIN: 1234",pinBtn:"Sign in",pinErr:"Wrong PIN",
+    admH:"Staff panel",pinH:"Who are you?",pinFor:"PIN for",owner:"Owner",ownerSub:"All barbers",pinHint:"Demo PINs: Albin 1111 · Redon 2222 · Loris 3333 · Owner 1234",switchU:"Switch",nBk:"bookings",myPanel:"My panel",pinBtn:"Sign in",pinErr:"Wrong PIN",
     addBk:"+ Add booking",logout:"Sign out",time:"Time",
     src:{web:"Online",phone:"Phone call",walkin:"Walk-in",insta:"Instagram",brk:"Break / blocked"},
     admNote:"Anything you add here shows as busy on the website straight away.",
@@ -439,7 +450,7 @@ const T = {
     save:"Save",noTimes:"No free time for this barber on this day.",
     saved:"Saved, that time now shows as busy online",deleted:"Booking deleted, the time is free again",
     del:"Delete booking",dClient:"Client",dSrc:"Source",
-    walkinName:"Walk-in client",breakName:"Break",
+    walkinName:"Walk-in client",breakName:"Break",resetDemo:"Reset demo data",resetDone:"Demo data reset",
     nNew:"New online booking",nH:"Notifications",nEmpty:"No notifications yet.",nNow:"now",nView:"View",nBadge:"NEW",nInfo:"The barber gets a phone notification for every online booking."
   },
   de:{
@@ -470,7 +481,7 @@ const T = {
     svcs:[["Klassischer Haarschnitt","Schere und Maschine, Waschen und Styling."],["Fade","Skin Fade oder Low/Mid/High Fade mit sauberen Konturen."],["Bartpflege","Formen, Konturen mit dem Messer und Bartöl."],["Haarschnitt + Bart","Das Komplettpaket: Haarschnitt und Bartpflege."],["Rasur mit dem Messer","Heißes Tuch, klassisches Messer und Balsam."],["Kinderhaarschnitt","Für Kinder bis 12 Jahre."]],
     days:["Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag","Sonntag"],
     today:"Heute",
-    admH:"Mitarbeiter-Bereich",pinH:"Mit Mitarbeiter-PIN anmelden",pinHint:"Demo-PIN: 1234",pinBtn:"Anmelden",pinErr:"Falscher PIN",
+    admH:"Mitarbeiter-Bereich",pinH:"Wer bist du?",pinFor:"PIN für",owner:"Inhaber",ownerSub:"Alle Barber",pinHint:"Demo-PINs: Albin 1111 · Redon 2222 · Loris 3333 · Inhaber 1234",switchU:"Wechseln",nBk:"Termine",myPanel:"Mein Bereich",pinBtn:"Anmelden",pinErr:"Falscher PIN",
     addBk:"+ Termin eintragen",logout:"Abmelden",time:"Zeit",
     src:{web:"Online",phone:"Telefon",walkin:"Laufkundschaft",insta:"Instagram",brk:"Pause / blockiert"},
     admNote:"Alles, was du hier einträgst, erscheint sofort als belegt auf der Website.",
@@ -480,7 +491,7 @@ const T = {
     save:"Speichern",noTimes:"Keine freie Zeit für diesen Barber an diesem Tag.",
     saved:"Gespeichert, die Zeit ist online jetzt belegt",deleted:"Termin gelöscht, die Zeit ist wieder frei",
     del:"Termin löschen",dClient:"Kunde",dSrc:"Quelle",
-    walkinName:"Laufkunde",breakName:"Pause",
+    walkinName:"Laufkunde",breakName:"Pause",resetDemo:"Demo-Daten zurücksetzen",resetDone:"Demo-Daten zurückgesetzt",
     nNew:"Neue Online-Buchung",nH:"Benachrichtigungen",nEmpty:"Noch keine Benachrichtigungen.",nNow:"jetzt",nView:"Ansehen",nBadge:"NEU",nInfo:"Der Barber bekommt für jede Online-Buchung eine Push-Nachricht aufs Handy."
   }
 };
@@ -511,7 +522,7 @@ function canFit(barber,day,idx,len,checkPast=true){
   return true;
 }
 // demo data so the schedule looks lived-in
-(function seed(){
+function seed(){
   let r=7;const rnd=()=>(r=(r*9301+49297)%233280)/233280;
   const names=["Arben K.","Driton M.","Luan B.","Faton H.","Blerim S.","Gent R.","Ilir D.","Valon T.","Egzon Q.","Kushtrim A."];
   const srcs=["web","web","web","phone","phone","walkin","insta"];
@@ -524,7 +535,7 @@ function canFit(barber,day,idx,len,checkPast=true){
       if(rnd()<0.6){const i=6+Math.floor(rnd()*4);if(canFit(b,day,i,1,false))bookings.push({id:nextId++,barber:b,day,slot:i,len:1,svc:null,name:"",tel:"",src:"brk",notes:""})}
     });
   });
-})();
+}
 
 /* ---------- page ---------- */
 function applyLang(){
@@ -563,7 +574,8 @@ function renderHours(){
 function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toast.h);toast.h=setTimeout(()=>el.classList.remove('show'),2600)}
 function fmtDay(d,opts){return d.toLocaleDateString(LOC[lang],opts)}
 function barberName(i){return i===-1?t('any'):BARBERS[i].n}
-function closeAll(){document.querySelectorAll('.overlay').forEach(o=>o.classList.remove('show'));document.body.style.overflow=''}
+function closeAll(){document.querySelectorAll('.overlay').forEach(o=>{if(!(isStaff()&&o.id==='ownerOv'))o.classList.remove('show')});if(!isStaff())document.body.style.overflow=''}
+function isStaff(){return document.body.classList.contains('staff-mode')}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});
 
 /* ---------- customer booking ---------- */
@@ -638,7 +650,7 @@ function go(dir){
     const barber=st.barber===-1?BARBERS.findIndex((_,b)=>canFit(b,st.day,st.time,len)):st.barber;
     if(barber<0||!canFit(barber,st.day,st.time,len)){st.step=2;st.time=null;renderStep();return}
     const b={id:nextId++,barber,day:st.day,slot:st.time,len,svc:st.svc,name:st.name.trim(),tel:st.tel.trim(),notes:st.notes,src:"web"};
-    bookings.push(b);st.done=b;renderStep();notify(b);return;
+    bookings.push(b);persist();st.done=b;renderStep();notify(b);return;
   }
   let s=st.step+dir;
   if(st.skipBarber&&s===1)s+=dir;
@@ -649,30 +661,39 @@ function go(dir){
 /* ---------- notifications (demo of what the barber receives) ---------- */
 let notifs=[];let lastPush=null;
 function notify(b){
-  notifs.unshift({bid:b.id,read:false,at:new Date()});lastPush=b.id;
+  notifs.unshift({bid:b.id,read:false,at:new Date()});persist();
+  if(isStaff())showPush(b);
+}
+function showPush(b){
+  if(adm.auth&&!mine(b))return;
+  lastPush=b.id;
   setTimeout(()=>{
     const el=document.getElementById('push');
     el.innerHTML=`<div class="ic"><svg viewBox="0 0 201.1578 117.48099" fill="currentColor" style="width:30px"><use href="#bingo-wordmark"/></svg></div><div style="flex:1"><div class="tp"><span>Barbershop Bingo · ${BARBERS[b.barber].n}</span><span>${t('nNow')}</span></div>
       <b>${t('nNew')}</b><p>${esc(b.name)} · ${t('svcs')[b.svc][0]}<br>${fmtDay(fromKey(b.day),{weekday:'short',day:'numeric',month:'short'})} · ${TIMES[b.slot]}</p></div>`;
     el.classList.add('show');clearTimeout(notify.h);notify.h=setTimeout(()=>el.classList.remove('show'),7000);
     if(document.getElementById('ownerOv').classList.contains('show'))renderAdmin();
-  },1800);
+  },600);
 }
 function openFromPush(){
   document.getElementById('push').classList.remove('show');
   const b=bookings.find(x=>x.id===lastPush);if(!b)return;
   closeAll();openOwner();adm.day=b.day;
+  if(adm.auth&&!mine(b)){adm.auth=false;adm.user=null}
+  if(!adm.auth)adm.pick=b.barber;
   if(adm.auth){adm.sel=b.id;adm.view='detail';markRead(b.id)}
   renderAdmin();
 }
-function markRead(id){notifs.forEach(n=>{if(n.bid===id)n.read=true})}
-function unread(){return notifs.filter(n=>!n.read&&bookings.some(b=>b.id===n.bid)).length}
+function markRead(id){notifs.forEach(n=>{if(n.bid===id)n.read=true});persist()}
+function mine(b){return adm.user===-1||adm.user===null||b.barber===adm.user}
+function unread(){return notifs.filter(n=>!n.read&&bookings.some(b=>b.id===n.bid&&mine(b))).length}
 function isNew(id){return notifs.some(n=>n.bid===id&&!n.read)}
 
 /* ---------- staff panel ---------- */
-let adm={auth:false,day:null,view:'grid',sel:null,f:{}};
+let adm={auth:false,user:null,pick:null,day:null,view:'grid',sel:null,f:{}};
 function openOwner(){
   if(!adm.day)adm.day=key(new Date());
+  if(!adm.auth)adm.pick=null;
   adm.view='grid';
   document.getElementById('ownerOv').classList.add('show');document.body.style.overflow='hidden';
   renderAdmin();
@@ -680,36 +701,48 @@ function openOwner(){
 function shiftDay(n){const d=fromKey(adm.day);d.setDate(d.getDate()+n);adm.day=key(d);renderAdmin()}
 function login(){
   const v=document.getElementById('pinIn').value;
-  if(v==='1234'){adm.auth=true;renderAdmin()}else{document.getElementById('pinErr').textContent=t('pinErr')}
+  const PINS={0:'1111',1:'2222',2:'3333','-1':'1234'};
+  if(adm.pick!==null&&v===PINS[adm.pick]){adm.auth=true;adm.user=adm.pick;adm.view='grid';renderAdmin()}else{document.getElementById('pinErr').textContent=t('pinErr')}
 }
-function startAdd(barber=0,slot=null){
+function startAdd(barber=null,slot=null){
+  if(barber===null)barber=adm.user>=0?adm.user:0;
   adm.f={barber,day:adm.day,slot,src:'phone',svc:0,brkLen:1,name:'',tel:'',notes:''};
   adm.view='form';renderAdmin();
 }
 function formLen(){return adm.f.src==='brk'?adm.f.brkLen:slotsLen(adm.f.svc)}
 function saveAdd(){
   const f=adm.f,len=formLen();
+  if(adm.user>=0)f.barber=adm.user;
   if(f.slot===null||!canFit(f.barber,f.day,f.slot,len,false))return;
   bookings.push({id:nextId++,barber:f.barber,day:f.day,slot:f.slot,len,svc:f.src==='brk'?null:f.svc,
     name:f.name.trim()||(f.src==='walkin'?t('walkinName'):''),tel:f.tel.trim(),notes:f.notes,src:f.src});
-  adm.day=f.day;adm.view='grid';renderAdmin();toast(t('saved'));
+  persist();adm.day=f.day;adm.view='grid';renderAdmin();toast(t('saved'));
 }
-function delBooking(id){bookings=bookings.filter(b=>b.id!==id);adm.view='grid';renderAdmin();toast(t('deleted'))}
+function delBooking(id){bookings=bookings.filter(b=>b.id!==id);persist();adm.view='grid';renderAdmin();toast(t('deleted'))}
 
 function renderAdmin(){
   const el=document.getElementById('ownerBody');
-  document.getElementById('admTitle').textContent=t('admH');
-  document.querySelector('#ownerOv .modal').classList.toggle('wide',adm.auth);
+  document.getElementById('admTitle').textContent=adm.auth?(adm.user===-1?t('admH')+' · '+t('owner'):t('myPanel')+' · '+BARBERS[adm.user].n):t('admH');
+  document.querySelector('#ownerOv .modal').classList.toggle('wide',adm.auth&&adm.user===-1);
   if(!adm.auth){
-    el.innerHTML=`<div class="pin"><p>${t('pinH')}</p>
+    const who=BARBERS.map((b,i)=>({i,n:b.n,a:b.i,s:'Barber'})).concat([{i:-1,n:t('owner'),a:'★',s:t('ownerSub')}]);
+    if(adm.pick===null){
+      el.innerHTML=`<div class="pin" style="max-width:360px"><p style="margin-bottom:14px">${t('pinH')}</p><div class="opts">`+who.map(o=>`
+        <button class="opt" onclick="adm.pick=${o.i};renderAdmin()"><div class="l"><div class="avatar">${o.a}</div><div style="text-align:left"><b>${o.n}</b><br><small>${o.s}</small></div></div><span style="color:var(--muted)">›</span></button>`).join('')+`</div>
+        <p class="note">${t('pinHint')}</p></div>`;
+      return;
+    }
+    const pk=who.find(o=>o.i===adm.pick);
+    el.innerHTML=`<div class="pin"><div class="avatar" style="width:64px;height:64px;font-size:24px;margin:0 auto 10px">${pk.a}</div><p>${t('pinFor')} <b>${pk.n}</b></p>
       <input id="pinIn" type="password" inputmode="numeric" maxlength="4" autocomplete="off" onkeydown="if(event.key==='Enter')login()">
       <div class="err" id="pinErr"></div>
       <button class="btn btn-gold" style="width:100%;justify-content:center" onclick="login()">${t('pinBtn')}</button>
+      <button class="owner-link" style="margin-top:12px" onclick="adm.pick=null;renderAdmin()">← ${t('switchU')}</button>
       <p class="note">${t('pinHint')}</p></div>`;
     setTimeout(()=>document.getElementById('pinIn')?.focus(),50);return;
   }
   if(adm.view==='notifs'){
-    const items=notifs.map(n=>({n,b:bookings.find(x=>x.id===n.bid)})).filter(o=>o.b);
+    const items=notifs.map(n=>({n,b:bookings.find(x=>x.id===n.bid)})).filter(o=>o.b&&mine(o.b));
     el.innerHTML=`<button class="owner-link" style="margin-bottom:14px" onclick="adm.view='grid';renderAdmin()">${t('editBack')}</button>
       <h3 class="serif" style="font-size:22px;margin-bottom:6px">${t('nH')}</h3><p class="note" style="margin:0 0 14px">${t('nInfo')}</p>
       <div class="nlist">${items.length?items.map(({n,b})=>`<button class="nitem ${n.read?'':'unread'}" onclick="adm.day='${b.day}';adm.sel=${b.id};adm.view='detail';markRead(${b.id});renderAdmin()">
@@ -719,7 +752,7 @@ function renderAdmin(){
     return;
   }
   if(adm.view==='detail'){
-    const b=bookings.find(x=>x.id===adm.sel);if(!b){adm.view='grid';return renderAdmin()}
+    const b=bookings.find(x=>x.id===adm.sel);if(!b||!mine(b)){adm.view='grid';return renderAdmin()}
     const end=b.slot+b.len<TIMES.length?TIMES[b.slot+b.len]:'21:00';
     el.innerHTML=`<button class="owner-link" style="margin-bottom:14px" onclick="adm.view='grid';renderAdmin()">${t('editBack')}</button>
       <div class="detail">
@@ -746,7 +779,7 @@ function renderAdmin(){
       <h3 class="serif" style="font-size:22px;margin-bottom:14px">${t('addH')}</h3>
       <div class="field"><label>${t('fSrc')}</label><div class="seg">${srcBtns}</div></div>
       <div class="aform">
-        <div class="field"><label>${t('fBarber')}</label><select onchange="adm.f.barber=+this.value;renderAdmin()">${BARBERS.map((b,i)=>`<option value="${i}" ${i===f.barber?'selected':''}>${b.n}</option>`).join('')}</select></div>
+        <div class="field"><label>${t('fBarber')}</label><select ${adm.user>=0?'disabled':''} onchange="adm.f.barber=+this.value;renderAdmin()">${BARBERS.map((b,i)=>`<option value="${i}" ${i===f.barber?'selected':''}>${b.n}</option>`).join('')}</select></div>
         <div class="field"><label>${t('fDate')}</label><select onchange="adm.f.day=this.value;renderAdmin()">${days.map((d,i)=>`<option value="${key(d)}" ${key(d)===f.day?'selected':''}>${i===0?t('today')+' · ':''}${fmtDay(d,{weekday:'short',day:'numeric',month:'short'})}</option>`).join('')}</select></div>
         ${f.src==='brk'
           ?`<div class="field"><label>${t('fDur')}</label><select onchange="adm.f.brkLen=+this.value;renderAdmin()">${[1,2,3,4].map(n=>`<option value="${n}" ${n===f.brkLen?'selected':''}>${n*30} ${t('min')}</option>`).join('')}</select></div>`
@@ -762,10 +795,12 @@ function renderAdmin(){
   }
   // grid view
   const d=fromKey(adm.day),isToday=adm.day===key(new Date());
+  const cols=adm.user>=0?[adm.user]:BARBERS.map((_,i)=>i);
+  const dayCount=bookings.filter(x=>x.day===adm.day&&x.src!=='brk'&&cols.includes(x.barber)).length;
   let rows='';
   TIMES.forEach((tm,idx)=>{
     rows+=`<tr><td>${tm}</td>`;
-    BARBERS.forEach((_,b)=>{
+    cols.forEach(b=>{
       const bk=covering(b,adm.day,idx);
       if(bk){
         if(bk.slot!==idx)return; // covered by rowspan above
@@ -782,14 +817,44 @@ function renderAdmin(){
   });
   el.innerHTML=`<div class="abar">
       <div class="dnav"><button onclick="shiftDay(-1)" aria-label="prev">‹</button><b>${isToday?t('today')+' · ':''}${fmtDay(d,{weekday:'short',day:'numeric',month:'short'})}</b><button onclick="shiftDay(1)" aria-label="next">›</button></div>
-      <div style="display:flex;gap:8px"><button class="bell" title="${t('nH')}" onclick="adm.view='notifs';renderAdmin()">🔔${unread()?`<em>${unread()}</em>`:''}</button><button class="btn btn-gold" onclick="startAdd()">${t('addBk')}</button><button class="btn btn-ghost" onclick="adm.auth=false;renderAdmin()">${t('logout')}</button></div>
+      <div style="display:flex;gap:8px"><button class="bell" title="${t('nH')}" onclick="adm.view='notifs';renderAdmin()">🔔${unread()?`<em>${unread()}</em>`:''}</button><button class="btn btn-gold" onclick="startAdd()">${t('addBk')}</button><button class="btn btn-ghost" onclick="adm.auth=false;adm.user=null;adm.pick=null;renderAdmin()">${t('logout')}</button></div>
     </div>
-    <p class="note" style="margin:0 0 12px">${t('admNote')}</p>
-    <div class="agrid"><table><thead><tr><th>${t('time')}</th>${BARBERS.map(b=>`<th>${b.n}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div>
+    <p class="note" style="margin:0 0 12px"><b style="font-style:normal;color:var(--text)">${dayCount} ${t('nBk')}</b> · ${t('admNote')}</p>
+    <div class="agrid"><table class="${cols.length===1?'one':''}"><thead><tr><th>${t('time')}</th>${cols.map(b=>`<th>${BARBERS[b].n}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div>
+    ${adm.user===-1?`<button class="owner-link" style="margin-top:12px;font-size:13px" onclick="resetDemo()">${t('resetDemo')}</button>`:''}
     <div class="alegend">${['web','phone','walkin','insta','brk'].map(s=>`<span><i class="src-${s}"></i>${t('src')[s]}</span>`).join('')}</div>`;
   if(isToday){const now=new Date(),mins=now.getHours()*60+now.getMinutes();const i=Math.max(0,Math.floor((mins-600)/30)-1);const g=el.querySelector('.agrid');if(g)g.scrollTop=i*42}
 }
 
+/* ---------- demo data store ----------
+   In the demo the schedule is kept in this browser, so the public page and the
+   staff page (index.html#staff) share it between tabs. The real version uses a database. */
+function persist(){try{localStorage.setItem('bb_data',JSON.stringify({day:key(new Date()),nextId,bookings,notifs:notifs.map(n=>({...n,at:n.at.toISOString()}))}))}catch(e){}}
+function loadData(){
+  try{const d=JSON.parse(localStorage.getItem('bb_data')||'null');
+    if(!d||d.day!==key(new Date()))return false;
+    bookings=d.bookings;nextId=d.nextId;notifs=d.notifs.map(n=>({...n,at:new Date(n.at)}));return true;
+  }catch(e){return false}
+}
+function resetDemo(){bookings=[];notifs=[];nextId=1;seed();persist();adm.view='grid';renderAdmin();toast(t('resetDone'))}
+window.addEventListener('storage',e=>{
+  if(e.key!=='bb_data')return;
+  const known=new Set(bookings.map(b=>b.id)),seen=new Set(notifs.map(n=>n.bid));
+  if(!loadData())return;
+  if(isStaff()){
+    bookings.filter(b=>b.src==='web'&&!known.has(b.id)).forEach(showPush);
+    renderAdmin();
+  }
+});
+function checkStaff(){
+  const on=location.hash==='#staff'||/[?&]staff\b/.test(location.search);
+  document.body.classList.toggle('staff-mode',on);
+  if(on){document.title='Barbershop Bingo · Staff';openOwner()}
+  else{document.getElementById('ownerOv').classList.remove('show');document.body.style.overflow=''}
+}
+window.addEventListener('hashchange',checkStaff);
+if(!loadData()){seed();persist()}
+checkStaff();
 applyLang();
 </script>
 </body>
