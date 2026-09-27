@@ -1,0 +1,796 @@
+<!doctype html>
+<html lang="sq">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barbershop Bingo — Redesign Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#12151c; --bg2:#1a1f29; --card:#1d2330; --line:#2d3444;
+    --text:#f2e9da; --muted:#cabfa9; --gold:#c9a227; --gold2:#e0bc4a;
+    --red:#a3352c; --red2:#b8402f; --on-red:#f9f3e6; --blue:#24406e;
+    --ok:#5fb67a; --taken:#2a303c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:Archivo,Verdana,sans-serif;line-height:1.55;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+  h1,h2,h3,.serif{font-family:Archivo,Verdana,sans-serif;font-weight:800;letter-spacing:-.02em}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font-weight:600;font-size:15px;cursor:pointer;border:1px solid transparent;transition:.2s}
+  .btn-gold{background:var(--red);color:var(--on-red)}
+  .btn-gold:hover{background:var(--red2)}
+  .btn-ghost{border-color:var(--line);color:var(--text);background:transparent}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold2)}
+  .eyebrow{color:var(--gold);letter-spacing:.18em;text-transform:uppercase;font-size:12px;font-weight:600}
+
+  /* header */
+  header::after{content:'';position:absolute;left:0;right:0;bottom:-5px;height:4px;background:repeating-linear-gradient(-45deg,#a3352c 0 10px,#f2e9da 10px 20px,#24406e 20px 30px,#f2e9da 30px 40px);background-size:200% 100%;animation:stripe 12s linear infinite;opacity:.85}
+  @keyframes stripe{to{background-position:-400px 0}}
+  header{position:sticky;top:0;z-index:40;background:rgba(18,21,28,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+  .logo{display:flex;align-items:center;gap:10px;color:var(--text);transition:color .2s}
+  .logo:hover{color:var(--gold2)}
+  .logo img{height:40px;display:none}
+  .logo .word{font-family:Archivo,Verdana,sans-serif;font-size:22px;font-weight:700;letter-spacing:.02em}
+  .logo .word span{color:var(--gold)}
+  .links{display:flex;gap:26px;font-size:14px;color:var(--muted)}
+  .links a:hover{color:var(--text)}
+  .right{display:flex;align-items:center;gap:12px}
+  .lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+  .lang button{background:none;border:0;color:var(--muted);padding:6px 10px;font:600 12px Archivo,Verdana,sans-serif;cursor:pointer}
+  .lang button.on{background:var(--gold);color:#171310}
+  .nav .btn{padding:9px 16px;font-size:14px}
+
+  /* hero */
+  .hero{position:relative;padding:110px 0 90px;background:
+    radial-gradient(900px 500px at 80% 10%,rgba(201,162,39,.10),transparent 60%),
+    radial-gradient(700px 400px at 0% 100%,rgba(36,64,110,.22),transparent 60%);}
+  .hero .pole{display:none;position:absolute;right:6%;top:70px;width:34px;height:300px;border-radius:17px;opacity:.5;
+    background:repeating-linear-gradient(135deg,#a3352c 0 18px,#f2e9da 18px 36px,#24406e 36px 54px,#f2e9da 54px 72px);
+    background-size:100% 200px;animation:pole 6s linear infinite;box-shadow:0 0 0 6px #232833}
+  @keyframes pole{to{background-position:0 200px}}
+  .motif{position:absolute;right:-60px;top:50%;transform:translateY(-50%);color:var(--gold);opacity:.07;pointer-events:none}
+  .hero .wrap{position:relative;z-index:1}
+  .hero{overflow:hidden}
+  .hero h1{font-size:clamp(40px,7vw,78px);line-height:1.05;margin:14px 0 18px;max-width:760px}
+  .hero h1 em{font-style:normal;color:var(--gold)}
+  .hero p{color:var(--muted);font-size:18px;max-width:560px;margin-bottom:30px}
+  .cta{display:flex;flex-wrap:wrap;gap:12px}
+  .badges{display:flex;flex-wrap:wrap;gap:22px;margin-top:44px;color:var(--muted);font-size:14px}
+  .badges b{color:var(--text)}
+
+  section{padding:80px 0}
+  .sec-head{margin-bottom:36px}
+  .sec-head h2{font-size:clamp(28px,4vw,42px);margin-top:8px}
+
+  /* services */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .svc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:8px;transition:.2s}
+  .svc:hover{border-color:var(--gold);transform:translateY(-2px)}
+  .svc .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .svc h3{font-size:20px}
+  .svc .price{color:var(--gold2);font-weight:600;white-space:nowrap}
+  .svc p{color:var(--muted);font-size:14px;flex:1}
+  .svc .dur{font-size:12px;color:var(--muted)}
+  .svc button{margin-top:8px;align-self:flex-start;background:none;border:0;color:var(--gold);font:600 14px Archivo,Verdana,sans-serif;cursor:pointer;padding:0}
+  .note{color:var(--muted);font-size:12px;margin-top:14px;font-style:italic}
+
+  /* gallery */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .gallery div{aspect-ratio:1;border-radius:12px;border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;text-align:center;padding:10px;
+    background:linear-gradient(135deg,#1c212b,#252b37)}
+  .gallery div:nth-child(1){grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+
+  /* info */
+  .info{display:grid;grid-template-columns:1fr 1.2fr;gap:24px;align-items:stretch}
+  .box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px}
+  .hours{width:100%;border-collapse:collapse;margin-top:12px}
+  .hours td{padding:9px 0;border-bottom:1px solid var(--line);font-size:15px}
+  .hours td:last-child{text-align:right;color:var(--muted)}
+  .hours tr.today td{color:var(--gold2);font-weight:600}
+  .open-now{display:inline-flex;align-items:center;gap:8px;font-size:13px;margin-top:6px;color:var(--muted)}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(95,182,122,.18)}
+  .contact-list{display:grid;gap:14px;margin:14px 0 20px}
+  .contact-list small{display:block;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.1em}
+  .contact-list a:hover{color:var(--gold2)}
+  .map{border-radius:12px;overflow:hidden;border:1px solid var(--line);height:240px}
+  .map iframe{width:100%;height:100%;border:0;filter:grayscale(.4) invert(.9) hue-rotate(180deg)}
+
+  footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:13px}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  .owner-link{color:var(--gold);cursor:pointer;background:none;border:0;font:inherit;text-decoration:underline}
+
+  /* mobile sticky book */
+  .mbook{display:none;position:fixed;left:16px;right:16px;bottom:16px;z-index:45;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+
+  /* modal */
+  .overlay{position:fixed;inset:0;background:rgba(6,8,12,.72);backdrop-filter:blur(4px);z-index:60;display:none;align-items:flex-end;justify-content:center}
+  .overlay.show{display:flex}
+  @media(min-width:700px){.overlay{align-items:center}}
+  .modal{background:var(--bg2);border:1px solid var(--line);width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:20px 20px 0 0;padding:24px}
+  @media(min-width:700px){.modal{border-radius:20px}}
+  .m-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  .m-head h3{font-size:24px}
+  .x{background:none;border:0;color:var(--muted);font-size:26px;cursor:pointer;line-height:1}
+  .steps{display:flex;gap:6px;margin:12px 0 22px}
+  .steps i{flex:1;height:4px;border-radius:2px;background:var(--line)}
+  .steps i.on{background:var(--gold)}
+  .step-title{font-weight:600;margin-bottom:12px}
+  .opts{display:grid;gap:10px}
+  .opt{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;cursor:pointer;text-align:left;color:var(--text);font:inherit;width:100%}
+  .opt:hover{border-color:#4a5263}
+  .opt.sel{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+  .opt small{color:var(--muted)}
+  .avatar{width:38px;height:38px;border-radius:50%;background:#2c3240;display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--gold2);flex:none}
+  .opt .l{display:flex;align-items:center;gap:12px}
+  .days{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:16px;scrollbar-width:thin}
+  .day{flex:none;width:62px;padding:10px 0;border-radius:12px;background:var(--card);border:1px solid var(--line);text-align:center;cursor:pointer;color:var(--text);font:inherit}
+  .day small{display:block;color:var(--muted);font-size:11px;text-transform:uppercase}
+  .day b{font-size:20px}
+  .day.sel{border-color:var(--gold);background:#2b2512}
+  .slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px}
+  .slot{padding:10px 0;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);font:600 14px Archivo,Verdana,sans-serif;cursor:pointer}
+  .slot:disabled{background:var(--taken);color:#6b7180;text-decoration:line-through;cursor:not-allowed;border-color:transparent}
+  .slot.sel{background:var(--gold);color:#171310;border-color:var(--gold)}
+  .legend{display:flex;gap:16px;font-size:12px;color:var(--muted);margin-top:10px}
+  .field{display:grid;gap:6px;margin-bottom:14px}
+  .field label{font-size:13px;color:var(--muted)}
+  .field input,.field textarea{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--text);font:15px Archivo,Verdana,sans-serif}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--gold)}
+  .summary{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px;margin-bottom:16px;display:grid;gap:4px}
+  .summary div{display:flex;justify-content:space-between;gap:10px}
+  .summary span{color:var(--muted)}
+  .m-foot{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+  .m-foot .btn:disabled{opacity:.4;cursor:not-allowed}
+  .done{text-align:center;padding:20px 0}
+  .done .check{width:64px;height:64px;border-radius:50%;background:rgba(95,182,122,.15);color:var(--ok);font-size:32px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+  .done p{color:var(--muted);margin:8px 0}
+  .err{color:#e07b7b;font-size:13px;min-height:18px}
+
+  /* owner panel */
+  .bk{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .bk small{color:var(--muted);display:block}
+  .bk button{background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:4px 10px;cursor:pointer;font:12px Archivo,Verdana,sans-serif;align-self:center}
+  .empty{color:var(--muted);text-align:center;padding:30px 0;font-size:14px}
+
+  /* staff / admin panel */
+  .modal.wide{max-width:980px}
+  .pin{max-width:300px;margin:20px auto;text-align:center}
+  .pin input{width:100%;text-align:center;font-size:26px;letter-spacing:.5em;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;color:var(--text);margin:14px 0 8px}
+  .pin input:focus{outline:none;border-color:var(--gold)}
+  .abar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+  .dnav{display:flex;align-items:center;gap:8px}
+  .dnav button{background:var(--card);border:1px solid var(--line);color:var(--text);width:36px;height:36px;border-radius:10px;cursor:pointer;font-size:16px}
+  .dnav b{min-width:170px;text-align:center;font-size:15px}
+  .abar .btn{padding:9px 16px;font-size:14px}
+  .agrid{overflow-x:auto;border:1px solid var(--line);border-radius:12px;max-height:60vh;overflow-y:auto}
+  .agrid table{width:100%;min-width:540px;border-collapse:collapse;table-layout:fixed}
+  .agrid th{position:sticky;top:0;background:var(--bg2);z-index:2;padding:10px 6px;font-size:14px;border-bottom:1px solid var(--line);text-align:left}
+  .agrid th:first-child,.agrid td:first-child{width:62px;color:var(--muted);font-size:12px;text-align:center}
+  .agrid td{border-bottom:1px solid #262b36;border-left:1px solid #262b36;height:42px;padding:3px;vertical-align:top}
+  .cell-free{width:100%;height:100%;min-height:34px;background:none;border:1px dashed transparent;border-radius:8px;color:#3a404d;cursor:pointer;font:600 16px Archivo,Verdana,sans-serif}
+  .cell-free:hover{border-color:var(--gold);color:var(--gold)}
+  .cell-past{width:100%;height:100%;min-height:34px;border-radius:8px;background:repeating-linear-gradient(45deg,transparent 0 6px,#1c2029 6px 12px)}
+  .bkc{width:100%;height:100%;border-radius:8px;padding:5px 8px;text-align:left;border:0;cursor:pointer;color:var(--text);font:12px/1.3 Archivo,Verdana,sans-serif;overflow:hidden;display:block}
+  .bkc b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bkc span{color:var(--muted)}
+  .src-web{background:#332a12;border-left:3px solid var(--gold)}
+  .src-phone{background:#1c2a44;border-left:3px solid #5b82c4}
+  .src-walkin{background:#1f3527;border-left:3px solid var(--ok)}
+  .src-insta{background:#35203a;border-left:3px solid #c27bd1}
+  .src-brk{background:repeating-linear-gradient(45deg,#2a2e38 0 8px,#232730 8px 16px);border-left:3px solid #6b7180}
+  .alegend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted);margin-top:10px}
+  .alegend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:5px}
+  .aform{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+  .aform .full{grid-column:1/-1}
+  .field select{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--text);font:15px Archivo,Verdana,sans-serif}
+  .seg{display:flex;flex-wrap:wrap;gap:6px}
+  .seg button{background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:999px;padding:8px 12px;cursor:pointer;font:13px Archivo,Verdana,sans-serif}
+  .seg button.on{border-color:var(--gold);background:#2b2512;color:var(--gold2)}
+  .detail{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:8px;font-size:14px}
+  .detail div{display:flex;justify-content:space-between;gap:10px}
+  .detail span{color:var(--muted)}
+  .btn-danger{border-color:#6e3434;color:#e07b7b;background:transparent}
+  .btn-danger:hover{background:#3a1f1f}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ok);color:#0e1a12;padding:10px 18px;border-radius:999px;font-weight:600;font-size:14px;z-index:80;opacity:0;transition:.3s;pointer-events:none}
+  .toast.show{opacity:1}
+  @media(max-width:600px){.aform{grid-template-columns:1fr}.dnav b{min-width:120px;font-size:13px}}
+
+  /* notifications */
+  .push{position:fixed;top:14px;right:14px;left:auto;width:min(360px,calc(100vw - 28px));z-index:90;background:rgba(40,44,54,.97);backdrop-filter:blur(12px);border:1px solid #3a404d;border-radius:18px;padding:12px 14px;box-shadow:0 18px 40px rgba(0,0,0,.55);display:flex;gap:12px;cursor:pointer;transform:translateY(-140%);transition:transform .45s cubic-bezier(.2,.9,.3,1.2)}
+  .push.show{transform:translateY(0)}
+  .push .ic{width:38px;height:38px;border-radius:10px;background:var(--bg);color:var(--gold2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:700;flex:none;font-family:Archivo,Verdana,sans-serif}
+  .push .tp{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+  .push b{display:block;font-size:14px;margin:1px 0}
+  .push p{font-size:13px;color:#d6d2ca;line-height:1.35}
+  .bell{position:relative;background:var(--card);border:1px solid var(--line);color:var(--text);width:40px;height:40px;border-radius:10px;cursor:pointer;font-size:17px}
+  .bell em{position:absolute;top:-6px;right:-6px;background:#d65a5a;color:#fff;font:700 11px Archivo,Verdana,sans-serif;font-style:normal;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+  .bkc.new{box-shadow:0 0 0 2px var(--gold) inset}
+  .bkc .nb{float:right;background:var(--gold);color:#171310;font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:4px}
+  .nlist{display:grid;gap:8px}
+  .nitem{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;text-align:left;color:var(--text);font:inherit;width:100%}
+  .nitem.unread{border-color:var(--gold)}
+  .nitem small{color:var(--muted);display:block}
+
+  .concept{background:var(--red);color:var(--on-red);text-align:center;font-size:12px;font-weight:600;padding:6px 12px}
+
+  @media(max-width:860px){
+    .links{display:none}
+    .info{grid-template-columns:1fr}
+    .gallery{grid-template-columns:repeat(2,1fr)}
+    .hero .pole{display:none}
+    .motif{right:-120px;opacity:.05}
+    .nav .btn-book{display:none}
+    .mbook{display:flex}
+    footer{padding-bottom:90px}
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="bingo-wordmark" viewBox="0 0 201.1578 117.48099"><g transform="matrix(1,0,0,-1,0,117.48099)"><path d="M68.7377 47.06001C68.6937 48.59001 68.79269 50.04401 69.03369 51.42201 69.27271 52.80002 69.65671 54.25301 70.18069 55.78502 70.96771 55.95901 71.79971 56.08101 72.67471 56.14601 73.54871 56.21101 74.3367 56.24501 75.03671 56.24501 75.73471 56.24501 76.51169 56.21101 77.36472 56.14601 78.21771 56.08101 79.01471 55.95901 79.7597 55.78502 79.7597 54.25301 79.62869 52.78902 79.36569 51.38901 79.1037 49.99001 78.71069 48.54601 78.18469 47.06001 77.39771 46.92801 76.5777 46.84001 75.7247 46.79701 74.87271 46.75301 74.0947 46.73201 73.39569 46.73201 72.73972 46.73201 71.97369 46.75301 71.0997 46.79701 70.22369 46.84001 69.43671 46.92801 68.7377 47.06001M66.83569 34.26601H62.7027C62.7027 34.39801 62.6907 34.52901 62.66971 34.66101 62.6467 34.79102 62.63669 34.94402 62.63669 35.12001 62.63669 36.25601 62.7457 37.31702 62.9657 38.30101 63.18271 39.28601 63.51071 40.30202 63.9487 41.35201H77.20071L71.23071 7.43401C69.5687 7.17101 67.99371 7.04001 66.50769 7.04001 65.1507 7.04001 63.6857 7.17101 62.11169 7.43401L66.83569 34.26601"/><path d="M84.54971 26.78999C85.02972 29.54599 85.39072 31.98299 85.63171 34.105 85.8717 36.226 85.99271 37.877 85.99271 39.05899V40.271C85.99271 40.59999 85.96973 40.961 85.92673 41.35399 87.36972 41.61699 88.81372 41.748 90.25671 41.748 90.91272 41.748 91.5697 41.715 92.22571 41.64899 92.88071 41.584 93.57971 41.485 94.3237 41.35399 94.41171 41.004 94.49872 40.58899 94.5867 40.10699 94.67371 39.62599 94.71771 38.90399 94.71771 37.94299 94.71771 37.549 94.70673 37.155 94.6857 36.76199 94.66272 36.368 94.6087 35.88699 94.5217 35.31799 95.04572 36.237 95.70172 37.11099 96.48871 37.94299 97.2767 38.77299 98.1727 39.495 99.17972 40.10699 100.18472 40.71999 101.2677 41.2 102.42673 41.55099 103.58472 41.89999 104.75571 42.07599 105.93671 42.07599 108.5607 42.07599 110.60471 41.409 112.07071 40.075 113.5347 38.73999 114.26871 36.521 114.26871 33.416 114.26871 32.75999 114.2247 32.06 114.13773 31.31599 114.04871 30.57199 113.9407 29.78499 113.80972 28.95499L110.00372 7.43599C108.34171 7.174 106.74472 7.043 105.21472 7.043 103.68372 7.043 102.17471 7.174 100.68872 7.43599L104.36172 28.23299C104.53571 29.10699 104.62473 29.939 104.62473 30.72699 104.62473 32.03799 104.33972 32.95699 103.7717 33.48099 103.20273 34.00699 102.39371 34.269 101.34473 34.269 100.73172 34.269 100.04172 34.11499 99.27771 33.81 98.51172 33.50299 97.73672 32.85799 96.9487 31.87399 96.16071 30.89099 95.39572 29.50099 94.65271 27.709 93.90771 25.91499 93.27472 23.55299 92.74973 20.623L90.32172 7.43599C88.6167 7.174 87.01971 7.043 85.53271 7.043 84.00171 7.043 82.49271 7.174 81.00671 7.43599L84.54971 26.78999"/><path d="M148.51361 31.8398C149.38861 32.01379 150.2196 32.1348 151.00662 32.1998 151.79361 32.2668 152.55863 32.2988 153.30261 32.2988 154.04563 32.2988 154.82361 32.2668 155.63162 32.1998 156.44062 32.1348 157.2406 32.01379 158.02661 31.8398L153.89362 8.4848C151.9686 7.8278 149.80362 7.3588 147.39862 7.07379 144.99262 6.78979 142.74161 6.6478 140.6416 6.6478 137.44962 6.6478 134.64862 7.1068 132.24362 8.0258 129.83762 8.9438 127.8266 10.21179 126.20761 11.8298 124.5896 13.44679 123.37561 15.36079 122.5676 17.56979 121.75662 19.7778 121.35361 22.17281 121.35361 24.7538 121.35361 28.9958 121.98761 32.97679 123.25562 36.6938 124.52362 40.4108 126.30661 43.6588 128.6026 46.4368 130.89862 49.21379 133.6636 51.4008 136.90161 52.9968 140.1376 54.5938 143.72461 55.3918 147.66062 55.3918 149.7156 55.3918 151.55261 55.2608 153.1716 54.9978 154.7886 54.73579 156.4296 54.2328 158.09162 53.4888 157.82962 52.1328 157.49161 50.86479 157.0766 49.6848 156.6596 48.50279 156.07962 47.2128 155.33661 45.8138 153.98062 46.38179 152.73462 46.7538 151.59763 46.9288 150.45862 47.10381 149.3436 47.1918 148.25061 47.1918 145.32163 47.1918 142.81662 46.55679 140.7406 45.2888 138.66162 44.01979 136.9556 42.3688 135.62162 40.3358 134.2876 38.3018 133.30362 35.9938 132.66962 33.4138 132.0346 30.83279 131.7186 28.2318 131.7186 25.6078 131.7186 21.8018 132.64762 19.0898 134.50662 17.4718 136.36661 15.85381 138.82563 15.0448 141.8876 15.0448 142.4996 15.0448 143.1766 15.0768 143.9216 15.1438 144.66461 15.2088 145.23361 15.2838 145.62662 15.3728L148.51361 31.8398"/><path d="M176.9208 13.7299C178.58182 13.7299 179.98181 14.2549 181.1188 15.3049 182.2558 16.3539 183.18582 17.65491 183.9068 19.20891 184.62882 20.7599 185.14279 22.3999 185.44882 24.1279 185.75479 25.85591 185.9078 27.4189 185.9078 28.8199 185.9078 32.84291 184.2688 34.8549 180.9878 34.8549 179.3248 34.8549 177.94681 34.30791 176.8548 33.2149 175.7608 32.1219 174.8638 30.7879 174.1648 29.21291 173.46482 27.63791 172.97281 25.97591 172.68881 24.2269 172.40381 22.4769 172.26282 20.9239 172.26282 19.56891 172.26282 15.6759 173.81482 13.7299 176.9208 13.7299M176.0668 6.6449C171.5628 6.6449 168.24881 7.8259 166.1278 10.1879 164.0068 12.5489 162.9458 15.7859 162.9458 19.8969 162.9458 22.5209 163.33982 25.1559 164.1268 27.80191 164.9148 30.4489 166.0958 32.83191 167.6698 34.9539 169.24481 37.07491 171.22281 38.8009 173.60782 40.13591 175.9898 41.46991 178.77881 42.1369 181.9718 42.1369 186.52082 42.1369 189.8548 40.9339 191.97684 38.5289 194.09781 36.1239 195.1578 32.8649 195.1578 28.7529 195.1578 26.0419 194.77481 23.37491 194.01084 20.74991 193.24478 18.1259 192.0748 15.7639 190.5008 13.6649 188.92581 11.56491 186.93582 9.8699 184.52982 8.5809 182.12482 7.29091 179.3038 6.6449 176.0668 6.6449"/><path d="M44.7836 24.77C44.29459 23.24901 43.58859 21.74901 42.6716 20.272 41.75159 18.795 40.6456 17.532 39.3526 16.47801 38.05759 15.427 36.60461 14.681 34.99561 14.244 33.38461 13.80501 31.6506 13.88501 29.7916 14.483 29.2406 14.66101 28.71262 14.866 28.20459 15.099 27.69659 15.332 27.29361 15.56601 26.99759 15.80301L31.00159 23.468C32.8606 27.067 34.75259 29.46701 36.67661 30.666 38.60159 31.866 40.53659 32.153 42.48059 31.526 43.95959 31.052 44.8306 30.17601 45.0976 28.901 45.36359 27.62601 45.25961 26.24901 44.7836 24.77M55.3486 32.494C54.41559 35.032 52.47061 36.778 49.5126 37.729 48.11859 38.17801 46.8446 38.42401 45.6926 38.46901 44.53961 38.51201 43.4816 38.41 42.51559 38.162 41.5506 37.91301 40.66159 37.58 39.85059 37.16501 39.0416 36.74901 38.28159 36.306 37.56961 35.83501L41.9906 44.13701C42.25659 44.62401 42.49561 45.089 42.7326 45.55301L42.74261 45.541C42.77661 45.61501 42.80661 45.683 42.8396 45.756 43.62561 47.30701 44.23361 48.71001 44.68661 49.98401 47.10959 56.43201 47.03961 57.79601 47.03961 57.79601L39.83859 56.41101 37.4006 52.78601C36.7756 51.66101 35.18359 49.403 31.95859 43.839L15.0636 13.06601C16.3526 11.998 17.76559 11.03 19.30661 10.16301 20.84659 9.29401 22.6066 8.54001 24.5946 7.901 28.94659 6.5 32.81961 6 36.21359 6.40001 39.6066 6.80101 42.54861 7.791 45.03961 9.367 47.52859 10.94501 49.5806 12.942 51.19958 15.36 52.8176 17.77701 54.04559 20.29601 54.89059 22.91701 56.12759 26.76201 56.2796 29.955 55.3486 32.494"/><path d="M46.12781 63.84999 44.5278 61.45999C44.30679 61.131 43.75281 61.11499 43.28882 61.42499 42.82581 61.73499 42.62982 62.254 42.8508 62.58398L44.45081 64.97299C44.67181 65.30299 45.2258 65.31898 45.68881 65.00899 46.1528 64.69899 46.34882 64.17999 46.12781 63.84999M73.26581 110.45399 37.2998 60.39499 39.79681 57.45099 47.30881 58.86099 75.1528 109.93498C75.1528 109.93498 74.5918 111.48099 73.26581 110.45399"/><path d="M16.974 35.1899 14.578 30.9509C14.37701 31.0199 14.14301 31.13789 13.87701 31.3069 13.612 31.4749 13.353 31.6629 13.10101 31.8669 12.25 32.5629 11.67899 33.35789 11.39301 34.2529 11.108 35.1469 11.01599 36.06189 11.116 36.99489 11.21799 37.92889 11.47601 38.83789 11.89301 39.72389 12.31 40.60989 12.802 41.4019 13.371 42.09889 13.92401 42.7769 14.54199 43.2469 15.22699 43.5119 15.91 43.77589 16.59 43.63289 17.26801 43.0789 18.159 42.35289 18.61499 41.35089 18.638 40.0739 18.66101 38.79689 18.10501 37.16989 16.974 35.1899M36.83899 54.5399 38.651 57.0399 36.61801 59.73289C36.61801 59.73289 32.23001 55.5199 30.96799 54.15489 29.86401 52.9619 27.07999 49.9469 24.823 47.19789 24.62201 47.00589 24.405 46.7979 24.16599 46.5649L20.806 42.0779C20.811 42.5589 20.78799 43.0529 20.73499 43.56389 20.685 44.0719 20.569 44.5939 20.38998 45.12689 20.21301 45.65889 19.93701 46.1899 19.564 46.7229 19.19 47.25189 18.68399 47.7789 18.04501 48.29889 16.69 49.4059 15.26999 49.79089 13.78601 49.4549 12.30099 49.1169 10.84 48.0679 9.401 46.30589 8.422 45.1059 7.608 43.75389 6.96201 42.2489 6.315 40.74489 6 39.16389 6.01498 37.5049 6.03299 35.8459 6.46701 34.15289 7.31699 32.4279 8.16599 30.70189 9.58801 29.0249 11.58099 27.3969 12.492 26.6539 13.388 26.0529 14.26801 25.5909 15.14999 25.1299 16.04001 24.75789 16.939 24.47589L24.569 35.5219 36.83899 54.5399"/></g></symbol></svg>
+
+<div class="concept" data-i="concept"></div>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo" aria-label="Barbershop Bingo">
+      <svg class="brand" viewBox="0 0 201.1578 117.48099" fill="currentColor" style="height:44px;width:auto" aria-hidden="true"><use href="#bingo-wordmark"/></svg>
+    </a>
+    <nav class="links">
+      <a href="#services" data-i="nServices"></a>
+      <a href="#team" data-i="nTeam"></a>
+      <a href="#gallery" data-i="nGallery"></a>
+      <a href="#visit" data-i="nVisit"></a>
+    </nav>
+    <div class="right">
+      <div class="lang" role="group" aria-label="Language">
+        <button data-l="sq">SQ</button><button data-l="en">EN</button><button data-l="de">DE</button>
+      </div>
+      <button class="btn btn-gold btn-book" onclick="openBook()" data-i="book"></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="pole" aria-hidden="true"></div>
+    <div class="motif" aria-hidden="true"><svg class="" viewBox="0 0 201.1578 117.48099" fill="currentColor" style="height:360px;width:auto" aria-hidden="true"><use href="#bingo-wordmark"/></svg></div>
+    <div class="wrap">
+      <div class="eyebrow">Kerem Lewton · Prishtinë · Kosovo</div>
+      <h1 data-i="heroH" data-html></h1>
+      <p data-i="heroP"></p>
+      <div class="cta">
+        <button class="btn btn-gold" onclick="openBook()" data-i="bookOnline"></button>
+        <a class="btn btn-ghost" href="tel:+38344907755" data-i="call"></a>
+      </div>
+      <div class="badges">
+        <div><b>10:00 – 21:00</b> · <span data-i="everyDay"></span></div>
+        <div><b data-i="walkins"></b></div>
+        <div><b>@bingobarbershop</b> · Instagram</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head"><div class="eyebrow" data-i="svcEyebrow"></div><h2 data-i="svcH"></h2></div>
+      <div class="grid" id="svcGrid"></div>
+      <div class="note" data-i="priceNote"></div>
+    </div>
+  </section>
+
+  <section id="team" style="padding-top:20px">
+    <div class="wrap">
+      <div class="sec-head"><div class="eyebrow" data-i="teamEyebrow"></div><h2 data-i="teamH"></h2></div>
+      <div class="grid" id="teamGrid"></div>
+    </div>
+  </section>
+
+  <section id="gallery" style="padding-top:20px">
+    <div class="wrap">
+      <div class="sec-head"><div class="eyebrow">Instagram</div><h2 data-i="galH"></h2></div>
+      <div class="gallery">
+        <div data-i="galPh"></div><div data-i="galPh"></div><div data-i="galPh"></div><div data-i="galPh"></div><div data-i="galPh"></div>
+      </div>
+      <div style="margin-top:20px"><a class="btn btn-ghost" href="https://www.instagram.com/bingobarbershop/" target="_blank" rel="noopener">@bingobarbershop →</a></div>
+    </div>
+  </section>
+
+  <section id="visit">
+    <div class="wrap">
+      <div class="sec-head"><div class="eyebrow" data-i="visitEyebrow"></div><h2 data-i="visitH"></h2></div>
+      <div class="info">
+        <div class="box">
+          <h3 class="serif" data-i="hoursH"></h3>
+          <div class="open-now"><span class="dot"></span><span id="openNow"></span></div>
+          <table class="hours" id="hours"></table>
+        </div>
+        <div class="box">
+          <div class="contact-list">
+            <div><small data-i="phone"></small><a href="tel:+38344907755">+383 44 907 755</a></div>
+            <div><small data-i="address"></small>Rr. Kerem Lewton, 10000 Prishtinë</div>
+            <div><small>Instagram</small><a href="https://www.instagram.com/bingobarbershop/" target="_blank" rel="noopener">@bingobarbershop</a></div>
+          </div>
+          <div class="map">
+            <iframe loading="lazy" title="Map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d688.828572348583!2d21.171083585396183!3d42.64504330223171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13549fc64f050d53%3A0xc6f5470bf076b520!2sBingo%20Barbershop!5e0!3m2!1sen!2s!4v1784320358937!5m2!1sen!2s"></iframe>
+          </div>
+          <div style="margin-top:14px"><a class="btn btn-ghost" href="https://maps.app.goo.gl/AmG6DSDjnoJrmMH26" target="_blank" rel="noopener" data-i="takeMe"></a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div style="display:flex;align-items:center;gap:14px"><svg class="" viewBox="0 0 201.1578 117.48099" fill="currentColor" style="color:var(--gold);height:34px;width:auto" aria-hidden="true"><use href="#bingo-wordmark"/></svg><span>© Barbershop Bingo · Prishtinë</span></div>
+    <button class="owner-link" onclick="openOwner()" data-i="ownerLink"></button>
+  </div>
+</footer>
+
+<button class="btn btn-gold mbook" onclick="openBook()" data-i="bookOnline"></button>
+
+<!-- Booking modal -->
+<div class="overlay" id="bookOv" onclick="if(event.target===this)closeAll()">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="m-head"><h3 data-i="bookTitle"></h3><button class="x" onclick="closeAll()" aria-label="Close">×</button></div>
+    <div class="steps" id="steps"></div>
+    <div id="stepBody"></div>
+    <div class="err" id="err"></div>
+    <div class="m-foot" id="mFoot">
+      <button class="btn btn-ghost" id="backBtn" onclick="go(-1)" data-i="back"></button>
+      <button class="btn btn-gold" id="nextBtn" onclick="go(1)"></button>
+    </div>
+  </div>
+</div>
+
+<!-- Staff panel -->
+<div class="overlay" id="ownerOv" onclick="if(event.target===this)closeAll()">
+  <div class="modal wide" role="dialog" aria-modal="true">
+    <div class="m-head"><h3 id="admTitle"></h3><button class="x" onclick="closeAll()" aria-label="Close">×</button></div>
+    <div id="ownerBody" style="margin-top:12px"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<div class="push" id="push" onclick="openFromPush()"></div>
+
+<script>
+const T = {
+  sq:{
+    concept:"Koncept ridizajni me rezervim online, vetëm demonstrim",
+    nServices:"Shërbimet",nGallery:"Punët tona",nVisit:"Na vizitoni",nTeam:"Ekipi",
+    book:"Rezervo",bookOnline:"Rezervo termin online",call:"Na telefononi",
+    heroH:"Where <em>Gentlemen</em> Are Made",
+    heroP:"Prerje klasike, rregullim mjekre dhe rruajtje me brisk në zemër të Prishtinës. Zgjidhni orën tuaj online, pa pritje.",
+    everyDay:"çdo ditë",walkins:"Rezervim online 24/7",
+    svcEyebrow:"Shërbimet",svcH:"Zgjidhni shërbimin tuaj",
+    priceNote:"Çmimet dhe kohëzgjatjet janë shembuj për këtë koncept, pronari i vendos ato reale.",
+    teamEyebrow:"Ekipi",teamH:"Berberët tanë",bookWith:"Rezervo te",
+    galH:"Punët tona",galPh:"Foto nga Instagram",
+    visitEyebrow:"Lokacioni",visitH:"Na gjeni në Prishtinë",
+    hoursH:"Orari",phone:"Telefoni",address:"Adresa",takeMe:"Më dërgo atje (Google Maps)",
+    openNow:"Hapur tani",closedNow:"Mbyllur tani, hapet në 10:00",
+    ownerLink:"Paneli i stafit",
+    bookTitle:"Rezervo terminin",back:"Kthehu",next:"Vazhdo",confirm:"Konfirmo rezervimin",
+    s1:"Çfarë shërbimi dëshironi?",s2:"Zgjidhni berberin",s3:"Zgjidhni ditën dhe orën",s4:"Të dhënat tuaja",
+    any:"Cilido berber i lirë",anySub:"Termini më i shpejtë",
+    free:"E lirë",taken:"E zënë",noSlots:"Nuk ka orare të lira për këtë ditë.",
+    name:"Emri dhe mbiemri",tel:"Numri i telefonit",notes:"Shënim (opsional)",
+    sum:{svc:"Shërbimi",barber:"Berberi",when:"Kur",price:"Çmimi"},
+    errName:"Ju lutem shkruani emrin dhe një numër telefoni të vlefshëm.",
+    doneH:"Termini u rezervua!",doneP:"Do të merrni konfirmim me SMS. Ju lutem ejani 5 minuta më herët.",
+    doneBtn:"Mbyll",cancelInfo:"Për ta anuluar, telefononi +383 44 907 755.",
+    min:"min",
+    svcs:[["Prerje klasike","Prerje me gërshërë dhe makinë, larje dhe stilim."],["Fade","Skin fade ose low/mid/high fade me detaje të pastra."],["Rregullim mjekre","Formësim, konturim me brisk dhe vaj mjekre."],["Prerje + mjekër","Paketa e plotë: prerje dhe rregullim mjekre."],["Rruajtje me brisk","Peshqir i nxehtë, brisk klasik dhe balsam."],["Prerje për fëmijë","Për fëmijë deri në 12 vjeç."]],
+    days:["E hënë","E martë","E mërkurë","E enjte","E premte","E shtunë","E diel"],
+    today:"Sot",
+    /* staff panel */
+    admH:"Paneli i stafit",pinH:"Hyni me PIN-in e stafit",pinHint:"PIN demo: 1234",pinBtn:"Hyr",pinErr:"PIN i gabuar",
+    addBk:"+ Shto rezervim",logout:"Dil",time:"Ora",
+    src:{web:"Online",phone:"Telefon",walkin:"Pa termin",insta:"Instagram",brk:"Pauzë / e bllokuar"},
+    admNote:"Çdo rezervim që shtoni këtu shfaqet menjëherë si i zënë në faqe.",
+    addH:"Shto rezervim",editBack:"← Kthehu te orari",
+    fBarber:"Berberi",fDate:"Data",fTime:"Ora e fillimit",fSvc:"Shërbimi",fSrc:"Si erdhi rezervimi?",fDur:"Kohëzgjatja",
+    fName:"Emri i klientit",fTel:"Telefoni (opsional)",optional:"opsional",
+    save:"Ruaj",noTimes:"Nuk ka kohë të lirë për këtë berber në këtë ditë.",
+    saved:"U ruajt, ora tani shfaqet e zënë online",deleted:"Rezervimi u fshi, ora u lirua",
+    del:"Fshij rezervimin",dClient:"Klienti",dSrc:"Burimi",
+    walkinName:"Klient pa termin",breakName:"Pauzë",
+    nNew:"Rezervim i ri online",nH:"Njoftimet",nEmpty:"Nuk ka njoftime ende.",nNow:"tani",nView:"Shiko",nBadge:"E RE",nInfo:"Barberi merr njoftim në telefon për çdo rezervim online."
+  },
+  en:{
+    concept:"Redesign concept with online booking, demo only",
+    nServices:"Services",nGallery:"Our work",nVisit:"Visit us",nTeam:"Team",
+    book:"Book",bookOnline:"Book online",call:"Call us",
+    heroH:"Where <em>Gentlemen</em> Are Made",
+    heroP:"Classic haircuts, beard trims and straight-razor shaves in the heart of Prishtina. Pick your time online, no waiting.",
+    everyDay:"every day",walkins:"Online booking 24/7",
+    svcEyebrow:"Services",svcH:"Choose your service",
+    priceNote:"Prices and durations are examples for this concept; the owner sets the real ones.",
+    teamEyebrow:"Team",teamH:"Our barbers",bookWith:"Book with",
+    galH:"Our work",galPh:"Instagram photo",
+    visitEyebrow:"Location",visitH:"Find us in Prishtina",
+    hoursH:"Opening hours",phone:"Phone",address:"Address",takeMe:"Take me there (Google Maps)",
+    openNow:"Open now",closedNow:"Closed now, opens at 10:00",
+    ownerLink:"Staff panel",
+    bookTitle:"Book an appointment",back:"Back",next:"Continue",confirm:"Confirm booking",
+    s1:"Which service would you like?",s2:"Choose your barber",s3:"Pick a day and time",s4:"Your details",
+    any:"Any available barber",anySub:"Fastest appointment",
+    free:"Free",taken:"Taken",noSlots:"No free times left for this day.",
+    name:"Full name",tel:"Phone number",notes:"Note (optional)",
+    sum:{svc:"Service",barber:"Barber",when:"When",price:"Price"},
+    errName:"Please enter your name and a valid phone number.",
+    doneH:"You're booked!",doneP:"You'll get an SMS confirmation. Please arrive 5 minutes early.",
+    doneBtn:"Close",cancelInfo:"To cancel, call +383 44 907 755.",
+    min:"min",
+    svcs:[["Classic haircut","Scissor and clipper cut, wash and styling."],["Fade","Skin fade or low/mid/high fade with sharp detailing."],["Beard trim","Shaping, straight-razor line-up and beard oil."],["Haircut + beard","The full package: haircut and beard trim."],["Straight-razor shave","Hot towel, classic razor and balm."],["Kids' haircut","For children up to 12."]],
+    days:["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    today:"Today",
+    admH:"Staff panel",pinH:"Sign in with the staff PIN",pinHint:"Demo PIN: 1234",pinBtn:"Sign in",pinErr:"Wrong PIN",
+    addBk:"+ Add booking",logout:"Sign out",time:"Time",
+    src:{web:"Online",phone:"Phone call",walkin:"Walk-in",insta:"Instagram",brk:"Break / blocked"},
+    admNote:"Anything you add here shows as busy on the website straight away.",
+    addH:"Add a booking",editBack:"← Back to schedule",
+    fBarber:"Barber",fDate:"Date",fTime:"Start time",fSvc:"Service",fSrc:"Where did it come from?",fDur:"Length",
+    fName:"Client name",fTel:"Phone (optional)",optional:"optional",
+    save:"Save",noTimes:"No free time for this barber on this day.",
+    saved:"Saved, that time now shows as busy online",deleted:"Booking deleted, the time is free again",
+    del:"Delete booking",dClient:"Client",dSrc:"Source",
+    walkinName:"Walk-in client",breakName:"Break",
+    nNew:"New online booking",nH:"Notifications",nEmpty:"No notifications yet.",nNow:"now",nView:"View",nBadge:"NEW",nInfo:"The barber gets a phone notification for every online booking."
+  },
+  de:{
+    concept:"Redesign-Konzept mit Online-Terminbuchung, nur Demo",
+    nServices:"Leistungen",nGallery:"Unsere Arbeit",nVisit:"Besuch",nTeam:"Team",
+    book:"Buchen",bookOnline:"Online buchen",call:"Anrufen",
+    heroH:"Where <em>Gentlemen</em> Are Made",
+    heroP:"Klassische Haarschnitte, Bartpflege und Rasur mit dem Messer im Herzen von Prishtina. Termin online wählen, ohne Wartezeit.",
+    everyDay:"täglich",walkins:"Online-Buchung rund um die Uhr",
+    svcEyebrow:"Leistungen",svcH:"Wähle deine Leistung",
+    priceNote:"Preise und Dauer sind Beispiele für dieses Konzept; die echten legt der Inhaber fest.",
+    teamEyebrow:"Team",teamH:"Unsere Barber",bookWith:"Buchen bei",
+    galH:"Unsere Arbeit",galPh:"Instagram-Foto",
+    visitEyebrow:"Standort",visitH:"So findest du uns in Prishtina",
+    hoursH:"Öffnungszeiten",phone:"Telefon",address:"Adresse",takeMe:"Route (Google Maps)",
+    openNow:"Jetzt geöffnet",closedNow:"Geschlossen, öffnet um 10:00",
+    ownerLink:"Mitarbeiter-Bereich",
+    bookTitle:"Termin buchen",back:"Zurück",next:"Weiter",confirm:"Buchung bestätigen",
+    s1:"Welche Leistung möchtest du?",s2:"Wähle deinen Barber",s3:"Tag und Uhrzeit wählen",s4:"Deine Daten",
+    any:"Beliebiger freier Barber",anySub:"Schnellster Termin",
+    free:"Frei",taken:"Belegt",noSlots:"Für diesen Tag sind keine Zeiten mehr frei.",
+    name:"Vor- und Nachname",tel:"Telefonnummer",notes:"Anmerkung (optional)",
+    sum:{svc:"Leistung",barber:"Barber",when:"Wann",price:"Preis"},
+    errName:"Bitte Namen und eine gültige Telefonnummer eingeben.",
+    doneH:"Termin gebucht!",doneP:"Du erhältst eine SMS-Bestätigung. Bitte 5 Minuten früher da sein.",
+    doneBtn:"Schließen",cancelInfo:"Zum Stornieren: +383 44 907 755.",
+    min:"Min.",
+    svcs:[["Klassischer Haarschnitt","Schere und Maschine, Waschen und Styling."],["Fade","Skin Fade oder Low/Mid/High Fade mit sauberen Konturen."],["Bartpflege","Formen, Konturen mit dem Messer und Bartöl."],["Haarschnitt + Bart","Das Komplettpaket: Haarschnitt und Bartpflege."],["Rasur mit dem Messer","Heißes Tuch, klassisches Messer und Balsam."],["Kinderhaarschnitt","Für Kinder bis 12 Jahre."]],
+    days:["Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag","Sonntag"],
+    today:"Heute",
+    admH:"Mitarbeiter-Bereich",pinH:"Mit Mitarbeiter-PIN anmelden",pinHint:"Demo-PIN: 1234",pinBtn:"Anmelden",pinErr:"Falscher PIN",
+    addBk:"+ Termin eintragen",logout:"Abmelden",time:"Zeit",
+    src:{web:"Online",phone:"Telefon",walkin:"Laufkundschaft",insta:"Instagram",brk:"Pause / blockiert"},
+    admNote:"Alles, was du hier einträgst, erscheint sofort als belegt auf der Website.",
+    addH:"Termin eintragen",editBack:"← Zurück zum Plan",
+    fBarber:"Barber",fDate:"Datum",fTime:"Startzeit",fSvc:"Leistung",fSrc:"Woher kam die Buchung?",fDur:"Dauer",
+    fName:"Name des Kunden",fTel:"Telefon (optional)",optional:"optional",
+    save:"Speichern",noTimes:"Keine freie Zeit für diesen Barber an diesem Tag.",
+    saved:"Gespeichert, die Zeit ist online jetzt belegt",deleted:"Termin gelöscht, die Zeit ist wieder frei",
+    del:"Termin löschen",dClient:"Kunde",dSrc:"Quelle",
+    walkinName:"Laufkunde",breakName:"Pause",
+    nNew:"Neue Online-Buchung",nH:"Benachrichtigungen",nEmpty:"Noch keine Benachrichtigungen.",nNow:"jetzt",nView:"Ansehen",nBadge:"NEU",nInfo:"Der Barber bekommt für jede Online-Buchung eine Push-Nachricht aufs Handy."
+  }
+};
+const LOC={sq:"sq-AL",en:"en-GB",de:"de-DE"};
+// sample price (€) & duration (min)
+const SVC=[[8,30],[10,40],[5,20],[13,50],[7,30],[6,25]];
+const BARBERS=[{n:"Albin",i:"A"},{n:"Redon",i:"R"},{n:"Loris",i:"L"}];
+// 30-minute slots, 10:00 – 20:30 start (closes 21:00)
+const TIMES=[];for(let m=600;m<=1230;m+=30)TIMES.push(String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0'));
+const slotsLen=svc=>Math.ceil(SVC[svc][1]/30);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+let lang=(()=>{try{return localStorage.getItem('bb_lang')||'sq'}catch(e){return 'sq'}})();
+let st={};
+function t(k){return T[lang][k]}
+
+/* ---------- shared schedule (in the real version this lives in a database) ---------- */
+let bookings=[];let nextId=1;
+function key(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function fromKey(k){return new Date(k+'T00:00')}
+function dayList(n=14){const a=[];const b=new Date();b.setHours(0,0,0,0);for(let i=0;i<n;i++){const d=new Date(b);d.setDate(b.getDate()+i);a.push(d)}return a}
+function covering(barber,day,idx){return bookings.find(b=>b.barber===barber&&b.day===day&&idx>=b.slot&&idx<b.slot+b.len)}
+function isPast(day,idx){const d=fromKey(day);const [h,m]=TIMES[idx].split(':');d.setHours(+h,+m);return d<=new Date()}
+function canFit(barber,day,idx,len,checkPast=true){
+  if(idx+len>TIMES.length)return false;
+  if(checkPast&&isPast(day,idx))return false;
+  for(let i=idx;i<idx+len;i++)if(covering(barber,day,i))return false;
+  return true;
+}
+// demo data so the schedule looks lived-in
+(function seed(){
+  let r=7;const rnd=()=>(r=(r*9301+49297)%233280)/233280;
+  const names=["Arben K.","Driton M.","Luan B.","Faton H.","Blerim S.","Gent R.","Ilir D.","Valon T.","Egzon Q.","Kushtrim A."];
+  const srcs=["web","web","web","phone","phone","walkin","insta"];
+  dayList(14).forEach(d=>{const day=key(d);
+    BARBERS.forEach((_,b)=>{
+      for(let i=0;i<TIMES.length;i++){
+        if(rnd()<0.3){const svc=Math.floor(rnd()*SVC.length),len=slotsLen(svc);
+          if(canFit(b,day,i,len,false)){bookings.push({id:nextId++,barber:b,day,slot:i,len,svc,name:names[Math.floor(rnd()*names.length)],tel:"+383 4"+Math.floor(rnd()*9)+" "+String(Math.floor(rnd()*900)+100)+" "+String(Math.floor(rnd()*900)+100),src:srcs[Math.floor(rnd()*srcs.length)],notes:""});i+=len-1}}
+      }
+      if(rnd()<0.6){const i=6+Math.floor(rnd()*4);if(canFit(b,day,i,1,false))bookings.push({id:nextId++,barber:b,day,slot:i,len:1,svc:null,name:"",tel:"",src:"brk",notes:""})}
+    });
+  });
+})();
+
+/* ---------- page ---------- */
+function applyLang(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-i]').forEach(el=>{
+    const v=t(el.dataset.i); if(v===undefined)return;
+    if(el.hasAttribute('data-html')) el.innerHTML=v; else el.textContent=v;
+  });
+  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===lang));
+  renderServices();renderTeam();renderHours();
+  if(document.getElementById('bookOv').classList.contains('show'))renderStep();
+  if(document.getElementById('ownerOv').classList.contains('show'))renderAdmin();
+}
+document.querySelectorAll('.lang button').forEach(b=>b.onclick=()=>{lang=b.dataset.l;try{localStorage.setItem('bb_lang',lang)}catch(e){};applyLang()});
+
+function renderServices(){
+  document.getElementById('svcGrid').innerHTML=t('svcs').map((s,i)=>`
+    <div class="svc"><div class="top"><h3>${s[0]}</h3><span class="price">€${SVC[i][0]}</span></div>
+    <p>${s[1]}</p><span class="dur">${SVC[i][1]} ${t('min')}</span>
+    <button onclick="openBook({svc:${i}})">${t('book')} →</button></div>`).join('');
+}
+function renderTeam(){
+  document.getElementById('teamGrid').innerHTML=BARBERS.map((b,i)=>`
+    <div class="svc" style="align-items:center;text-align:center">
+      <div class="avatar" style="width:84px;height:84px;font-size:30px;margin-bottom:6px">${b.i}</div>
+      <h3>${b.n}</h3><span class="dur">Barber</span>
+      <button style="align-self:center" onclick="openBook({barber:${i}})">${t('bookWith')} ${b.n} →</button></div>`).join('');
+}
+function renderHours(){
+  const d=(new Date().getDay()+6)%7;
+  document.getElementById('hours').innerHTML=t('days').map((n,i)=>`<tr class="${i===d?'today':''}"><td>${n}</td><td>10:00 – 21:00</td></tr>`).join('');
+  const h=new Date().getHours(),open=h>=10&&h<21;
+  document.getElementById('openNow').textContent=open?t('openNow'):t('closedNow');
+  document.querySelector('.dot').style.background=open?'var(--ok)':'#c96b6b';
+}
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toast.h);toast.h=setTimeout(()=>el.classList.remove('show'),2600)}
+function fmtDay(d,opts){return d.toLocaleDateString(LOC[lang],opts)}
+function barberName(i){return i===-1?t('any'):BARBERS[i].n}
+function closeAll(){document.querySelectorAll('.overlay').forEach(o=>o.classList.remove('show'));document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});
+
+/* ---------- customer booking ---------- */
+function openBook(pre={}){
+  st={step:0,svc:null,barber:null,day:null,time:null,name:"",tel:"",notes:"",done:false,skipBarber:false};
+  if(pre.svc!==undefined){st.svc=pre.svc;st.step=1}
+  if(pre.barber!==undefined){st.barber=pre.barber;st.skipBarber=true}
+  document.getElementById('bookOv').classList.add('show');document.body.style.overflow='hidden';
+  renderStep();
+}
+function customerSlots(day){
+  const len=slotsLen(st.svc);
+  return TIMES.map((time,idx)=>{
+    const ok=st.barber===-1?BARBERS.some((_,b)=>canFit(b,day,idx,len)):canFit(st.barber,day,idx,len);
+    return {time,idx,taken:!ok};
+  });
+}
+function renderStep(){
+  const body=document.getElementById('stepBody'),next=document.getElementById('nextBtn'),back=document.getElementById('backBtn'),foot=document.getElementById('mFoot');
+  document.getElementById('err').textContent='';
+  document.getElementById('steps').innerHTML=[0,1,2,3].map(i=>`<i class="${i<=st.step||st.done?'on':''}"></i>`).join('');
+  foot.style.display=st.done?'none':'flex';
+  back.style.visibility=st.step===0?'hidden':'visible';
+  next.textContent=st.step===3?t('confirm'):t('next');
+  if(st.done){
+    const b=st.done;
+    body.innerHTML=`<div class="done"><div class="check">✓</div><h3 class="serif" style="font-size:26px">${t('doneH')}</h3>
+      <p>${t('svcs')[b.svc][0]} · ${BARBERS[b.barber].n}<br>${fmtDay(fromKey(b.day),{weekday:'long',day:'numeric',month:'long'})} · ${TIMES[b.slot]}</p>
+      <p>${t('doneP')}</p><p style="font-size:13px">${t('cancelInfo')}</p>
+      <button class="btn btn-gold" style="margin-top:14px" onclick="closeAll()">${t('doneBtn')}</button></div>`;
+    return;
+  }
+  if(st.step===0){
+    body.innerHTML=`<div class="step-title">${t('s1')}</div><div class="opts">`+t('svcs').map((s,i)=>`
+      <button class="opt ${st.svc===i?'sel':''}" onclick="st.svc=${i};st.time=null;renderStep()"><div><b>${s[0]}</b><br><small>${SVC[i][1]} ${t('min')}</small></div><b style="color:var(--gold2)">€${SVC[i][0]}</b></button>`).join('')+`</div>`;
+    next.disabled=st.svc===null;
+  }
+  if(st.step===1){
+    const opts=[{i:-1,n:t('any'),s:t('anySub'),a:'★'}].concat(BARBERS.map((b,i)=>({i,n:b.n,s:'Barber',a:b.i})));
+    body.innerHTML=`<div class="step-title">${t('s2')}</div><div class="opts">`+opts.map(o=>`
+      <button class="opt ${st.barber===o.i?'sel':''}" onclick="st.barber=${o.i};st.time=null;renderStep()"><div class="l"><div class="avatar">${o.a}</div><div><b>${o.n}</b><br><small>${o.s}</small></div></div></button>`).join('')+`</div>`;
+    next.disabled=st.barber===null;
+  }
+  if(st.step===2){
+    const days=dayList();if(!st.day)st.day=key(days[0]);
+    const slots=customerSlots(st.day);
+    body.innerHTML=`<div class="step-title">${t('s3')}</div>
+      <div class="days">`+days.map((d,i)=>`<button class="day ${key(d)===st.day?'sel':''}" onclick="st.day='${key(d)}';st.time=null;renderStep()"><small>${i===0?t('today'):fmtDay(d,{weekday:'short'})}</small><b>${d.getDate()}</b><small>${fmtDay(d,{month:'short'})}</small></button>`).join('')+`</div>
+      ${slots.every(s=>s.taken)?`<p class="note">${t('noSlots')}</p>`:''}
+      <div class="slots">`+slots.map(s=>`<button class="slot ${st.time===s.idx?'sel':''}" ${s.taken?'disabled':''} onclick="st.time=${s.idx};renderStep()">${s.time}</button>`).join('')+`</div>
+      <div class="legend"><span>▢ ${t('free')}</span><span style="text-decoration:line-through">${t('taken')}</span></div>`;
+    next.disabled=st.time===null;
+  }
+  if(st.step===3){
+    body.innerHTML=`<div class="step-title">${t('s4')}</div>
+      <div class="summary">
+        <div><span>${t('sum').svc}</span><b>${t('svcs')[st.svc][0]}</b></div>
+        <div><span>${t('sum').barber}</span><b>${barberName(st.barber)}</b></div>
+        <div><span>${t('sum').when}</span><b>${fmtDay(fromKey(st.day),{weekday:'short',day:'numeric',month:'short'})} · ${TIMES[st.time]}</b></div>
+        <div><span>${t('sum').price}</span><b>€${SVC[st.svc][0]}</b></div>
+      </div>
+      <div class="field"><label>${t('name')}</label><input id="fName" value="${esc(st.name)}" oninput="st.name=this.value" autocomplete="name"></div>
+      <div class="field"><label>${t('tel')}</label><input id="fTel" value="${esc(st.tel)}" oninput="st.tel=this.value" placeholder="+383 4x xxx xxx" inputmode="tel" autocomplete="tel"></div>
+      <div class="field"><label>${t('notes')}</label><textarea rows="2" oninput="st.notes=this.value">${esc(st.notes)}</textarea></div>`;
+    next.disabled=false;
+  }
+}
+function go(dir){
+  if(dir>0&&st.step===3){
+    if(st.name.trim().length<2||st.tel.replace(/\D/g,'').length<8){document.getElementById('err').textContent=t('errName');return}
+    const len=slotsLen(st.svc);
+    const barber=st.barber===-1?BARBERS.findIndex((_,b)=>canFit(b,st.day,st.time,len)):st.barber;
+    if(barber<0||!canFit(barber,st.day,st.time,len)){st.step=2;st.time=null;renderStep();return}
+    const b={id:nextId++,barber,day:st.day,slot:st.time,len,svc:st.svc,name:st.name.trim(),tel:st.tel.trim(),notes:st.notes,src:"web"};
+    bookings.push(b);st.done=b;renderStep();notify(b);return;
+  }
+  let s=st.step+dir;
+  if(st.skipBarber&&s===1)s+=dir;
+  st.step=Math.max(0,Math.min(3,s));renderStep();
+}
+
+
+/* ---------- notifications (demo of what the barber receives) ---------- */
+let notifs=[];let lastPush=null;
+function notify(b){
+  notifs.unshift({bid:b.id,read:false,at:new Date()});lastPush=b.id;
+  setTimeout(()=>{
+    const el=document.getElementById('push');
+    el.innerHTML=`<div class="ic"><svg viewBox="0 0 201.1578 117.48099" fill="currentColor" style="width:30px"><use href="#bingo-wordmark"/></svg></div><div style="flex:1"><div class="tp"><span>Barbershop Bingo · ${BARBERS[b.barber].n}</span><span>${t('nNow')}</span></div>
+      <b>${t('nNew')}</b><p>${esc(b.name)} · ${t('svcs')[b.svc][0]}<br>${fmtDay(fromKey(b.day),{weekday:'short',day:'numeric',month:'short'})} · ${TIMES[b.slot]}</p></div>`;
+    el.classList.add('show');clearTimeout(notify.h);notify.h=setTimeout(()=>el.classList.remove('show'),7000);
+    if(document.getElementById('ownerOv').classList.contains('show'))renderAdmin();
+  },1800);
+}
+function openFromPush(){
+  document.getElementById('push').classList.remove('show');
+  const b=bookings.find(x=>x.id===lastPush);if(!b)return;
+  closeAll();openOwner();adm.day=b.day;
+  if(adm.auth){adm.sel=b.id;adm.view='detail';markRead(b.id)}
+  renderAdmin();
+}
+function markRead(id){notifs.forEach(n=>{if(n.bid===id)n.read=true})}
+function unread(){return notifs.filter(n=>!n.read&&bookings.some(b=>b.id===n.bid)).length}
+function isNew(id){return notifs.some(n=>n.bid===id&&!n.read)}
+
+/* ---------- staff panel ---------- */
+let adm={auth:false,day:null,view:'grid',sel:null,f:{}};
+function openOwner(){
+  if(!adm.day)adm.day=key(new Date());
+  adm.view='grid';
+  document.getElementById('ownerOv').classList.add('show');document.body.style.overflow='hidden';
+  renderAdmin();
+}
+function shiftDay(n){const d=fromKey(adm.day);d.setDate(d.getDate()+n);adm.day=key(d);renderAdmin()}
+function login(){
+  const v=document.getElementById('pinIn').value;
+  if(v==='1234'){adm.auth=true;renderAdmin()}else{document.getElementById('pinErr').textContent=t('pinErr')}
+}
+function startAdd(barber=0,slot=null){
+  adm.f={barber,day:adm.day,slot,src:'phone',svc:0,brkLen:1,name:'',tel:'',notes:''};
+  adm.view='form';renderAdmin();
+}
+function formLen(){return adm.f.src==='brk'?adm.f.brkLen:slotsLen(adm.f.svc)}
+function saveAdd(){
+  const f=adm.f,len=formLen();
+  if(f.slot===null||!canFit(f.barber,f.day,f.slot,len,false))return;
+  bookings.push({id:nextId++,barber:f.barber,day:f.day,slot:f.slot,len,svc:f.src==='brk'?null:f.svc,
+    name:f.name.trim()||(f.src==='walkin'?t('walkinName'):''),tel:f.tel.trim(),notes:f.notes,src:f.src});
+  adm.day=f.day;adm.view='grid';renderAdmin();toast(t('saved'));
+}
+function delBooking(id){bookings=bookings.filter(b=>b.id!==id);adm.view='grid';renderAdmin();toast(t('deleted'))}
+
+function renderAdmin(){
+  const el=document.getElementById('ownerBody');
+  document.getElementById('admTitle').textContent=t('admH');
+  document.querySelector('#ownerOv .modal').classList.toggle('wide',adm.auth);
+  if(!adm.auth){
+    el.innerHTML=`<div class="pin"><p>${t('pinH')}</p>
+      <input id="pinIn" type="password" inputmode="numeric" maxlength="4" autocomplete="off" onkeydown="if(event.key==='Enter')login()">
+      <div class="err" id="pinErr"></div>
+      <button class="btn btn-gold" style="width:100%;justify-content:center" onclick="login()">${t('pinBtn')}</button>
+      <p class="note">${t('pinHint')}</p></div>`;
+    setTimeout(()=>document.getElementById('pinIn')?.focus(),50);return;
+  }
+  if(adm.view==='notifs'){
+    const items=notifs.map(n=>({n,b:bookings.find(x=>x.id===n.bid)})).filter(o=>o.b);
+    el.innerHTML=`<button class="owner-link" style="margin-bottom:14px" onclick="adm.view='grid';renderAdmin()">${t('editBack')}</button>
+      <h3 class="serif" style="font-size:22px;margin-bottom:6px">${t('nH')}</h3><p class="note" style="margin:0 0 14px">${t('nInfo')}</p>
+      <div class="nlist">${items.length?items.map(({n,b})=>`<button class="nitem ${n.read?'':'unread'}" onclick="adm.day='${b.day}';adm.sel=${b.id};adm.view='detail';markRead(${b.id});renderAdmin()">
+        <div class="avatar">${BARBERS[b.barber].i}</div><div><b>${t('nNew')} · ${BARBERS[b.barber].n}</b>
+        <small>${esc(b.name)} · ${t('svcs')[b.svc][0]} · ${fmtDay(fromKey(b.day),{weekday:'short',day:'numeric',month:'short'})} ${TIMES[b.slot]}</small>
+        <small>${n.at.toLocaleTimeString(LOC[lang],{hour:'2-digit',minute:'2-digit'})}</small></div></button>`).join(''):`<div class="empty">${t('nEmpty')}</div>`}</div>`;
+    return;
+  }
+  if(adm.view==='detail'){
+    const b=bookings.find(x=>x.id===adm.sel);if(!b){adm.view='grid';return renderAdmin()}
+    const end=b.slot+b.len<TIMES.length?TIMES[b.slot+b.len]:'21:00';
+    el.innerHTML=`<button class="owner-link" style="margin-bottom:14px" onclick="adm.view='grid';renderAdmin()">${t('editBack')}</button>
+      <div class="detail">
+        <div><span>${t('fBarber')}</span><b>${BARBERS[b.barber].n}</b></div>
+        <div><span>${t('fDate')}</span><b>${fmtDay(fromKey(b.day),{weekday:'long',day:'numeric',month:'long'})}</b></div>
+        <div><span>${t('time')}</span><b>${TIMES[b.slot]} – ${end}</b></div>
+        ${b.src==='brk'?'':`<div><span>${t('fSvc')}</span><b>${t('svcs')[b.svc][0]}</b></div>
+        <div><span>${t('dClient')}</span><b>${esc(b.name)||'–'}</b></div>
+        <div><span>${t('phone')}</span><b>${b.tel?`<a href="tel:${esc(b.tel.replace(/\s/g,''))}" style="color:var(--gold2)">${esc(b.tel)}</a>`:'–'}</b></div>`}
+        <div><span>${t('dSrc')}</span><b>${t('src')[b.src]}</b></div>
+        ${b.notes?`<div><span>${t('notes')}</span><b>${esc(b.notes)}</b></div>`:''}
+      </div>
+      <button class="btn btn-danger" style="margin-top:16px" onclick="delBooking(${b.id})">${t('del')}</button>`;
+    return;
+  }
+  if(adm.view==='form'){
+    const f=adm.f,len=formLen();
+    const free=TIMES.map((tm,i)=>({tm,i})).filter(o=>canFit(f.barber,f.day,o.i,len,false));
+    if(f.slot!==null&&!free.some(o=>o.i===f.slot))f.slot=null;
+    if(f.slot===null&&free.length)f.slot=free[0].i;
+    const days=dayList(30);
+    const srcBtns=['phone','walkin','insta','brk'].map(s=>`<button class="${f.src===s?'on':''}" onclick="adm.f.src='${s}';renderAdmin()">${t('src')[s]}</button>`).join('');
+    el.innerHTML=`<button class="owner-link" style="margin-bottom:14px" onclick="adm.view='grid';renderAdmin()">${t('editBack')}</button>
+      <h3 class="serif" style="font-size:22px;margin-bottom:14px">${t('addH')}</h3>
+      <div class="field"><label>${t('fSrc')}</label><div class="seg">${srcBtns}</div></div>
+      <div class="aform">
+        <div class="field"><label>${t('fBarber')}</label><select onchange="adm.f.barber=+this.value;renderAdmin()">${BARBERS.map((b,i)=>`<option value="${i}" ${i===f.barber?'selected':''}>${b.n}</option>`).join('')}</select></div>
+        <div class="field"><label>${t('fDate')}</label><select onchange="adm.f.day=this.value;renderAdmin()">${days.map((d,i)=>`<option value="${key(d)}" ${key(d)===f.day?'selected':''}>${i===0?t('today')+' · ':''}${fmtDay(d,{weekday:'short',day:'numeric',month:'short'})}</option>`).join('')}</select></div>
+        ${f.src==='brk'
+          ?`<div class="field"><label>${t('fDur')}</label><select onchange="adm.f.brkLen=+this.value;renderAdmin()">${[1,2,3,4].map(n=>`<option value="${n}" ${n===f.brkLen?'selected':''}>${n*30} ${t('min')}</option>`).join('')}</select></div>`
+          :`<div class="field"><label>${t('fSvc')}</label><select onchange="adm.f.svc=+this.value;renderAdmin()">${t('svcs').map((s,i)=>`<option value="${i}" ${i===f.svc?'selected':''}>${s[0]} · ${SVC[i][1]} ${t('min')}</option>`).join('')}</select></div>`}
+        <div class="field"><label>${t('fTime')}</label>${free.length?`<select onchange="adm.f.slot=+this.value">${free.map(o=>`<option value="${o.i}" ${o.i===f.slot?'selected':''}>${o.tm}</option>`).join('')}</select>`:`<p class="err">${t('noTimes')}</p>`}</div>
+        ${f.src==='brk'?'':`
+        <div class="field"><label>${t('fName')}${f.src==='walkin'?' ('+t('optional')+')':''}</label><input value="${esc(f.name)}" oninput="adm.f.name=this.value"></div>
+        <div class="field"><label>${t('fTel')}</label><input value="${esc(f.tel)}" oninput="adm.f.tel=this.value" inputmode="tel" placeholder="+383 4x xxx xxx"></div>`}
+        <div class="field full"><label>${t('notes')}</label><input value="${esc(f.notes)}" oninput="adm.f.notes=this.value"></div>
+      </div>
+      <button class="btn btn-gold" ${free.length?'':'disabled style="opacity:.4"'} onclick="saveAdd()">${t('save')}</button>`;
+    return;
+  }
+  // grid view
+  const d=fromKey(adm.day),isToday=adm.day===key(new Date());
+  let rows='';
+  TIMES.forEach((tm,idx)=>{
+    rows+=`<tr><td>${tm}</td>`;
+    BARBERS.forEach((_,b)=>{
+      const bk=covering(b,adm.day,idx);
+      if(bk){
+        if(bk.slot!==idx)return; // covered by rowspan above
+        const label=bk.src==='brk'?t('breakName'):esc(bk.name)||t('src')[bk.src];
+        const sub=bk.src==='brk'?'':`${t('svcs')[bk.svc][0]} · ${t('src')[bk.src]}`;
+        rows+=`<td rowspan="${bk.len}"><button class="bkc src-${bk.src} ${isNew(bk.id)?'new':''}" onclick="adm.sel=${bk.id};adm.view='detail';markRead(${bk.id});renderAdmin()"><b>${isNew(bk.id)?`<span class='nb'>${t('nBadge')}</span>`:''}${label}</b><span>${sub}</span></button></td>`;
+      }else if(isPast(adm.day,idx)){
+        rows+=`<td><div class="cell-past"></div></td>`;
+      }else{
+        rows+=`<td><button class="cell-free" title="${t('addBk')}" onclick="startAdd(${b},${idx})">+</button></td>`;
+      }
+    });
+    rows+='</tr>';
+  });
+  el.innerHTML=`<div class="abar">
+      <div class="dnav"><button onclick="shiftDay(-1)" aria-label="prev">‹</button><b>${isToday?t('today')+' · ':''}${fmtDay(d,{weekday:'short',day:'numeric',month:'short'})}</b><button onclick="shiftDay(1)" aria-label="next">›</button></div>
+      <div style="display:flex;gap:8px"><button class="bell" title="${t('nH')}" onclick="adm.view='notifs';renderAdmin()">🔔${unread()?`<em>${unread()}</em>`:''}</button><button class="btn btn-gold" onclick="startAdd()">${t('addBk')}</button><button class="btn btn-ghost" onclick="adm.auth=false;renderAdmin()">${t('logout')}</button></div>
+    </div>
+    <p class="note" style="margin:0 0 12px">${t('admNote')}</p>
+    <div class="agrid"><table><thead><tr><th>${t('time')}</th>${BARBERS.map(b=>`<th>${b.n}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div>
+    <div class="alegend">${['web','phone','walkin','insta','brk'].map(s=>`<span><i class="src-${s}"></i>${t('src')[s]}</span>`).join('')}</div>`;
+  if(isToday){const now=new Date(),mins=now.getHours()*60+now.getMinutes();const i=Math.max(0,Math.floor((mins-600)/30)-1);const g=el.querySelector('.agrid');if(g)g.scrollTop=i*42}
+}
+
+applyLang();
+</script>
+</body>
+</html>
