@@ -1005,7 +1005,9 @@ if(API_URL){
       const d=await api('/staff/bookings?'+range(),{staff:true});
       bookings=d.bookings.map(r=>({id:r.id,barber:r.barber,day:r.day,slot:r.slot,len:r.len,svc:r.svc,name:r.name||'',tel:r.tel||'',notes:r.notes||'',src:r.src,status:r.status,lang:r.lang||'sq',read:!!r.is_read,at:new Date(r.created_at)}));
       notifs=bookings.filter(b=>b.src==='web').sort((a,b)=>b.at-a.at).map(b=>({bid:b.id,read:b.read,at:b.at}));
-      const fresh=known?bookings.filter(b=>b.src==='web'&&!b.read&&!known.has(b.id)):[];
+      // first load after signing in: pop up the newest unread online booking; afterwards: every new one
+      const unreadWeb=bookings.filter(b=>b.src==='web'&&!b.read&&mine(b)).sort((a,b)=>b.at-a.at);
+      const fresh=known?unreadWeb.filter(b=>!known.has(b.id)):unreadWeb.slice(0,1);
       known=new Set(bookings.map(b=>b.id));
       fresh.forEach(showPush);
       if(adm.view==='grid'||adm.view==='notifs')renderAdmin();   // never wipe a form being filled in
