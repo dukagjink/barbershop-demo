@@ -416,6 +416,12 @@
 <div class="push" id="push" onclick="openFromPush()"></div>
 
 <script>
+/* ===== TELEGRAM =====
+   Paste your Cloudflare Worker address between the quotes, e.g.
+   const TELEGRAM_WORKER_URL = "https://bingo-notify.yourname.workers.dev";
+   Leave it empty to turn Telegram off. */
+const TELEGRAM_WORKER_URL = "https://bingo-notify.dukagjinkacoli.workers.dev";
+
 const T = {
   sq:{
     concept:"Koncept ridizajni me rezervim online, vetëm demonstrim",
@@ -707,7 +713,7 @@ function go(dir){
     const barber=st.barber===-1?BARBERS.findIndex((_,b)=>canFit(b,st.day,st.time,len)):st.barber;
     if(barber<0||!canFit(barber,st.day,st.time,len)){st.step=2;st.time=null;renderStep();return}
     const b={id:nextId++,barber,day:st.day,slot:st.time,len,svc:st.svc,name:st.name.trim(),tel:st.tel.trim(),notes:st.notes,src:"web",status:"pending",lang};
-    bookings.push(b);persist();st.done=b;renderStep();notify(b);return;
+    bookings.push(b);persist();st.done=b;renderStep();notify(b);sendTelegram(b);return;
   }
   let s=st.step+dir;
   if(st.skipBarber&&s===1)s+=dir;
@@ -746,6 +752,21 @@ function mine(b){return adm.user===-1||adm.user===null||b.barber===adm.user}
 function unread(){return notifs.filter(n=>!n.read&&bookings.some(b=>b.id===n.bid&&mine(b))).length}
 function isNew(id){return notifs.some(n=>n.bid===id&&!n.read)}
 
+
+
+/* ---------- Telegram: send each online booking to that barber's bot ---------- */
+function sendTelegram(b){
+  if(!TELEGRAM_WORKER_URL)return;
+  const d=fromKey(b.day);
+  const pad=n=>String(n).padStart(2,'0');
+  fetch(TELEGRAM_WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+    barber:BARBERS[b.barber].n.toLowerCase(),
+    name:b.name, phone:b.tel,
+    service:T.sq.svcs[b.svc][0]+' ('+SVC[b.svc][1]+' min)',
+    date:T.sq.days[(d.getDay()+6)%7]+', '+pad(d.getDate())+'.'+pad(d.getMonth()+1)+'.'+d.getFullYear(),
+    time:TIMES[b.slot], lang:LANG_NAME[b.lang||'sq'], notes:b.notes||''
+  })}).catch(()=>{});
+}
 
 /* ---------- confirming bookings to the client ---------- */
 function waNumber(tel){let d=String(tel).replace(/[^\d+]/g,'');if(d.startsWith('+'))d=d.slice(1);else if(d.startsWith('00'))d=d.slice(2);else if(d.startsWith('0'))d='383'+d.slice(1);return d}
