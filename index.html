@@ -416,11 +416,11 @@
 <div class="push" id="push" onclick="openFromPush()"></div>
 
 <script>
-/* ===== TELEGRAM =====
-   Paste your Cloudflare Worker address between the quotes, e.g.
-   const TELEGRAM_WORKER_URL = "https://bingo-notify.yourname.workers.dev";
-   Leave it empty to turn Telegram off. */
-const TELEGRAM_WORKER_URL = "https://bingo-notify.dukagjinkacoli.workers.dev";
+/* ===== BOOKINGS DATABASE + TELEGRAM =====
+   Address of the Cloudflare Worker that stores all bookings (D1 database) and
+   sends the Telegram messages. Leave it empty to run the demo offline, with
+   bookings kept only in this browser. */
+const TELEGRAM_WORKER_URL = "https://agronit.org/berber/api.php";
 
 const T = {
   sq:{
@@ -462,7 +462,7 @@ const T = {
     save:"Ruaj",noTimes:"Nuk ka kohë të lirë për këtë berber në këtë ditë.",
     saved:"U ruajt, ora tani shfaqet e zënë online",deleted:"Rezervimi u fshi, ora u lirua",
     del:"Fshij rezervimin",dClient:"Klienti",dSrc:"Burimi",
-    walkinName:"Klient pa termin",breakName:"Pauzë",
+    walkinName:"Klient pa termin",breakName:"Pauzë",takenErr:"Kjo orë sapo u zu. Ju lutem zgjidhni një tjetër.",netErr:"Nuk u lidh dot. Kontrolloni internetin dhe provoni sërish.",
     stL:"Statusi",stPending:"Në pritje",stConfirmed:"Konfirmuar",clientLang:"Gjuha e klientit",confirmBtn:"Konfirmo & dërgo në WhatsApp",declineBtn:"Refuzo",resend:"Dërgo sërish konfirmimin",msgIn:"Mesazhi do të jetë në",confirmedToast:"U konfirmua, WhatsApp u hap me mesazhin",declinedToast:"U refuzua, ora u lirua",msgOk:"Përshëndetje {name}! ✂️ Termini juaj në Barbershop Bingo është konfirmuar.\n\n📅 {date} · {time}\n💈 {service} te {barber}\n📍 Rr. Kerem Lewton, Prishtinë\n\nJu lutem ejani 5 minuta më herët. Për ndryshime: +383 44 907 755",msgNo:"Përshëndetje {name}, na vjen keq, termini {date} · {time} te {barber} nuk është më i lirë. Ju lutem zgjidhni një orë tjetër në faqen tonë ose na telefononi: +383 44 907 755. Barbershop Bingo",resetDemo:"Rivendos të dhënat demo",resetDone:"Të dhënat demo u rivendosën",
     nNew:"Rezervim i ri online",nH:"Njoftimet",nEmpty:"Nuk ka njoftime ende.",nNow:"tani",nView:"Shiko",nBadge:"E RE",nInfo:"Barberi merr njoftim në telefon për çdo rezervim online."
   },
@@ -504,7 +504,7 @@ const T = {
     save:"Save",noTimes:"No free time for this barber on this day.",
     saved:"Saved, that time now shows as busy online",deleted:"Booking deleted, the time is free again",
     del:"Delete booking",dClient:"Client",dSrc:"Source",
-    walkinName:"Walk-in client",breakName:"Break",
+    walkinName:"Walk-in client",breakName:"Break",takenErr:"That time was just taken. Please pick another.",netErr:"Couldn't connect. Check your internet and try again.",
     stL:"Status",stPending:"Waiting",stConfirmed:"Confirmed",clientLang:"Client's language",confirmBtn:"Confirm & send on WhatsApp",declineBtn:"Decline",resend:"Send confirmation again",msgIn:"The message will be in",confirmedToast:"Confirmed, WhatsApp opened with the message",declinedToast:"Declined, the time is free again",msgOk:"Hi {name}! ✂️ Your appointment at Barbershop Bingo is confirmed.\n\n📅 {date} · {time}\n💈 {service} with {barber}\n📍 Rr. Kerem Lewton, Prishtina\n\nPlease arrive 5 minutes early. To change it: +383 44 907 755",msgNo:"Hi {name}, sorry, the time {date} · {time} with {barber} is no longer available. Please pick another time on our website or call us: +383 44 907 755. Barbershop Bingo",resetDemo:"Reset demo data",resetDone:"Demo data reset",
     nNew:"New online booking",nH:"Notifications",nEmpty:"No notifications yet.",nNow:"now",nView:"View",nBadge:"NEW",nInfo:"The barber gets a phone notification for every online booking."
   },
@@ -546,7 +546,7 @@ const T = {
     save:"Speichern",noTimes:"Keine freie Zeit für diesen Barber an diesem Tag.",
     saved:"Gespeichert, die Zeit ist online jetzt belegt",deleted:"Termin gelöscht, die Zeit ist wieder frei",
     del:"Termin löschen",dClient:"Kunde",dSrc:"Quelle",
-    walkinName:"Laufkunde",breakName:"Pause",
+    walkinName:"Laufkunde",breakName:"Pause",takenErr:"Diese Zeit wurde gerade vergeben. Bitte wähle eine andere.",netErr:"Keine Verbindung. Bitte Internet prüfen und erneut versuchen.",
     stL:"Status",stPending:"Wartet",stConfirmed:"Bestätigt",clientLang:"Sprache des Kunden",confirmBtn:"Bestätigen & per WhatsApp senden",declineBtn:"Ablehnen",resend:"Bestätigung erneut senden",msgIn:"Die Nachricht ist auf",confirmedToast:"Bestätigt, WhatsApp mit der Nachricht geöffnet",declinedToast:"Abgelehnt, die Zeit ist wieder frei",msgOk:"Hallo {name}! ✂️ Dein Termin bei Barbershop Bingo ist bestätigt.\n\n📅 {date} · {time}\n💈 {service} bei {barber}\n📍 Rr. Kerem Lewton, Prishtina\n\nBitte 5 Minuten früher da sein. Für Änderungen: +383 44 907 755",msgNo:"Hallo {name}, leider ist der Termin {date} · {time} bei {barber} nicht mehr frei. Bitte wähle eine andere Zeit auf unserer Website oder ruf uns an: +383 44 907 755. Barbershop Bingo",resetDemo:"Demo-Daten zurücksetzen",resetDone:"Demo-Daten zurückgesetzt",
     nNew:"Neue Online-Buchung",nH:"Benachrichtigungen",nEmpty:"Noch keine Benachrichtigungen.",nNow:"jetzt",nView:"Ansehen",nBadge:"NEU",nInfo:"Der Barber bekommt für jede Online-Buchung eine Push-Nachricht aufs Handy."
   }
@@ -786,6 +786,7 @@ function declineBooking(id){const b=bookings.find(x=>x.id===id);if(!b)return;ope
 
 /* ---------- staff panel ---------- */
 let adm={auth:false,user:null,pick:null,day:null,view:'grid',sel:null,f:{}};
+function logout(){adm.auth=false;adm.user=null;adm.pick=null;adm.cred=null;clearInterval(window.__poll);renderAdmin()}
 function openOwner(){
   if(!adm.day)adm.day=key(new Date());
   if(!adm.auth)adm.pick=null;
@@ -922,7 +923,7 @@ function renderAdmin(){
   });
   el.innerHTML=`<div class="abar">
       <div class="dnav"><button onclick="shiftDay(-1)" aria-label="prev">‹</button><b>${isToday?t('today')+' · ':''}${fmtDay(d,{weekday:'short',day:'numeric',month:'short'})}</b><button onclick="shiftDay(1)" aria-label="next">›</button></div>
-      <div style="display:flex;gap:8px"><button class="bell" title="${t('nH')}" onclick="adm.view='notifs';renderAdmin()">🔔${unread()?`<em>${unread()}</em>`:''}</button><button class="btn btn-gold" onclick="startAdd()">${t('addBk')}</button><button class="btn btn-ghost" onclick="adm.auth=false;adm.user=null;adm.pick=null;renderAdmin()">${t('logout')}</button></div>
+      <div style="display:flex;gap:8px"><button class="bell" title="${t('nH')}" onclick="adm.view='notifs';renderAdmin()">🔔${unread()?`<em>${unread()}</em>`:''}</button><button class="btn btn-gold" onclick="startAdd()">${t('addBk')}</button><button class="btn btn-ghost" onclick="logout()">${t('logout')}</button></div>
     </div>
     <p class="note" style="margin:0 0 12px"><b style="font-style:normal;color:var(--text)">${dayCount} ${t('nBk')}</b> · ${t('admNote')}</p>
     <div class="agrid"><table class="${cols.length===1?'one':''}"><thead><tr><th>${t('time')}</th>${cols.map(b=>`<th>${BARBERS[b].n}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div>
@@ -951,6 +952,112 @@ window.addEventListener('storage',e=>{
     renderAdmin();
   }
 });
+
+/* ---------- shared database mode (Cloudflare Worker + D1) ----------
+   With TELEGRAM_WORKER_URL set, every visitor and the staff panel share one schedule. */
+const API_URL=TELEGRAM_WORKER_URL.replace(/\/+$/,'');
+if(API_URL){
+  const WHO=['albin','redon','loris'];
+  // Cloudflare Worker: https://…workers.dev/slots   ·   IONOS (PHP): https://…/api.php?r=/slots
+  const apiUrl=path=>{if(!/\.php$/i.test(API_URL))return API_URL+path;const [p,qs]=path.split('?');return API_URL+'?r='+encodeURIComponent(p)+(qs?'&'+qs:'')};
+  const api=async(path,opt={})=>{
+    const headers={'Content-Type':'application/json'};
+    if(opt.staff&&adm.cred)headers['X-Staff']=adm.cred;
+    const r=await fetch(apiUrl(path),{method:opt.method||'GET',headers,body:opt.body?JSON.stringify(opt.body):undefined});
+    let data={};try{data=await r.json()}catch(e){}
+    if(!r.ok){const e=new Error(data.error||String(r.status));e.status=r.status;throw e}
+    return data;
+  };
+  const range=()=>{const a=new Date();a.setDate(a.getDate()-14);const b=new Date();b.setDate(b.getDate()+60);return 'from='+key(a)+'&to='+key(b)};
+  persist=function(){};
+  loadData=function(){return true};
+  sendTelegram=function(){};           // the Worker sends Telegram itself
+
+  /* public page: only busy times, no names or phone numbers */
+  window.refreshSlots=async function(){
+    try{const d=await api('/slots?'+range());if(!isStaff())bookings=d.slots.map(x=>({...x}));}catch(e){}
+    if(document.getElementById('bookOv').classList.contains('show')&&!st.done&&!st.sending)renderStep();
+  };
+  const _openBook=openBook;
+  openBook=function(pre){_openBook(pre);refreshSlots()};
+  const _go=go;
+  go=async function(dir){
+    if(!(dir>0&&st.step===3))return _go(dir);
+    const err=document.getElementById('err');
+    if(st.name.trim().length<2||st.tel.replace(/\D/g,'').length<8){err.textContent=t('errName');return}
+    if(st.sending)return;
+    st.sending=true;const nb=document.getElementById('nextBtn');nb.disabled=true;nb.textContent='…';
+    try{
+      const d=await api('/book',{method:'POST',body:{barber:st.barber,day:st.day,slot:st.time,svc:st.svc,name:st.name.trim(),tel:st.tel.trim(),notes:st.notes,lang}});
+      st.sending=false;st.done={...d.booking,name:st.name.trim(),tel:st.tel.trim(),lang};renderStep();refreshSlots();
+    }catch(e){
+      st.sending=false;
+      if(e.status===409){await refreshSlots();st.step=2;st.time=null;renderStep();document.getElementById('err').textContent=t('takenErr')}
+      else{nb.disabled=false;nb.textContent=t('confirm');err.textContent=t('netErr')}
+    }
+  };
+
+  /* staff panel: full bookings for the signed-in barber (or everyone for the owner) */
+  let known=null;
+  window.loadStaff=async function(){
+    if(!adm.auth)return;
+    try{
+      const d=await api('/staff/bookings?'+range(),{staff:true});
+      bookings=d.bookings.map(r=>({id:r.id,barber:r.barber,day:r.day,slot:r.slot,len:r.len,svc:r.svc,name:r.name||'',tel:r.tel||'',notes:r.notes||'',src:r.src,status:r.status,lang:r.lang||'sq',read:!!r.is_read,at:new Date(r.created_at)}));
+      notifs=bookings.filter(b=>b.src==='web').sort((a,b)=>b.at-a.at).map(b=>({bid:b.id,read:b.read,at:b.at}));
+      const fresh=known?bookings.filter(b=>b.src==='web'&&!b.read&&!known.has(b.id)):[];
+      known=new Set(bookings.map(b=>b.id));
+      fresh.forEach(showPush);
+      if(adm.view==='grid'||adm.view==='notifs')renderAdmin();   // never wipe a form being filled in
+    }catch(e){if(e.status===401)logout()}
+  };
+  login=async function(){
+    const v=document.getElementById('pinIn').value;
+    adm.cred=(adm.pick===-1?'owner':WHO[adm.pick])+':'+v;
+    try{
+      await api('/staff/login',{method:'POST',body:{},staff:true});
+      adm.auth=true;adm.user=adm.pick;adm.view='grid';known=null;bookings=[];
+      renderAdmin();await loadStaff();
+      clearInterval(window.__poll);window.__poll=setInterval(loadStaff,8000);
+    }catch(e){adm.cred=null;const pe=document.getElementById('pinErr');if(pe)pe.textContent=e.status===401?t('pinErr'):t('netErr')}
+  };
+  markRead=function(id){
+    const b=bookings.find(x=>x.id===id);if(!b||b.read)return;
+    b.read=true;notifs.forEach(n=>{if(n.bid===id)n.read=true});
+    api('/staff/bookings/'+id,{method:'PATCH',body:{read:1},staff:true}).catch(()=>{});
+  };
+  confirmBooking=function(id){
+    const b=bookings.find(x=>x.id===id);if(!b)return;
+    openWhatsApp(b,'ok');                                 // open WhatsApp right away (inside the tap)
+    b.status='confirmed';b.read=true;renderAdmin();
+    api('/staff/bookings/'+id,{method:'PATCH',body:{status:'confirmed'},staff:true}).then(()=>toast(t('confirmedToast'))).catch(()=>toast(t('netErr'))).finally(loadStaff);
+  };
+  declineBooking=function(id){
+    const b=bookings.find(x=>x.id===id);if(!b)return;
+    openWhatsApp(b,'no');
+    bookings=bookings.filter(x=>x.id!==id);adm.view='grid';renderAdmin();
+    api('/staff/bookings/'+id,{method:'DELETE',staff:true}).then(()=>toast(t('declinedToast'))).catch(()=>toast(t('netErr'))).finally(loadStaff);
+  };
+  delBooking=function(id){
+    bookings=bookings.filter(x=>x.id!==id);adm.view='grid';renderAdmin();
+    api('/staff/bookings/'+id,{method:'DELETE',staff:true}).then(()=>toast(t('deleted'))).catch(()=>toast(t('netErr'))).finally(loadStaff);
+  };
+  saveAdd=async function(){
+    const f=adm.f,len=formLen();
+    if(adm.user>=0)f.barber=adm.user;
+    if(f.slot===null||!canFit(f.barber,f.day,f.slot,len,false))return;
+    try{
+      await api('/staff/bookings',{method:'POST',staff:true,body:{barber:f.barber,day:f.day,slot:f.slot,svc:f.src==='brk'?null:f.svc,len,src:f.src,
+        name:f.name.trim()||(f.src==='walkin'?t('walkinName'):''),tel:f.tel.trim(),notes:f.notes}});
+      adm.day=f.day;adm.view='grid';toast(t('saved'));await loadStaff();
+    }catch(e){toast(e.status===409?t('takenErr'):t('netErr'));loadStaff()}
+  };
+  resetDemo=async function(){
+    try{await api('/staff/reset',{method:'POST',body:{},staff:true});adm.view='grid';toast(t('resetDone'))}catch(e){toast(t('netErr'))}
+    known=null;await loadStaff();
+  };
+}
+
 function checkStaff(){
   const on=location.hash==='#staff'||/[?&]staff\b/.test(location.search);
   document.body.classList.toggle('staff-mode',on);
