@@ -161,6 +161,12 @@
   .wa-float svg{width:30px;height:30px}
   body.staff-mode>.wa-float{display:none}
   @media(max-width:860px){.wa-float{bottom:84px;right:16px;width:52px;height:52px}}
+  .price s,.tile span s{color:var(--muted);font-weight:400;font-size:.8em;margin-left:4px}
+  .save{font-style:normal;align-self:flex-start;background:rgba(95,182,122,.15);color:#7fd39a;font-size:11px;font-weight:700;padding:2px 7px;border-radius:999px;letter-spacing:.02em}
+  .svc.deal,.tile.deal{border-color:rgba(201,162,39,.45)}
+  .phone-row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.4fr);gap:8px}
+  .phone-row select{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 10px;color:var(--text);font:15px Archivo,Verdana,sans-serif;min-width:0}
+  .phone-row select:focus{outline:none;border-color:var(--gold)}
   .tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
   .tile{aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;text-align:left;gap:6px;padding:14px;border-radius:14px;background:var(--card);border:1px solid var(--line);color:var(--text);font:inherit;cursor:pointer;transition:.15s}
   .tile:hover{border-color:#4a5263;transform:translateY(-1px)}
@@ -168,7 +174,7 @@
   .tile b{font-size:15px;line-height:1.25}
   .tile small{color:var(--muted);font-size:12px;margin-top:auto}
   .tile span{color:var(--gold2);font-weight:700;font-size:18px}
-  @media(max-width:420px){.tiles{gap:8px}.tile{padding:10px;border-radius:12px}.tile b{font-size:13px}.tile span{font-size:16px}}
+  @media(max-width:520px){.tiles{gap:8px}.tile{aspect-ratio:auto;min-height:128px;padding:10px;border-radius:12px}.tile b{font-size:12.5px;hyphens:auto;overflow-wrap:anywhere}.tile span{font-size:15px}.tile .save{font-size:10px;padding:2px 5px}}
   .field{display:grid;gap:6px;margin-bottom:14px}
   .field label{font-size:13px;color:var(--muted)}
   .field input,.field textarea{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--text);font:15px Archivo,Verdana,sans-serif}
@@ -309,7 +315,6 @@
       <p data-i="heroP"></p>
       <div class="cta">
         <button class="btn btn-gold" onclick="openBook()" data-i="bookOnline"></button>
-        <a class="btn btn-wa" data-wa href="https://wa.me/38344907755" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.8h-.01a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.41Z"/></svg><span>WhatsApp</span></a>
         <a class="btn btn-ghost" href="tel:+38344907755" data-i="call"></a>
       </div>
       <div class="badges">
@@ -372,7 +377,6 @@
           </div>
           <div class="cards">
             <a class="link-card lc-map" href="https://maps.app.goo.gl/AmG6DSDjnoJrmMH26" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg></span><span class="tx"><b data-i="takeMe"></b><small>Google Maps · Rr. Kerem Lewton</small></span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-            <a class="link-card lc-wa" href="https://wa.me/38344907755" target="_blank" rel="noopener" data-wa><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.8h-.01a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.41Z"/></svg></span><span class="tx"><b data-i="waTitle"></b><small>+383 44 907 755</small></span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             <a class="link-card lc-ig" href="https://www.instagram.com/bingobarbershop/" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></span><span class="tx"><b data-i="igFollow"></b><small>@bingobarbershop</small></span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
         </div>
@@ -411,7 +415,6 @@
     <div id="ownerBody" style="margin-top:12px"></div>
   </div>
 </div>
-<a class="wa-float" data-wa href="https://wa.me/38344907755" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.8h-.01a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.41Z"/></svg></a>
 <div class="toast" id="toast"></div>
 <div class="push" id="push" onclick="openFromPush()"></div>
 
@@ -428,10 +431,10 @@ const T = {
     nServices:"Shërbimet",nGallery:"Punët tona",nVisit:"Na vizitoni",nTeam:"Ekipi",
     book:"Rezervo",bookOnline:"Rezervo termin online",call:"Na telefononi",
     heroH:"Where <em>Gentlemen</em> Are Made",
-    heroP:"Prerje klasike, rregullim mjekre dhe rruajtje me brisk në zemër të Prishtinës. Zgjidhni orën tuaj online, pa pritje.",
+    heroP:"Prerje flokësh, rregullim mjekre dhe tretmane fytyre në zemër të Prishtinës. Zgjidhni orën tuaj online, pa pritje.",
     everyDay:"çdo ditë",walkins:"Rezervim online 24/7",
     svcEyebrow:"Shërbimet",svcH:"Zgjidhni shërbimin tuaj",
-    priceNote:"Çmimet dhe kohëzgjatjet janë shembuj për këtë koncept, pronari i vendos ato reale.",
+    priceNote:"Kohëzgjatjet janë të përafërta.",
     teamEyebrow:"Ekipi",teamH:"Berberët tanë",bookWith:"Rezervo te",
     galH:"Punët tona",galPh:"Foto nga Instagram",
     visitEyebrow:"Lokacioni",visitH:"Na gjeni në Prishtinë",
@@ -442,17 +445,17 @@ const T = {
     s1:"Çfarë shërbimi dëshironi?",s2:"Zgjidhni berberin",s3:"Zgjidhni ditën dhe orën",s4:"Të dhënat tuaja",
     any:"Cilido berber i lirë",anySub:"Termini më i shpejtë",
     free:"E lirë",taken:"E zënë",noSlots:"Nuk ka orare të lira për këtë ditë.",
-    name:"Emri dhe mbiemri",tel:"Numri i telefonit (WhatsApp)",notes:"Shënim (opsional)",
+    name:"Emri dhe mbiemri",tel:"Numri i telefonit (WhatsApp / Viber)",ccLabel:"Shteti",ccOther:"Tjetër",telOtherPh:"Shkruani numrin e plotë me prefiks, p.sh. +46 70 123 4567",errPhone:"Ju lutem shkruani një numër të vlefshëm telefoni me prefiksin e shtetit.",errNameOnly:"Ju lutem shkruani emrin tuaj.",notes:"Shënim (opsional)",
     sum:{svc:"Shërbimi",barber:"Berberi",when:"Kur",price:"Çmimi"},
     errName:"Ju lutem shkruani emrin dhe një numër telefoni të vlefshëm.",
     doneH:"Kërkesa u dërgua!",doneP:"Berberi do ta konfirmojë terminin së shpejti, do të merrni mesazh në WhatsApp.",
     doneBtn:"Mbyll",cancelInfo:"Për ta anuluar, telefononi +383 44 907 755.",
     min:"min",
-    svcs:[["Prerje klasike","Prerje me gërshërë dhe makinë, larje dhe stilim."],["Fade","Skin fade ose low/mid/high fade me detaje të pastra."],["Rregullim mjekre","Formësim, konturim me brisk dhe vaj mjekre."],["Prerje + mjekër","Paketa e plotë: prerje dhe rregullim mjekre."],["Rruajtje me brisk","Peshqir i nxehtë, brisk klasik dhe balsam."],["Prerje për fëmijë","Për fëmijë deri në 12 vjeç."]],
+    svcs:[["Prerja e flokëve", "Prerje me gërshërë ose makinë, sipas stilit tuaj."], ["Rregullimi i mjekrës", "Formësim dhe konturim i pastër i mjekrës."], ["Larja e flokëve", "Larje me shampo dhe balsam, me masazh të lehtë."], ["Ngjyrosja e mjekrës", "Ngjyrë natyrale që mbulon qimet e bardha."], ["Depilimi i fytyrës me dyll", "Heqje e qimeve të fytyrës me dyll, për lëkurë të pastër."], ["Tretmani i fytyrës", "Pastrim dhe kujdes për lëkurën e fytyrës."], ["Prerja e flokëve + Rregullimi i mjekrës", "Paketa më e kërkuar: flokët dhe mjekra në një vizitë."], ["Paketa e plotë", "Të gjitha shërbimet e mësipërme në një vizitë."]],save:"Kurseni",
     days:["E hënë","E martë","E mërkurë","E enjte","E premte","E shtunë","E diel"],
     today:"Sot",
     /* staff panel */
-    admH:"Paneli i stafit",pinH:"Kush jeni?",pinFor:"PIN-i për",owner:"Pronari",ownerSub:"Të gjithë berberët",pinHint:"PIN demo: Albin 1111 · Redon 2222 · Loris 3333 · Pronari 1234",switchU:"Ndërro",nBk:"rezervime",myPanel:"Paneli im",pinBtn:"Hyr",pinErr:"PIN i gabuar",
+    admH:"Paneli i stafit",pinH:"Kush jeni?",pinFor:"PIN-i për",owner:"Pronari",ownerSub:"Të gjithë berberët",pinHint:"PIN demo: Albini 1111 · Redoni 2222 · Lorisi 3333 · Pronari 1234",switchU:"Ndërro",nBk:"rezervime",myPanel:"Paneli im",pinBtn:"Hyr",pinErr:"PIN i gabuar",
     addBk:"+ Shto rezervim",logout:"Dil",time:"Ora",
     src:{web:"Online",phone:"Telefon",walkin:"Pa termin",insta:"Instagram",brk:"Pauzë / e bllokuar"},
     admNote:"Çdo rezervim që shtoni këtu shfaqet menjëherë si i zënë në faqe.",
@@ -463,7 +466,7 @@ const T = {
     saved:"U ruajt, ora tani shfaqet e zënë online",deleted:"Rezervimi u fshi, ora u lirua",
     del:"Fshij rezervimin",dClient:"Klienti",dSrc:"Burimi",
     walkinName:"Klient pa termin",breakName:"Pauzë",takenErr:"Kjo orë sapo u zu. Ju lutem zgjidhni një tjetër.",netErr:"Nuk u lidh dot. Kontrolloni internetin dhe provoni sërish.",
-    stL:"Statusi",stPending:"Në pritje",stConfirmed:"Konfirmuar",clientLang:"Gjuha e klientit",confirmBtn:"Konfirmo & dërgo në WhatsApp",declineBtn:"Refuzo",resend:"Dërgo sërish konfirmimin",msgIn:"Mesazhi do të jetë në",confirmedToast:"U konfirmua, WhatsApp u hap me mesazhin",declinedToast:"U refuzua, ora u lirua",msgOk:"Përshëndetje {name}! ✂️ Termini juaj në Barbershop Bingo është konfirmuar.\n\n📅 {date} · {time}\n💈 {service} te {barber}\n📍 Rr. Kerem Lewton, Prishtinë\n\nJu lutem ejani 5 minuta më herët. Për ndryshime: +383 44 907 755",msgNo:"Përshëndetje {name}, na vjen keq, termini {date} · {time} te {barber} nuk është më i lirë. Ju lutem zgjidhni një orë tjetër në faqen tonë ose na telefononi: +383 44 907 755. Barbershop Bingo",resetDemo:"Rivendos të dhënat demo",resetDone:"Të dhënat demo u rivendosën",
+    stL:"Statusi",stPending:"Në pritje",stConfirmed:"Konfirmuar",clientLang:"Gjuha e klientit",confirmBtn:"Konfirmo & dërgo në {app}",sendVia:"Dërgo mesazhin me",viberNote:"Me Viber mesazhi kopjohet edhe automatikisht. Nëse nuk shfaqet në bisedë, thjesht ngjiteni (Paste).",declineBtn:"Refuzo",resend:"Dërgo sërish konfirmimin",msgIn:"Mesazhi do të jetë në",confirmedToast:"U konfirmua, WhatsApp u hap me mesazhin",declinedToast:"U refuzua, ora u lirua",msgOk:"Përshëndetje {name}! Termini juaj në Barbershop Bingo është konfirmuar.\n\nData: {date}, ora {time}\nShërbimi: {service} te {barber}\nAdresa: Rr. Kerem Lewton, Prishtinë\n\nJu lutem ejani 5 minuta më herët. Për ndryshime: +383 44 907 755",msgNo:"Përshëndetje {name}, na vjen keq, termini {date}, ora {time} te {barber} nuk është më i lirë. Ju lutem zgjidhni një orë tjetër në faqen tonë ose na telefononi: +383 44 907 755. Barbershop Bingo",months:["janar","shkurt","mars","prill","maj","qershor","korrik","gusht","shtator","tetor","nëntor","dhjetor"],resetDemo:"Rivendos të dhënat demo",resetDone:"Të dhënat demo u rivendosën",
     nNew:"Rezervim i ri online",nH:"Njoftimet",nEmpty:"Nuk ka njoftime ende.",nNow:"tani",nView:"Shiko",nBadge:"E RE",nInfo:"Barberi merr njoftim në telefon për çdo rezervim online."
   },
   en:{
@@ -471,10 +474,10 @@ const T = {
     nServices:"Services",nGallery:"Our work",nVisit:"Visit us",nTeam:"Team",
     book:"Book",bookOnline:"Book online",call:"Call us",
     heroH:"Where <em>Gentlemen</em> Are Made",
-    heroP:"Classic haircuts, beard trims and straight-razor shaves in the heart of Prishtina. Pick your time online, no waiting.",
+    heroP:"Haircuts, beard trims and facial treatments in the heart of Prishtina. Pick your time online, no waiting.",
     everyDay:"every day",walkins:"Online booking 24/7",
     svcEyebrow:"Services",svcH:"Choose your service",
-    priceNote:"Prices and durations are examples for this concept; the owner sets the real ones.",
+    priceNote:"Times are approximate.",
     teamEyebrow:"Team",teamH:"Our barbers",bookWith:"Book with",
     galH:"Our work",galPh:"Instagram photo",
     visitEyebrow:"Location",visitH:"Find us in Prishtina",
@@ -485,16 +488,16 @@ const T = {
     s1:"Which service would you like?",s2:"Choose your barber",s3:"Pick a day and time",s4:"Your details",
     any:"Any available barber",anySub:"Fastest appointment",
     free:"Free",taken:"Taken",noSlots:"No free times left for this day.",
-    name:"Full name",tel:"Phone number (WhatsApp)",notes:"Note (optional)",
+    name:"Full name",tel:"Phone number (WhatsApp / Viber)",ccLabel:"Country",ccOther:"Other",telOtherPh:"Type the full number with country code, e.g. +46 70 123 4567",errPhone:"Please enter a valid phone number with the country code.",errNameOnly:"Please enter your name.",notes:"Note (optional)",
     sum:{svc:"Service",barber:"Barber",when:"When",price:"Price"},
     errName:"Please enter your name and a valid phone number.",
     doneH:"Request sent!",doneP:"Your barber will confirm shortly. You'll get a WhatsApp message.",
     doneBtn:"Close",cancelInfo:"To cancel, call +383 44 907 755.",
     min:"min",
-    svcs:[["Classic haircut","Scissor and clipper cut, wash and styling."],["Fade","Skin fade or low/mid/high fade with sharp detailing."],["Beard trim","Shaping, straight-razor line-up and beard oil."],["Haircut + beard","The full package: haircut and beard trim."],["Straight-razor shave","Hot towel, classic razor and balm."],["Kids' haircut","For children up to 12."]],
+    svcs:[["Haircut", "Scissor or clipper cut, styled the way you like."], ["Beard Trim", "Clean shaping and line-up of your beard."], ["Hairwash", "Shampoo and conditioner with a light scalp massage."], ["Beard Dyeing", "Natural color that covers grey hairs."], ["Facial Waxing", "Facial hair removal with wax for clean skin."], ["Facial Treatment", "Cleansing and care for your facial skin."], ["Haircut + Beard Trim", "Our most popular combo: hair and beard in one visit."], ["Full Package", "Every service above in one visit."]],save:"Save",
     days:["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
     today:"Today",
-    admH:"Staff panel",pinH:"Who are you?",pinFor:"PIN for",owner:"Owner",ownerSub:"All barbers",pinHint:"Demo PINs: Albin 1111 · Redon 2222 · Loris 3333 · Owner 1234",switchU:"Switch",nBk:"bookings",myPanel:"My panel",pinBtn:"Sign in",pinErr:"Wrong PIN",
+    admH:"Staff panel",pinH:"Who are you?",pinFor:"PIN for",owner:"Owner",ownerSub:"All barbers",pinHint:"Demo PINs: Albini 1111 · Redoni 2222 · Lorisi 3333 · Owner 1234",switchU:"Switch",nBk:"bookings",myPanel:"My panel",pinBtn:"Sign in",pinErr:"Wrong PIN",
     addBk:"+ Add booking",logout:"Sign out",time:"Time",
     src:{web:"Online",phone:"Phone call",walkin:"Walk-in",insta:"Instagram",brk:"Break / blocked"},
     admNote:"Anything you add here shows as busy on the website straight away.",
@@ -505,7 +508,7 @@ const T = {
     saved:"Saved, that time now shows as busy online",deleted:"Booking deleted, the time is free again",
     del:"Delete booking",dClient:"Client",dSrc:"Source",
     walkinName:"Walk-in client",breakName:"Break",takenErr:"That time was just taken. Please pick another.",netErr:"Couldn't connect. Check your internet and try again.",
-    stL:"Status",stPending:"Waiting",stConfirmed:"Confirmed",clientLang:"Client's language",confirmBtn:"Confirm & send on WhatsApp",declineBtn:"Decline",resend:"Send confirmation again",msgIn:"The message will be in",confirmedToast:"Confirmed, WhatsApp opened with the message",declinedToast:"Declined, the time is free again",msgOk:"Hi {name}! ✂️ Your appointment at Barbershop Bingo is confirmed.\n\n📅 {date} · {time}\n💈 {service} with {barber}\n📍 Rr. Kerem Lewton, Prishtina\n\nPlease arrive 5 minutes early. To change it: +383 44 907 755",msgNo:"Hi {name}, sorry, the time {date} · {time} with {barber} is no longer available. Please pick another time on our website or call us: +383 44 907 755. Barbershop Bingo",resetDemo:"Reset demo data",resetDone:"Demo data reset",
+    stL:"Status",stPending:"Waiting",stConfirmed:"Confirmed",clientLang:"Client's language",confirmBtn:"Confirm & send on {app}",sendVia:"Send the message with",viberNote:"With Viber the message is also copied automatically. If it doesn't appear in the chat, just paste it.",declineBtn:"Decline",resend:"Send confirmation again",msgIn:"The message will be in",confirmedToast:"Confirmed, WhatsApp opened with the message",declinedToast:"Declined, the time is free again",msgOk:"Hi {name}! Your appointment at Barbershop Bingo is confirmed.\n\nDate: {date}, {time}\nService: {service} with {barber}\nAddress: Rr. Kerem Lewton, Prishtina\n\nPlease arrive 5 minutes early. To change it: +383 44 907 755",msgNo:"Hi {name}, sorry, the time {date}, {time} with {barber} is no longer available. Please pick another time on our website or call us: +383 44 907 755. Barbershop Bingo",months:["January","February","March","April","May","June","July","August","September","October","November","December"],resetDemo:"Reset demo data",resetDone:"Demo data reset",
     nNew:"New online booking",nH:"Notifications",nEmpty:"No notifications yet.",nNow:"now",nView:"View",nBadge:"NEW",nInfo:"The barber gets a phone notification for every online booking."
   },
   de:{
@@ -513,10 +516,10 @@ const T = {
     nServices:"Leistungen",nGallery:"Unsere Arbeit",nVisit:"Besuch",nTeam:"Team",
     book:"Buchen",bookOnline:"Online buchen",call:"Anrufen",
     heroH:"Where <em>Gentlemen</em> Are Made",
-    heroP:"Klassische Haarschnitte, Bartpflege und Rasur mit dem Messer im Herzen von Prishtina. Termin online wählen, ohne Wartezeit.",
+    heroP:"Haarschnitte, Bartpflege und Gesichtsbehandlungen im Herzen von Prishtina. Termin online wählen, ohne Wartezeit.",
     everyDay:"täglich",walkins:"Online-Buchung rund um die Uhr",
     svcEyebrow:"Leistungen",svcH:"Wähle deine Leistung",
-    priceNote:"Preise und Dauer sind Beispiele für dieses Konzept; die echten legt der Inhaber fest.",
+    priceNote:"Die Dauer ist ungefähr angegeben.",
     teamEyebrow:"Team",teamH:"Unsere Barber",bookWith:"Buchen bei",
     galH:"Unsere Arbeit",galPh:"Instagram-Foto",
     visitEyebrow:"Standort",visitH:"So findest du uns in Prishtina",
@@ -527,16 +530,16 @@ const T = {
     s1:"Welche Leistung möchtest du?",s2:"Wähle deinen Barber",s3:"Tag und Uhrzeit wählen",s4:"Deine Daten",
     any:"Beliebiger freier Barber",anySub:"Schnellster Termin",
     free:"Frei",taken:"Belegt",noSlots:"Für diesen Tag sind keine Zeiten mehr frei.",
-    name:"Vor- und Nachname",tel:"Telefonnummer (WhatsApp)",notes:"Anmerkung (optional)",
+    name:"Vor- und Nachname",tel:"Telefonnummer (WhatsApp / Viber)",ccLabel:"Land",ccOther:"Andere",telOtherPh:"Vollständige Nummer mit Ländervorwahl, z. B. +46 70 123 4567",errPhone:"Bitte gib eine gültige Telefonnummer mit Ländervorwahl ein.",errNameOnly:"Bitte gib deinen Namen ein.",notes:"Anmerkung (optional)",
     sum:{svc:"Leistung",barber:"Barber",when:"Wann",price:"Preis"},
     errName:"Bitte Namen und eine gültige Telefonnummer eingeben.",
     doneH:"Anfrage gesendet!",doneP:"Dein Barber bestätigt den Termin in Kürze. Du bekommst eine WhatsApp-Nachricht.",
     doneBtn:"Schließen",cancelInfo:"Zum Stornieren: +383 44 907 755.",
     min:"Min.",
-    svcs:[["Klassischer Haarschnitt","Schere und Maschine, Waschen und Styling."],["Fade","Skin Fade oder Low/Mid/High Fade mit sauberen Konturen."],["Bartpflege","Formen, Konturen mit dem Messer und Bartöl."],["Haarschnitt + Bart","Das Komplettpaket: Haarschnitt und Bartpflege."],["Rasur mit dem Messer","Heißes Tuch, klassisches Messer und Balsam."],["Kinderhaarschnitt","Für Kinder bis 12 Jahre."]],
+    svcs:[["Haarschnitt", "Schere oder Maschine, gestylt wie du es magst."], ["Bart trimmen", "Sauberes Formen und Konturieren des Barts."], ["Haarwäsche", "Shampoo und Spülung mit leichter Kopfmassage."], ["Bart färben", "Natürliche Farbe, die graue Haare abdeckt."], ["Gesichtsenthaarung mit Wachs", "Entfernung von Gesichtshaaren mit Wachs."], ["Gesichtsbehandlung", "Reinigung und Pflege der Gesichtshaut."], ["Haarschnitt + Bart trimmen", "Unser beliebtestes Paket: Haare und Bart bei einem Besuch."], ["Komplettpaket", "Alle oben genannten Leistungen bei einem Besuch."]],save:"Du sparst",
     days:["Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag","Sonntag"],
     today:"Heute",
-    admH:"Mitarbeiter-Bereich",pinH:"Wer bist du?",pinFor:"PIN für",owner:"Inhaber",ownerSub:"Alle Barber",pinHint:"Demo-PINs: Albin 1111 · Redon 2222 · Loris 3333 · Inhaber 1234",switchU:"Wechseln",nBk:"Termine",myPanel:"Mein Bereich",pinBtn:"Anmelden",pinErr:"Falscher PIN",
+    admH:"Mitarbeiter-Bereich",pinH:"Wer bist du?",pinFor:"PIN für",owner:"Inhaber",ownerSub:"Alle Barber",pinHint:"Demo-PINs: Albini 1111 · Redoni 2222 · Lorisi 3333 · Inhaber 1234",switchU:"Wechseln",nBk:"Termine",myPanel:"Mein Bereich",pinBtn:"Anmelden",pinErr:"Falscher PIN",
     addBk:"+ Termin eintragen",logout:"Abmelden",time:"Zeit",
     src:{web:"Online",phone:"Telefon",walkin:"Laufkundschaft",insta:"Instagram",brk:"Pause / blockiert"},
     admNote:"Alles, was du hier einträgst, erscheint sofort als belegt auf der Website.",
@@ -547,18 +550,23 @@ const T = {
     saved:"Gespeichert, die Zeit ist online jetzt belegt",deleted:"Termin gelöscht, die Zeit ist wieder frei",
     del:"Termin löschen",dClient:"Kunde",dSrc:"Quelle",
     walkinName:"Laufkunde",breakName:"Pause",takenErr:"Diese Zeit wurde gerade vergeben. Bitte wähle eine andere.",netErr:"Keine Verbindung. Bitte Internet prüfen und erneut versuchen.",
-    stL:"Status",stPending:"Wartet",stConfirmed:"Bestätigt",clientLang:"Sprache des Kunden",confirmBtn:"Bestätigen & per WhatsApp senden",declineBtn:"Ablehnen",resend:"Bestätigung erneut senden",msgIn:"Die Nachricht ist auf",confirmedToast:"Bestätigt, WhatsApp mit der Nachricht geöffnet",declinedToast:"Abgelehnt, die Zeit ist wieder frei",msgOk:"Hallo {name}! ✂️ Dein Termin bei Barbershop Bingo ist bestätigt.\n\n📅 {date} · {time}\n💈 {service} bei {barber}\n📍 Rr. Kerem Lewton, Prishtina\n\nBitte 5 Minuten früher da sein. Für Änderungen: +383 44 907 755",msgNo:"Hallo {name}, leider ist der Termin {date} · {time} bei {barber} nicht mehr frei. Bitte wähle eine andere Zeit auf unserer Website oder ruf uns an: +383 44 907 755. Barbershop Bingo",resetDemo:"Demo-Daten zurücksetzen",resetDone:"Demo-Daten zurückgesetzt",
+    stL:"Status",stPending:"Wartet",stConfirmed:"Bestätigt",clientLang:"Sprache des Kunden",confirmBtn:"Bestätigen & per {app} senden",sendVia:"Nachricht senden über",viberNote:"Bei Viber wird die Nachricht auch automatisch kopiert. Falls sie nicht im Chat erscheint, einfach einfügen.",declineBtn:"Ablehnen",resend:"Bestätigung erneut senden",msgIn:"Die Nachricht ist auf",confirmedToast:"Bestätigt, WhatsApp mit der Nachricht geöffnet",declinedToast:"Abgelehnt, die Zeit ist wieder frei",msgOk:"Hallo {name}! Dein Termin bei Barbershop Bingo ist bestätigt.\n\nDatum: {date}, {time} Uhr\nLeistung: {service} bei {barber}\nAdresse: Rr. Kerem Lewton, Prishtina\n\nBitte 5 Minuten früher da sein. Für Änderungen: +383 44 907 755",msgNo:"Hallo {name}, leider ist der Termin {date}, {time} Uhr bei {barber} nicht mehr frei. Bitte wähle eine andere Zeit auf unserer Website oder ruf uns an: +383 44 907 755. Barbershop Bingo",months:["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],resetDemo:"Demo-Daten zurücksetzen",resetDone:"Demo-Daten zurückgesetzt",
     nNew:"Neue Online-Buchung",nH:"Benachrichtigungen",nEmpty:"Noch keine Benachrichtigungen.",nNow:"jetzt",nView:"Ansehen",nBadge:"NEU",nInfo:"Der Barber bekommt für jede Online-Buchung eine Push-Nachricht aufs Handy."
   }
 };
 const LOC={sq:"sq-AL",en:"en-GB",de:"de-DE"};
 const LANG_NAME={sq:"Shqip",en:"English",de:"Deutsch"};
 // sample price (€) & duration (min)
-const SVC=[[8,30],[10,40],[5,20],[13,50],[7,30],[6,25]];
-const BARBERS=[{n:"Albin",i:"A"},{n:"Redon",i:"R"},{n:"Loris",i:"L"}];
+// [price €, minutes, normal price € (packages only)]
+const SVC=[[6,30],[3,15],[2,10],[5,15],[5,15],[10,30],[8,45,9],[28,120,31]];
+const BARBERS=[{n:"Albini",i:"A"},{n:"Redoni",i:"R"},{n:"Lorisi",i:"L"}];
 // 30-minute slots, 10:00 – 20:30 start (closes 21:00)
 const TIMES=[];for(let m=600;m<=1230;m+=30)TIMES.push(String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0'));
 const slotsLen=svc=>Math.ceil(SVC[svc][1]/30);
+const priceHTML=i=>SVC[i][2]?`€${SVC[i][0]} <s>€${SVC[i][2]}</s>`:`€${SVC[i][0]}`;
+const saveHTML=i=>'';
+const HIDE_TIME=[2];   // Larja e flokëve: no time shown
+const durTxt=i=>HIDE_TIME.includes(i)?'':SVC[i][1]>=60?(SVC[i][1]/60)+' h':SVC[i][1]+' '+t('min');
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 let lang=(()=>{try{return localStorage.getItem('bb_lang')||'sq'}catch(e){return 'sq'}})();
@@ -602,7 +610,6 @@ function applyLang(){
     if(el.hasAttribute('data-html')) el.innerHTML=v; else el.textContent=v;
   });
   document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===lang));
-  document.querySelectorAll('[data-wa]').forEach(a=>a.href='https://wa.me/38344907755?text='+encodeURIComponent(t('waMsg')));
   renderServices();renderTeam();renderHours();
   if(document.getElementById('bookOv').classList.contains('show'))renderStep();
   if(document.getElementById('ownerOv').classList.contains('show'))renderAdmin();
@@ -611,8 +618,8 @@ document.querySelectorAll('.lang button').forEach(b=>b.onclick=()=>{lang=b.datas
 
 function renderServices(){
   document.getElementById('svcGrid').innerHTML=t('svcs').map((s,i)=>`
-    <div class="svc"><div class="top"><h3>${s[0]}</h3><span class="price">€${SVC[i][0]}</span></div>
-    <p>${s[1]}</p><span class="dur">${SVC[i][1]} ${t('min')}</span>
+    <div class="svc ${SVC[i][2]?'deal':''}"><div class="top"><h3>${s[0]}</h3><span class="price">${priceHTML(i)}</span></div>
+    ${saveHTML(i)}<p>${s[1]}</p><span class="dur">${durTxt(i)}</span>
     <button onclick="openBook({svc:${i}})">${t('book')} →</button></div>`).join('');
 }
 function renderTeam(){
@@ -630,15 +637,57 @@ function renderHours(){
   document.querySelector('.dot').style.background=open?'var(--ok)':'#c96b6b';
 }
 function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toast.h);toast.h=setTimeout(()=>el.classList.remove('show'),2600)}
-function fmtDay(d,opts){return d.toLocaleDateString(LOC[lang],opts)}
+// Albanian names written out by hand: many browsers don't have Albanian date names built in
+const SQ_DAY_SHORT=["Hën","Mar","Mër","Enj","Pre","Sht","Die"],SQ_MON_SHORT=["jan","shk","mar","pri","maj","qer","korr","gush","sht","tet","nën","dhj"];
+function fmtDay(d,opts){
+  if(lang!=='sq')return d.toLocaleDateString(LOC[lang],opts);
+  const w=(d.getDay()+6)%7,parts=[];
+  if(opts.weekday)parts.push(opts.weekday==='long'?T.sq.days[w]:SQ_DAY_SHORT[w]);
+  const dm=[];if(opts.day)dm.push(d.getDate());if(opts.month)dm.push(opts.month==='long'?T.sq.months[d.getMonth()]:SQ_MON_SHORT[d.getMonth()]);
+  if(dm.length)parts.push(dm.join(' '));
+  return parts.join(', ');
+}
 function barberName(i){return i===-1?t('any'):BARBERS[i].n}
 function closeAll(){document.querySelectorAll('.overlay').forEach(o=>{if(!(isStaff()&&o.id==='ownerOv'))o.classList.remove('show')});if(!isStaff())document.body.style.overflow=''}
 function isStaff(){return document.body.classList.contains('staff-mode')}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});
 
 /* ---------- customer booking ---------- */
+
+/* ---------- phone number with country code ---------- */
+const COUNTRIES=[ // [code, sq, en, de]
+ ['+383','Kosovë','Kosovo','Kosovo'],['+355','Shqipëri','Albania','Albanien'],['+389','Maqedoni e Veriut','North Macedonia','Nordmazedonien'],
+ ['+382','Mal i Zi','Montenegro','Montenegro'],['+381','Serbi','Serbia','Serbien'],['+49','Gjermani','Germany','Deutschland'],
+ ['+41','Zvicër','Switzerland','Schweiz'],['+43','Austri','Austria','Österreich'],['+39','Itali','Italy','Italien'],
+ ['+33','Francë','France','Frankreich'],['+32','Belgjikë','Belgium','Belgien'],['+31','Holandë','Netherlands','Niederlande'],
+ ['+46','Suedi','Sweden','Schweden'],['+44','Mbretëri e Bashkuar','United Kingdom','Vereinigtes Königreich'],
+ ['+90','Turqi','Turkey','Türkei'],['+1','SHBA / Kanada','USA / Canada','USA / Kanada']];
+function ccOptions(sel){
+  const li={sq:1,en:2,de:3}[lang];
+  return COUNTRIES.map(c=>`<option value="${c[0]}" ${c[0]===sel?'selected':''}>${c[0]}  ${c[li]}</option>`).join('')+`<option value="other" ${sel==='other'?'selected':''}>${t('ccOther')}</option>`;
+}
+// returns "+383 44123456" or null if not a valid international number
+function fullPhone(){
+  let local=String(st.tel||'').trim();
+  let num;
+  if(st.cc==='other'){
+    const d=local.replace(/[^\d+]/g,'').replace(/^00/,'+');
+    if(!/^\+[1-9]\d{7,14}$/.test(d))return null;
+    num=d;
+  }else{
+    let d=local.replace(/[^\d+]/g,'');
+    if(d.startsWith('+')||d.startsWith('00')){                       // they typed the full number themselves
+      d=d.replace(/^00/,'+');return /^\+[1-9]\d{7,14}$/.test(d)?d:null;
+    }
+    d=d.replace(/^0+/,'');                                           // 044… → 44…
+    if(d.length<6||d.length>12)return null;
+    num=st.cc+' '+d;
+  }
+  return num;
+}
+
 function openBook(pre={}){
-  st={step:0,svc:null,barber:null,day:null,time:null,name:"",tel:"",notes:"",done:false,skipBarber:false};
+  st={step:0,svc:null,barber:null,day:null,time:null,name:"",tel:"",cc:"+383",notes:"",done:false,skipBarber:false};
   if(pre.svc!==undefined){st.svc=pre.svc;st.step=1}
   if(pre.barber!==undefined){st.barber=pre.barber;st.skipBarber=true}
   document.getElementById('bookOv').classList.add('show');document.body.style.overflow='hidden';
@@ -673,7 +722,7 @@ function renderStep(){
   }
   if(st.step===0){
     body.innerHTML=`<div class="step-title">${t('s1')}</div><div class="tiles">`+t('svcs').map((s,i)=>`
-      <button class="tile ${st.svc===i?'sel':''}" onclick="pick('svc',${i})"><b>${s[0]}</b><small>${SVC[i][1]} ${t('min')}</small><span>€${SVC[i][0]}</span></button>`).join('')+`</div>`;
+      <button class="tile ${st.svc===i?'sel':''} ${SVC[i][2]?'deal':''}" onclick="pick('svc',${i})"><b>${s[0]}</b>${saveHTML(i)}<small>${durTxt(i)}</small><span>${priceHTML(i)}</span></button>`).join('')+`</div>`;
     next.disabled=st.svc===null;
   }
   if(st.step===1){
@@ -701,18 +750,25 @@ function renderStep(){
         <div><span>${t('sum').price}</span><b>€${SVC[st.svc][0]}</b></div>
       </div>
       <div class="field"><label>${t('name')}</label><input id="fName" value="${esc(st.name)}" oninput="st.name=this.value" autocomplete="name"></div>
-      <div class="field"><label>${t('tel')}</label><input id="fTel" value="${esc(st.tel)}" oninput="st.tel=this.value" placeholder="+383 4x xxx xxx" inputmode="tel" autocomplete="tel"></div>
+      <div class="field"><label>${t('tel')}</label>
+        <div class="phone-row">
+          <select id="fCc" aria-label="${t('ccLabel')}" onchange="st.cc=this.value;renderStep();setTimeout(()=>document.getElementById('fTel')?.focus(),0)">${ccOptions(st.cc)}</select>
+          <input id="fTel" value="${esc(st.tel)}" oninput="st.tel=this.value" placeholder="${st.cc==='other'?'+46 70 123 4567':st.cc==='+383'?'44 123 456':''}" inputmode="tel" autocomplete="tel-national">
+        </div>
+        ${st.cc==='other'?`<small class="note" style="margin:0">${t('telOtherPh')}</small>`:''}
+      </div>
       <div class="field"><label>${t('notes')}</label><textarea rows="2" oninput="st.notes=this.value">${esc(st.notes)}</textarea></div>`;
     next.disabled=false;
   }
 }
 function go(dir){
   if(dir>0&&st.step===3){
-    if(st.name.trim().length<2||st.tel.replace(/\D/g,'').length<8){document.getElementById('err').textContent=t('errName');return}
+    if(st.name.trim().length<2){document.getElementById('err').textContent=t('errNameOnly');return}
+    if(!fullPhone()){document.getElementById('err').textContent=t('errPhone');return}
     const len=slotsLen(st.svc);
     const barber=st.barber===-1?BARBERS.findIndex((_,b)=>canFit(b,st.day,st.time,len)):st.barber;
     if(barber<0||!canFit(barber,st.day,st.time,len)){st.step=2;st.time=null;renderStep();return}
-    const b={id:nextId++,barber,day:st.day,slot:st.time,len,svc:st.svc,name:st.name.trim(),tel:st.tel.trim(),notes:st.notes,src:"web",status:"pending",lang};
+    const b={id:nextId++,barber,day:st.day,slot:st.time,len,svc:st.svc,name:st.name.trim(),tel:fullPhone(),notes:st.notes,src:"web",status:"pending",lang};
     bookings.push(b);persist();st.done=b;renderStep();notify(b);sendTelegram(b);return;
   }
   let s=st.step+dir;
@@ -760,7 +816,7 @@ function sendTelegram(b){
   const d=fromKey(b.day);
   const pad=n=>String(n).padStart(2,'0');
   fetch(TELEGRAM_WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-    barber:BARBERS[b.barber].n.toLowerCase(),
+    barber:['albin','redon','loris'][b.barber],
     name:b.name, phone:b.tel,
     service:T.sq.svcs[b.svc][0]+' ('+SVC[b.svc][1]+' min)',
     date:T.sq.days[(d.getDay()+6)%7]+', '+pad(d.getDate())+'.'+pad(d.getMonth()+1)+'.'+d.getFullYear(),
@@ -770,17 +826,35 @@ function sendTelegram(b){
 
 /* ---------- confirming bookings to the client ---------- */
 function waNumber(tel){let d=String(tel).replace(/[^\d+]/g,'');if(d.startsWith('+'))d=d.slice(1);else if(d.startsWith('00'))d=d.slice(2);else if(d.startsWith('0'))d='383'+d.slice(1);return d}
+// date written out by hand, so it's correct in Albanian too (browsers often lack Albanian date names)
+function clientDate(day,L){
+  const d=fromKey(day),T2=T[L],w=T2.days[(d.getDay()+6)%7],m=T2.months[d.getMonth()];
+  return L==='de'?`${w}, ${d.getDate()}. ${m}`:L==='en'?`${w}, ${d.getDate()} ${m}`:`${w}, ${d.getDate()} ${m}`;
+}
 function clientMsg(b,kind){
   const L=b.lang||'sq',T2=T[L];
   return T2[kind==='ok'?'msgOk':'msgNo']
     .replace('{name}',b.name.split(' ')[0]).replace('{barber}',BARBERS[b.barber].n)
-    .replace('{date}',fromKey(b.day).toLocaleDateString(LOC[L],{weekday:'long',day:'numeric',month:'long'}))
+    .replace('{date}',clientDate(b.day,L))
     .replace('{time}',TIMES[b.slot]).replace('{service}',T2.svcs[b.svc][0]);
 }
+/* barber chooses WhatsApp or Viber once per device; Confirm / Decline / Resend use it */
+let msgApp=(()=>{try{return localStorage.getItem('bb_app')||'wa'}catch(e){return 'wa'}})();
+const APP_NAME={wa:'WhatsApp',viber:'Viber'};
+function setApp(a){msgApp=a;try{localStorage.setItem('bb_app',a)}catch(e){};renderAdmin()}
 function openWhatsApp(b,kind){
-  const url='https://wa.me/'+waNumber(b.tel)+'?text='+encodeURIComponent(clientMsg(b,kind));
-  window.__lastWa=url; try{window.open(url,'_blank')}catch(e){}
+  const text=clientMsg(b,kind),num=waNumber(b.tel);
+  if(msgApp==='viber'){
+    try{navigator.clipboard&&navigator.clipboard.writeText(text).catch(()=>{})}catch(e){}   // backup in case Viber ignores the draft
+    const url='viber://chat?number=%2B'+num+'&draft='+encodeURIComponent(text);
+    window.__lastWa=url;
+    const a=document.createElement('a');a.href=url;a.rel='noopener';document.body.appendChild(a);a.click();a.remove();
+  }else{
+    const url='https://wa.me/'+num+'?text='+encodeURIComponent(text);
+    window.__lastWa=url; try{window.open(url,'_blank')}catch(e){}
+  }
 }
+
 function confirmBooking(id){const b=bookings.find(x=>x.id===id);if(!b)return;b.status='confirmed';markRead(id);persist();openWhatsApp(b,'ok');renderAdmin();toast(t('confirmedToast'))}
 function declineBooking(id){const b=bookings.find(x=>x.id===id);if(!b)return;openWhatsApp(b,'no');bookings=bookings.filter(x=>x.id!==id);persist();adm.view='grid';renderAdmin();toast(t('declinedToast'))}
 
@@ -863,14 +937,17 @@ function renderAdmin(){
         <div><span>${t('clientLang')}</span><b>${LANG_NAME[b.lang||'sq']}</b></div>`:''}
         ${b.notes?`<div><span>${t('notes')}</span><b>${esc(b.notes)}</b></div>`:''}
       </div>
+      ${b.src==='web'&&b.tel?`<div class="field" style="margin:16px 0 0"><label>${t('sendVia')}</label><div class="seg">
+          <button class="${msgApp==='wa'?'on':''}" onclick="setApp('wa')">WhatsApp</button><button class="${msgApp==='viber'?'on':''}" onclick="setApp('viber')">Viber</button></div>
+          ${msgApp==='viber'?`<p class="note" style="margin:6px 0 0">${t('viberNote')}</p>`:''}</div>`:''}
       ${b.src==='web'&&b.status==='pending'?`
         <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:16px">
-          <button class="btn btn-ok" onclick="confirmBooking(${b.id})">✓ ${t('confirmBtn')}</button>
+          <button class="btn btn-ok" onclick="confirmBooking(${b.id})">✓ ${t('confirmBtn').replace('{app}',APP_NAME[msgApp])}</button>
           <button class="btn btn-danger" onclick="declineBooking(${b.id})">✕ ${t('declineBtn')}</button>
         </div>
         <p class="note" style="margin-top:8px">${t('msgIn')} <b style="font-style:normal">${LANG_NAME[b.lang||'sq']}</b>:</p>
         <div class="wa-prev">${esc(clientMsg(b,'ok')).replace(/\n/g,'<br>')}</div>`
-      :`${b.src==='web'&&b.tel?`<button class="owner-link" style="margin-top:14px;display:block" onclick="openWhatsApp(bookings.find(x=>x.id===${b.id}),'ok')">${t('resend')} (WhatsApp · ${LANG_NAME[b.lang||'sq']})</button>`:''}
+      :`${b.src==='web'&&b.tel?`<button class="owner-link" style="margin-top:14px;display:block" onclick="openWhatsApp(bookings.find(x=>x.id===${b.id}),'ok')">${t('resend')} (${APP_NAME[msgApp]} · ${LANG_NAME[b.lang||'sq']})</button>`:''}
       <button class="btn btn-danger" style="margin-top:16px" onclick="delBooking(${b.id})">${t('del')}</button>`}`;
     return;
   }
@@ -984,16 +1061,17 @@ if(API_URL){
   go=async function(dir){
     if(!(dir>0&&st.step===3))return _go(dir);
     const err=document.getElementById('err');
-    if(st.name.trim().length<2||st.tel.replace(/\D/g,'').length<8){err.textContent=t('errName');return}
+    if(st.name.trim().length<2){err.textContent=t('errNameOnly');return}
+    if(!fullPhone()){err.textContent=t('errPhone');return}
     if(st.sending)return;
     st.sending=true;const nb=document.getElementById('nextBtn');nb.disabled=true;nb.textContent='…';
     try{
-      const d=await api('/book',{method:'POST',body:{barber:st.barber,day:st.day,slot:st.time,svc:st.svc,name:st.name.trim(),tel:st.tel.trim(),notes:st.notes,lang}});
-      st.sending=false;st.done={...d.booking,name:st.name.trim(),tel:st.tel.trim(),lang};renderStep();refreshSlots();
+      const d=await api('/book',{method:'POST',body:{barber:st.barber,day:st.day,slot:st.time,svc:st.svc,name:st.name.trim(),tel:fullPhone(),notes:st.notes,lang}});
+      st.sending=false;st.done={...d.booking,name:st.name.trim(),tel:fullPhone(),lang};renderStep();refreshSlots();
     }catch(e){
       st.sending=false;
       if(e.status===409){await refreshSlots();st.step=2;st.time=null;renderStep();document.getElementById('err').textContent=t('takenErr')}
-      else{nb.disabled=false;nb.textContent=t('confirm');err.textContent=t('netErr')}
+      else{nb.disabled=false;nb.textContent=t('confirm');err.textContent=e.message==='phone'?t('errPhone'):t('netErr')}
     }
   };
 
@@ -1030,7 +1108,7 @@ if(API_URL){
   };
   confirmBooking=function(id){
     const b=bookings.find(x=>x.id===id);if(!b)return;
-    openWhatsApp(b,'ok');                                 // open WhatsApp right away (inside the tap)
+    openWhatsApp(b,'ok');                                 // open WhatsApp / Viber right away (inside the tap)
     b.status='confirmed';b.read=true;renderAdmin();
     api('/staff/bookings/'+id,{method:'PATCH',body:{status:'confirmed'},staff:true}).then(()=>toast(t('confirmedToast'))).catch(()=>toast(t('netErr'))).finally(loadStaff);
   };
