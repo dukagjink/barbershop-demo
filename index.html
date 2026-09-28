@@ -839,7 +839,7 @@ function clientMsg(b,kind){
     .replace('{time}',TIMES[b.slot]).replace('{service}',T2.svcs[b.svc][0]);
 }
 /* barber chooses WhatsApp or Viber once per device; Confirm / Decline / Resend use it */
-let msgApp=(()=>{try{return localStorage.getItem('bb_app')||'wa'}catch(e){return 'wa'}})();
+let msgApp='wa';   // confirmations go out on WhatsApp
 const APP_NAME={wa:'WhatsApp',viber:'Viber'};
 function setApp(a){msgApp=a;try{localStorage.setItem('bb_app',a)}catch(e){};renderAdmin()}
 function openWhatsApp(b,kind){
@@ -937,9 +937,7 @@ function renderAdmin(){
         <div><span>${t('clientLang')}</span><b>${LANG_NAME[b.lang||'sq']}</b></div>`:''}
         ${b.notes?`<div><span>${t('notes')}</span><b>${esc(b.notes)}</b></div>`:''}
       </div>
-      ${b.src==='web'&&b.tel?`<div class="field" style="margin:16px 0 0"><label>${t('sendVia')}</label><div class="seg">
-          <button class="${msgApp==='wa'?'on':''}" onclick="setApp('wa')">WhatsApp</button><button class="${msgApp==='viber'?'on':''}" onclick="setApp('viber')">Viber</button></div>
-          ${msgApp==='viber'?`<p class="note" style="margin:6px 0 0">${t('viberNote')}</p>`:''}</div>`:''}
+
       ${b.src==='web'&&b.status==='pending'?`
         <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:16px">
           <button class="btn btn-ok" onclick="confirmBooking(${b.id})">✓ ${t('confirmBtn').replace('{app}',APP_NAME[msgApp])}</button>
