@@ -336,6 +336,10 @@
   /* notifications */
   .push{position:fixed;top:14px;right:14px;left:auto;width:min(360px,calc(100vw - 28px));z-index:90;background:rgba(40,44,54,.97);backdrop-filter:blur(12px);border:1px solid #3a404d;border-radius:18px;padding:12px 14px;box-shadow:0 18px 40px rgba(0,0,0,.55);display:flex;gap:12px;cursor:pointer;transform:translateY(-180%);visibility:hidden;transition:transform .45s cubic-bezier(.2,.9,.3,1.2),visibility .45s}
   .push.show{transform:translateY(0);visibility:visible}
+  .push{touch-action:none;user-select:none;-webkit-user-select:none;position:fixed}
+  .push .px{position:absolute;top:6px;right:8px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(255,255,255,.08);color:var(--muted);font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .push .px:hover{background:rgba(255,255,255,.16);color:var(--text)}
+  .push .tp{padding-right:30px}
   .push .ic{width:38px;height:38px;border-radius:10px;background:var(--bg);color:var(--gold2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:700;flex:none;font-family:Archivo,Verdana,sans-serif}
   .push .tp{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
   .push b{display:block;font-size:14px;margin:1px 0}
@@ -526,7 +530,7 @@
   </div>
 </div>
 <div class="toast" id="toast"></div>
-<div class="push" id="push" onclick="openFromPush()"></div>
+<div class="push" id="push"></div>
 
 <script>
 /* ===== BOOKINGS DATABASE + TELEGRAM =====
@@ -576,7 +580,7 @@ const T = {
     saved:"U ruajt, ora tani shfaqet e zënë online",deleted:"Rezervimi u fshi, ora u lirua",
     del:"Fshij rezervimin",dClient:"Klienti",dSrc:"Burimi",
     walkinName:"Klient pa termin",breakName:"Pauzë",revEyebrow:"Vlerësime",revH:"Çfarë thonë klientët",revCount:"96 vlerësime në Google",revAll:"Shiko të gjitha vlerësimet",revVia:"Vlerësim në Google · 2 muaj më parë",revTag1:"Berberë profesionalë",revTag2:"Atmosferë mikpritëse",revTag3:"Prerje të pastra",revWrite:"Na lini një vlerësim në Google",revBadge:"96 vlerësime në Google",nRev:"Vlerësimet",popular:"Më e preferuara",dayOffBtn:"Ditë pushimi",offBanner:"Ditë pushimi: nuk pranohen rezervime.",offUndo:"Anulo pushimin",offWarn:"Kujdes: këtë ditë ka {n} termine. Njoftoni klientët ose fshijini.",offSet:"Dita u shënua si pushim",offRemoved:"Pushimi u anulua",custOff:"{b} nuk punon këtë ditë. Zgjidhni një ditë tjetër.",offPick:"Zgjidhni një berber më sipër për t'i shënuar ditë pushimi.",waitH:"Presin konfirmim",waitHint:"Konfirmo hap WhatsApp me mesazhin gati për klientin.",listH:"Terminet",noAppts:"Nuk ka termine për këtë ditë.",addAppt:"+ Shto termin",brkToggle:"Pauzë (bllokoje orën)",callBtn:"Thirr",delBtn:"Fshij",delSure:"Po, fshije",allB:"Të gjithë",tomorrowL:"Nesër",formName:"Emri (opsional)",cancelF:"Anulo",okBtn:"Konfirmo",resendShort:"Dërgo sërish në WhatsApp",takenErr:"Kjo orë sapo u zu. Ju lutem zgjidhni një tjetër.",netErr:"Nuk u lidh dot. Kontrolloni internetin dhe provoni sërish.",
-    stL:"Statusi",stPending:"Në pritje",stConfirmed:"Konfirmuar",clientLang:"Gjuha e klientit",confirmBtn:"Konfirmo & dërgo në {app}",sendVia:"Dërgo mesazhin me",viberNote:"Me Viber mesazhi kopjohet edhe automatikisht. Nëse nuk shfaqet në bisedë, thjesht ngjiteni (Paste).",declineBtn:"Refuzo",resend:"Dërgo sërish konfirmimin",msgIn:"Mesazhi do të jetë në",confirmedToast:"Termini u konfirmua",askOkH:"Termini u konfirmua",askOkQ:"Dërgo konfirmimin edhe në WhatsApp te {name}?",askYesWa:"Po, dërgo në WhatsApp",askNoWa:"Jo",askNoH:"Refuzo terminin?",askNoWaBtn:"Refuzo dhe njofto në WhatsApp",askOnlyNo:"Vetëm refuzo",askCancel:"Anulo",declinedToast:"U refuzua, ora u lirua",msgOk:"Përshëndetje {name}! Termini juaj në Barbershop Bingo është konfirmuar.\n\nData: {date}, ora {time}\nShërbimi: {service} te {barber}\nAdresa: Rr. Kerem Lewton, Prishtinë\n\nJu lutem ejani 5 minuta më herët. Për ndryshime: +383 44 907 755",msgNo:"Përshëndetje {name}, na vjen keq, termini {date}, ora {time} te {barber} nuk është më i lirë. Ju lutem zgjidhni një orë tjetër në faqen tonë ose na telefononi: +383 44 907 755. Barbershop Bingo",months:["janar","shkurt","mars","prill","maj","qershor","korrik","gusht","shtator","tetor","nëntor","dhjetor"],resetDemo:"Rivendos të dhënat demo",resetDone:"Të dhënat demo u rivendosën",
+    stL:"Statusi",stPending:"Në pritje",stConfirmed:"Konfirmuar",clientLang:"Gjuha e klientit",confirmBtn:"Konfirmo & dërgo në {app}",sendVia:"Dërgo mesazhin me",viberNote:"Me Viber mesazhi kopjohet edhe automatikisht. Nëse nuk shfaqet në bisedë, thjesht ngjiteni (Paste).",declineBtn:"Refuzo",resend:"Dërgo sërish konfirmimin",msgIn:"Mesazhi do të jetë në",confirmedToast:"Termini u konfirmua",askOkH:"Konfirmo terminin?",askYesWa:"Konfirmo dhe dërgo në WhatsApp",askOnlyOk:"Vetëm konfirmo",askNoWa:"Jo",askNoH:"Refuzo terminin?",askNoWaBtn:"Refuzo dhe njofto në WhatsApp",askOnlyNo:"Vetëm refuzo",askCancel:"Anulo",declinedToast:"U refuzua, ora u lirua",msgOk:"Përshëndetje {name}! Termini juaj në Barbershop Bingo është konfirmuar.\n\nData: {date}, ora {time}\nShërbimi: {service} te {barber}\nAdresa: Rr. Kerem Lewton, Prishtinë\n\nJu lutem ejani 5 minuta më herët. Për ndryshime: +383 44 907 755",msgNo:"Përshëndetje {name}, na vjen keq, termini {date}, ora {time} te {barber} nuk është më i lirë. Ju lutem zgjidhni një orë tjetër në faqen tonë ose na telefononi: +383 44 907 755. Barbershop Bingo",months:["janar","shkurt","mars","prill","maj","qershor","korrik","gusht","shtator","tetor","nëntor","dhjetor"],resetDemo:"Rivendos të dhënat demo",resetDone:"Të dhënat demo u rivendosën",
     nNew:"Rezervim i ri online",nH:"Njoftimet",nEmpty:"Nuk ka njoftime ende.",nNow:"tani",nView:"Shiko",nBadge:"E RE",nInfo:"Barberi merr njoftim në telefon për çdo rezervim online."
   },
   en:{
@@ -618,7 +622,7 @@ const T = {
     saved:"Saved, that time now shows as busy online",deleted:"Booking deleted, the time is free again",
     del:"Delete booking",dClient:"Client",dSrc:"Source",
     walkinName:"Walk-in client",breakName:"Break",revEyebrow:"Reviews",revH:"What our clients say",revCount:"96 reviews on Google",revAll:"See all reviews",revVia:"Google review · 2 months ago",revTag1:"Professional barbers",revTag2:"Welcoming atmosphere",revTag3:"Clean cuts",revWrite:"Leave us a review on Google",revBadge:"96 Google reviews",nRev:"Reviews",popular:"Most popular",dayOffBtn:"Day off",offBanner:"Day off: no bookings accepted.",offUndo:"Cancel day off",offWarn:"Careful: there are {n} appointments on this day. Let the clients know or delete them.",offSet:"Marked as a day off",offRemoved:"Day off cancelled",custOff:"{b} isn't working on this day. Please pick another day.",offPick:"Pick a barber above to mark a day off.",waitH:"Waiting for confirmation",waitHint:"Confirm opens WhatsApp with the message ready for the client.",listH:"Appointments",noAppts:"No appointments for this day.",addAppt:"+ Add appointment",brkToggle:"Break (block this time)",callBtn:"Call",delBtn:"Delete",delSure:"Yes, delete",allB:"All",tomorrowL:"Tomorrow",formName:"Name (optional)",cancelF:"Cancel",okBtn:"Confirm",resendShort:"Send again on WhatsApp",takenErr:"That time was just taken. Please pick another.",netErr:"Couldn't connect. Check your internet and try again.",
-    stL:"Status",stPending:"Waiting",stConfirmed:"Confirmed",clientLang:"Client's language",confirmBtn:"Confirm & send on {app}",sendVia:"Send the message with",viberNote:"With Viber the message is also copied automatically. If it doesn't appear in the chat, just paste it.",declineBtn:"Decline",resend:"Send confirmation again",msgIn:"The message will be in",confirmedToast:"Appointment confirmed",askOkH:"Appointment confirmed",askOkQ:"Also send the confirmation to {name} on WhatsApp?",askYesWa:"Yes, send on WhatsApp",askNoWa:"No",askNoH:"Decline this appointment?",askNoWaBtn:"Decline and tell them on WhatsApp",askOnlyNo:"Just decline",askCancel:"Cancel",declinedToast:"Declined, the time is free again",msgOk:"Hi {name}! Your appointment at Barbershop Bingo is confirmed.\n\nDate: {date}, {time}\nService: {service} with {barber}\nAddress: Rr. Kerem Lewton, Prishtina\n\nPlease arrive 5 minutes early. To change it: +383 44 907 755",msgNo:"Hi {name}, sorry, the time {date}, {time} with {barber} is no longer available. Please pick another time on our website or call us: +383 44 907 755. Barbershop Bingo",months:["January","February","March","April","May","June","July","August","September","October","November","December"],resetDemo:"Reset demo data",resetDone:"Demo data reset",
+    stL:"Status",stPending:"Waiting",stConfirmed:"Confirmed",clientLang:"Client's language",confirmBtn:"Confirm & send on {app}",sendVia:"Send the message with",viberNote:"With Viber the message is also copied automatically. If it doesn't appear in the chat, just paste it.",declineBtn:"Decline",resend:"Send confirmation again",msgIn:"The message will be in",confirmedToast:"Appointment confirmed",askOkH:"Confirm this appointment?",askYesWa:"Confirm and send on WhatsApp",askOnlyOk:"Just confirm",askNoWa:"No",askNoH:"Decline this appointment?",askNoWaBtn:"Decline and tell them on WhatsApp",askOnlyNo:"Just decline",askCancel:"Cancel",declinedToast:"Declined, the time is free again",msgOk:"Hi {name}! Your appointment at Barbershop Bingo is confirmed.\n\nDate: {date}, {time}\nService: {service} with {barber}\nAddress: Rr. Kerem Lewton, Prishtina\n\nPlease arrive 5 minutes early. To change it: +383 44 907 755",msgNo:"Hi {name}, sorry, the time {date}, {time} with {barber} is no longer available. Please pick another time on our website or call us: +383 44 907 755. Barbershop Bingo",months:["January","February","March","April","May","June","July","August","September","October","November","December"],resetDemo:"Reset demo data",resetDone:"Demo data reset",
     nNew:"New online booking",nH:"Notifications",nEmpty:"No notifications yet.",nNow:"now",nView:"View",nBadge:"NEW",nInfo:"The barber gets a phone notification for every online booking."
   },
   de:{
@@ -660,7 +664,7 @@ const T = {
     saved:"Gespeichert, die Zeit ist online jetzt belegt",deleted:"Termin gelöscht, die Zeit ist wieder frei",
     del:"Termin löschen",dClient:"Kunde",dSrc:"Quelle",
     walkinName:"Laufkunde",breakName:"Pause",revEyebrow:"Bewertungen",revH:"Das sagen unsere Kunden",revCount:"96 Bewertungen auf Google",revAll:"Alle Bewertungen ansehen",revVia:"Google-Bewertung · vor 2 Monaten",revTag1:"Professionelle Barber",revTag2:"Einladende Atmosphäre",revTag3:"Saubere Schnitte",revWrite:"Bewerte uns auf Google",revBadge:"96 Google-Bewertungen",nRev:"Bewertungen",popular:"Am beliebtesten",dayOffBtn:"Freier Tag",offBanner:"Freier Tag: keine Buchungen möglich.",offUndo:"Freien Tag aufheben",offWarn:"Achtung: An diesem Tag gibt es {n} Termine. Informiere die Kunden oder lösche sie.",offSet:"Als freier Tag markiert",offRemoved:"Freier Tag aufgehoben",custOff:"{b} arbeitet an diesem Tag nicht. Bitte wähle einen anderen Tag.",offPick:"Wähle oben einen Barber, um einen freien Tag einzutragen.",waitH:"Warten auf Bestätigung",waitHint:"Bestätigen öffnet WhatsApp mit der fertigen Nachricht für den Kunden.",listH:"Termine",noAppts:"Keine Termine an diesem Tag.",addAppt:"+ Termin eintragen",brkToggle:"Pause (Zeit blockieren)",callBtn:"Anrufen",delBtn:"Löschen",delSure:"Ja, löschen",allB:"Alle",tomorrowL:"Morgen",formName:"Name (optional)",cancelF:"Abbrechen",okBtn:"Bestätigen",resendShort:"Erneut per WhatsApp senden",takenErr:"Diese Zeit wurde gerade vergeben. Bitte wähle eine andere.",netErr:"Keine Verbindung. Bitte Internet prüfen und erneut versuchen.",
-    stL:"Status",stPending:"Wartet",stConfirmed:"Bestätigt",clientLang:"Sprache des Kunden",confirmBtn:"Bestätigen & per {app} senden",sendVia:"Nachricht senden über",viberNote:"Bei Viber wird die Nachricht auch automatisch kopiert. Falls sie nicht im Chat erscheint, einfach einfügen.",declineBtn:"Ablehnen",resend:"Bestätigung erneut senden",msgIn:"Die Nachricht ist auf",confirmedToast:"Termin bestätigt",askOkH:"Termin bestätigt",askOkQ:"Bestätigung auch per WhatsApp an {name} senden?",askYesWa:"Ja, per WhatsApp senden",askNoWa:"Nein",askNoH:"Termin ablehnen?",askNoWaBtn:"Ablehnen und per WhatsApp informieren",askOnlyNo:"Nur ablehnen",askCancel:"Abbrechen",declinedToast:"Abgelehnt, die Zeit ist wieder frei",msgOk:"Hallo {name}! Dein Termin bei Barbershop Bingo ist bestätigt.\n\nDatum: {date}, {time} Uhr\nLeistung: {service} bei {barber}\nAdresse: Rr. Kerem Lewton, Prishtina\n\nBitte 5 Minuten früher da sein. Für Änderungen: +383 44 907 755",msgNo:"Hallo {name}, leider ist der Termin {date}, {time} Uhr bei {barber} nicht mehr frei. Bitte wähle eine andere Zeit auf unserer Website oder ruf uns an: +383 44 907 755. Barbershop Bingo",months:["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],resetDemo:"Demo-Daten zurücksetzen",resetDone:"Demo-Daten zurückgesetzt",
+    stL:"Status",stPending:"Wartet",stConfirmed:"Bestätigt",clientLang:"Sprache des Kunden",confirmBtn:"Bestätigen & per {app} senden",sendVia:"Nachricht senden über",viberNote:"Bei Viber wird die Nachricht auch automatisch kopiert. Falls sie nicht im Chat erscheint, einfach einfügen.",declineBtn:"Ablehnen",resend:"Bestätigung erneut senden",msgIn:"Die Nachricht ist auf",confirmedToast:"Termin bestätigt",askOkH:"Termin bestätigen?",askYesWa:"Bestätigen und per WhatsApp senden",askOnlyOk:"Nur bestätigen",askNoWa:"Nein",askNoH:"Termin ablehnen?",askNoWaBtn:"Ablehnen und per WhatsApp informieren",askOnlyNo:"Nur ablehnen",askCancel:"Abbrechen",declinedToast:"Abgelehnt, die Zeit ist wieder frei",msgOk:"Hallo {name}! Dein Termin bei Barbershop Bingo ist bestätigt.\n\nDatum: {date}, {time} Uhr\nLeistung: {service} bei {barber}\nAdresse: Rr. Kerem Lewton, Prishtina\n\nBitte 5 Minuten früher da sein. Für Änderungen: +383 44 907 755",msgNo:"Hallo {name}, leider ist der Termin {date}, {time} Uhr bei {barber} nicht mehr frei. Bitte wähle eine andere Zeit auf unserer Website oder ruf uns an: +383 44 907 755. Barbershop Bingo",months:["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],resetDemo:"Demo-Daten zurücksetzen",resetDone:"Demo-Daten zurückgesetzt",
     nNew:"Neue Online-Buchung",nH:"Benachrichtigungen",nEmpty:"Noch keine Benachrichtigungen.",nNow:"jetzt",nView:"Ansehen",nBadge:"NEU",nInfo:"Der Barber bekommt für jede Online-Buchung eine Push-Nachricht aufs Handy."
   }
 };
@@ -906,12 +910,34 @@ function showPush(b){
   lastPush=b.id;
   setTimeout(()=>{
     const el=document.getElementById('push');
-    el.innerHTML=`<div class="ic"><svg viewBox="0 0 201.1578 117.48099" fill="currentColor" style="width:30px"><use href="#bingo-wordmark"/></svg></div><div style="flex:1"><div class="tp"><span>Barbershop Bingo · ${BARBERS[b.barber].n}</span><span>${t('nNow')}</span></div>
+    el.innerHTML=`<div class="ic"><svg viewBox="0 0 201.1578 117.48099" fill="currentColor" style="width:30px"><use href="#bingo-wordmark"/></svg></div><div style="flex:1"><div class="tp"><span>Barbershop Bingo · ${BARBERS[b.barber].n}</span><span>${t('nNow')}</span></div><button class="px" aria-label="Mbyll" onclick="event.stopPropagation();dismissPush(0,-1)">×</button>
       <b>${t('nNew')}</b><p>${esc(b.name)} · ${t('svcs')[b.svc][0]}<br>${fmtDay(fromKey(b.day),{weekday:'short',day:'numeric',month:'short'})} · ${TIMES[b.slot]}</p></div>`;
     el.classList.add('show');clearTimeout(notify.h);notify.h=setTimeout(()=>el.classList.remove('show'),7000);
     if(document.getElementById('ownerOv').classList.contains('show'))renderAdmin();
   },600);
 }
+/* in-app banner: tap opens the booking, swipe up / left / right (or ×) hides it */
+function dismissPush(dx,dy){
+  const el=document.getElementById('push');clearTimeout(notify.h);
+  el.style.transition='transform .28s ease,opacity .28s ease';
+  el.style.transform=Math.abs(dx)>Math.abs(dy)?`translateX(${dx>0?120:-120}%)`:'translateY(-180%)';el.style.opacity='0';
+  setTimeout(()=>{el.classList.remove('show');el.style.transition='none';el.style.transform='';el.style.opacity='';void el.offsetWidth;el.style.transition=''},300);
+}
+(function(){
+  const el=document.getElementById('push');let x0=0,y0=0,dx=0,dy=0,drag=false,moved=false;
+  const start=(x,y)=>{x0=x;y0=y;dx=dy=0;drag=true;moved=false;el.style.transition='none';clearTimeout(notify.h)};
+  const move=(x,y)=>{if(!drag)return;dx=x-x0;dy=Math.min(0,y-y0);if(Math.abs(dx)>8||dy<-8)moved=true;
+    if(moved){el.style.transform=`translate(${dx}px,${dy}px)`;el.style.opacity=String(Math.max(.2,1-(Math.abs(dx)+Math.abs(dy))/260))}};
+  const end=()=>{if(!drag)return;drag=false;
+    if(Math.abs(dx)>70||dy<-35)dismissPush(dx,dy);
+    else{el.style.transition='';el.style.transform='';el.style.opacity='';notify.h=setTimeout(()=>el.classList.remove('show'),5000)}};
+  el.addEventListener('touchstart',e=>start(e.touches[0].clientX,e.touches[0].clientY),{passive:true});
+  el.addEventListener('touchmove',e=>{move(e.touches[0].clientX,e.touches[0].clientY);if(moved)e.preventDefault()},{passive:false});
+  el.addEventListener('touchend',end);el.addEventListener('touchcancel',end);
+  el.addEventListener('mousedown',e=>{if(e.target.closest('.px'))return;start(e.clientX,e.clientY);e.preventDefault()});
+  addEventListener('mousemove',e=>move(e.clientX,e.clientY));addEventListener('mouseup',end);
+  el.addEventListener('click',e=>{if(moved){moved=false;return}if(!e.target.closest('.px'))openFromPush()});
+})();
 function openFromPush(){
   document.getElementById('push').classList.remove('show');
   const b=bookings.find(x=>x.id===lastPush);if(!b)return;
@@ -990,13 +1016,13 @@ function askSheet(html){
 }
 function closeAsk(){const ov=document.getElementById('askOv');if(ov)ov.classList.remove('show');askB=null}
 function askWho(b){return `<p class="ask-who"><b>${esc(b.name)}</b> · ${fmtDay(fromKey(b.day),{weekday:'short',day:'numeric',month:'short'})} · ${TIMES[b.slot]}</p>`}
-function confirmBooking(id){
+function confirmBooking(id){   // asks first: tapping outside or "Anulo" changes nothing
   const b=bookings.find(x=>x.id===id);if(!b)return;
-  askB={...b};doConfirm(id);
-  if(!askB.tel){askB=null;return}
-  askSheet(`<h3>${t('askOkH')}</h3>${askWho(askB)}<p class="ask-q">${t('askOkQ').replace('{name}',esc(askB.name.split(' ')[0]))}</p>
-    <div class="ask-btns"><button class="btn btn-ok" onclick="const b=askB;closeAsk();openWhatsApp(b,'ok')">${t('askYesWa')}</button>
-    <button class="btn btn-ghost" onclick="closeAsk()">${t('askNoWa')}</button></div>`);
+  askB={...b};
+  askSheet(`<h3>${t('askOkH')}</h3>${askWho(askB)}
+    <div class="ask-btns">${askB.tel?`<button class="btn btn-ok" onclick="const b=askB;closeAsk();doConfirm(b.id);openWhatsApp(b,'ok')">${t('askYesWa')}</button>`:''}
+    <button class="btn btn-ghost" onclick="const b=askB;closeAsk();doConfirm(b.id)">${t('askOnlyOk')}</button>
+    <button class="owner-link" onclick="closeAsk()">${t('askCancel')}</button></div>`);
 }
 function declineBooking(id){
   const b=bookings.find(x=>x.id===id);if(!b)return;
@@ -1235,9 +1261,10 @@ if(API_URL){
       known=new Set(bookings.map(b=>b.id));
       fresh.forEach(showPush);
       if(adm.view==='grid'||adm.view==='notifs')renderAdmin();   // never wipe a form being filled in
-    }catch(e){if(e.status===401)logout()}
+    }catch(e){if(e.status===401)pinChanged()}
   };
   login=async function(){
+    pushAsk();   // inside the tap: iPhone only shows "Allow notifications" from a tap
     const v=document.getElementById('pinIn').value;
     adm.cred=(adm.pick===-1?'owner':WHO[adm.pick])+':'+v;
     try{
@@ -1284,9 +1311,17 @@ if(API_URL){
 
   /* ---------- staff app: stays signed in on this phone + phone notifications ---------- */
   const SKEY='bb_staff';
-  const saveCred=()=>{try{localStorage.setItem(SKEY,JSON.stringify({cred:adm.cred,pick:adm.pick}))}catch(e){}};
+  // the sign-in is kept in two places (localStorage + IndexedDB): iPhone can lose a fresh localStorage write
+  // when the app is swiped away, IndexedDB is written to disk straight away
+  const idb=(mode,fn)=>new Promise(res=>{try{
+    const r=indexedDB.open('bingo-staff',1);r.onupgradeneeded=()=>r.result.createObjectStore('kv');
+    r.onsuccess=()=>{const db=r.result;let q=null;try{const tx=db.transaction('kv',mode);q=fn(tx.objectStore('kv'));
+      tx.oncomplete=()=>{db.close();res(q?q.result:null)};tx.onerror=tx.onabort=()=>{db.close();res(null)}}catch(e){db.close();res(null)}};
+    r.onerror=()=>res(null)}catch(e){res(null)}});
+  const saveCred=()=>{const v={cred:adm.cred,pick:adm.pick};try{localStorage.setItem(SKEY,JSON.stringify(v))}catch(e){}idb('readwrite',st=>st.put(v,SKEY));
+    try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist().catch(()=>{})}catch(e){}};
   const loadCred=()=>{try{return JSON.parse(localStorage.getItem(SKEY)||'null')}catch(e){return null}};
-  const clearCred=()=>{try{localStorage.removeItem(SKEY)}catch(e){}};
+  const clearCred=()=>{try{localStorage.removeItem(SKEY)}catch(e){}idb('readwrite',st=>st.delete(SKEY))};
   const rr=()=>{if(adm.auth&&adm.view==='grid')renderAdmin()};
   async function startSession(){
     adm.auth=true;adm.user=adm.pick;adm.view='grid';known=null;bookings=[];saveCred();
@@ -1299,9 +1334,14 @@ if(API_URL){
     const s=loadCred();
     if(!adm.auth&&s&&s.cred){adm.cred=s.cred;adm.pick=s.pick;startSession()}
     _openOwner();
+    pushPrep();
+    if(!adm.auth&&!(s&&s.cred))idb('readonly',st=>st.get(SKEY)).then(v=>{   // backup copy
+      if(v&&v.cred&&!adm.auth){adm.cred=v.cred;adm.pick=v.pick;startSession()}
+    });
   };
   const _logout=logout;
-  logout=function(){clearCred();pushOff();_logout()};   // only the "Dil" button (or a changed PIN) signs out
+  logout=function(){clearCred();pushOff();_logout()};            // "Dil" button: signs out and stops notifications on this phone
+  window.pinChanged=function(){clearCred();_logout()};            // wrong/changed PIN: sign in again, notifications stay on
   document.addEventListener('visibilitychange',()=>{if(!document.hidden&&adm.auth)loadStaff()});
 
   const canPush=()=>'serviceWorker' in navigator&&'PushManager' in window&&'Notification' in window;
@@ -1312,14 +1352,32 @@ if(API_URL){
   const regSW=async()=>{await navigator.serviceWorker.register('sw.js',{scope:'./'});return navigator.serviceWorker.ready};
   if('serviceWorker' in navigator)navigator.serviceWorker.addEventListener('message',()=>{if(adm.auth)loadStaff()});
   let pushState='';   // '' · install · off · on · blocked
-  async function pushSync(){          // after sign-in: link this phone to whoever is signed in
-    if(!canPush()){pushState=isIOS&&!isApp()?'install':'';rr();return}
-    if(Notification.permission==='denied'){pushState='blocked';rr();return}
+  // ready before the PIN is typed, so the login tap itself can switch notifications on
+  const pre={reg:null,key:null,job:null};
+  function pushPrep(){
+    if(!canPush()||pre.reg)return;
+    regSW().then(r=>{pre.reg=r}).catch(()=>{});
+    if(!pre.key)api('/push/key').then(d=>{pre.key=keyBytes(d.key)}).catch(()=>{});
+  }
+  function pushAsk(){
+    if(!canPush()||Notification.permission==='denied')return;
     try{
-      const reg=await regSW();const sub=await reg.pushManager.getSubscription();
-      if(sub&&Notification.permission==='granted'){await api('/staff/push/subscribe',{method:'POST',body:sub.toJSON(),staff:true});pushState='on'}
-      else pushState='off';
-    }catch(e){pushState='off'}
+      if(pre.reg&&pre.key)pre.job=pre.reg.pushManager.getSubscription().then(s=>s||pre.reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:pre.key}));
+      if(Notification.permission==='default'){const p=Notification.requestPermission();pre.job=pre.job?pre.job.catch(()=>p):p}
+    }catch(e){}
+  }
+  async function pushSync(){          // every time the app opens: make sure this phone gets notifications for whoever is signed in
+    if(!canPush()){pushState=isIOS&&!isApp()?'install':'';rr();return}
+    if(pre.job){try{await pre.job}catch(e){}pre.job=null}
+    try{
+      const reg=await regSW();let sub=await reg.pushManager.getSubscription();
+      if(!sub&&Notification.permission==='granted'){   // allowed before but the link got lost: re-link silently, no tap needed
+        const key=keyBytes((await api('/staff/push/key',{staff:true})).key);
+        sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:key});
+      }
+      if(sub){await api('/staff/push/subscribe',{method:'POST',body:sub.toJSON(),staff:true});pushState='on'}
+      else pushState=Notification.permission==='denied'?'blocked':'off';
+    }catch(e){pushState=pushState==='on'?'on':(Notification.permission==='denied'?'blocked':'off')}
     rr();
   }
   window.pushEnable=async function(){
@@ -1343,7 +1401,8 @@ if(API_URL){
     if(!canPush()||!cred)return;
     try{
       const reg=await navigator.serviceWorker.getRegistration();const sub=reg&&await reg.pushManager.getSubscription();
-      if(sub){await api('/staff/push/unsubscribe',{method:'POST',body:{endpoint:sub.endpoint},staff:true,cred}).catch(()=>{});await sub.unsubscribe().catch(()=>{})}
+      // unlink from this account only; the phone keeps its permission, so the next account gets notifications without asking again
+      if(sub)await api('/staff/push/unsubscribe',{method:'POST',body:{endpoint:sub.endpoint},staff:true,cred}).catch(()=>{});
     }catch(e){}
   }
   const bell='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>';
