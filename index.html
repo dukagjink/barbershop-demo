@@ -167,6 +167,52 @@
   .phone-row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.4fr);gap:8px}
   .phone-row select{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 10px;color:var(--text);font:15px Archivo,Verdana,sans-serif;min-width:0}
   .phone-row select:focus{outline:none;border-color:var(--gold)}
+  /* simple staff panel */
+  .sp-top{display:flex;gap:10px;margin-bottom:14px}
+  .sp-top .btn-gold{flex:1;justify-content:center}
+  .sp-filter{margin-bottom:14px}
+  .sp-wait{background:#231f14;border:1px solid rgba(201,162,39,.45);border-radius:16px;padding:14px;margin-bottom:18px}
+  .sp-wait h4{font-size:16px;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+  .sp-wait h4 em{font-style:normal;background:var(--gold);color:#171310;border-radius:999px;padding:1px 9px;font-size:13px}
+  .pcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:8px}
+  .pinfo{display:flex;flex-direction:column;min-width:0}
+  .pinfo b{font-size:15px}.pinfo span{color:var(--muted);font-size:13px}.pinfo .pwhen{color:var(--gold2);font-weight:600}
+  .pact{display:flex;gap:8px}.pact .btn,.ract .btn{padding:10px 14px;font-size:14px}
+  .sp-h{font-size:16px;margin:4px 0 10px}
+  .sp-days{margin-bottom:12px}
+  .slist{display:grid;gap:8px}
+  .srow{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer}
+  .srow.open{border-color:var(--gold)}
+  .srow.past{opacity:.5}
+  .srow.brk{background:repeating-linear-gradient(45deg,#1d2330 0 10px,#202634 10px 20px)}
+  .srow .rt{font-weight:700;font-size:16px;min-width:52px;display:flex;flex-direction:column;line-height:1.2}
+  .srow .rt small{color:var(--muted);font-weight:400;font-size:12px}
+  .srow .rb{display:flex;flex-direction:column;min-width:0;flex:1}
+  .srow .rb b{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .srow .rb span{color:var(--muted);font-size:13px}
+  .srow .tag{font-style:normal;background:rgba(201,162,39,.18);color:var(--gold2);font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;white-space:nowrap}
+  .srow .who{font-style:normal;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--text);white-space:nowrap}
+  .srow .who.b0{border-color:#c9a227}.srow .who.b1{border-color:#5b82c4}.srow .who.b2{border-color:#b8402f}
+  .ract{display:flex;flex-wrap:wrap;gap:8px;padding:2px 2px 8px}
+  .sp-switch{display:flex;align-items:center;gap:10px;margin-bottom:16px;cursor:pointer;font-size:15px}
+  .sp-switch input{display:none}
+  .sp-switch span{width:44px;height:26px;border-radius:999px;background:var(--line);position:relative;transition:.2s;flex:none}
+  .sp-switch span::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--text);transition:.2s}
+  .sp-switch input:checked+span{background:var(--gold)}
+  .sp-switch input:checked+span::after{left:21px;background:#171310}
+  .sp-btns{display:flex;gap:10px;margin-top:6px}
+  .day.off{opacity:.45;text-decoration:line-through}
+  .off-note{color:var(--gold2)!important;font-style:normal!important}
+  .sp-off{background:#1f2a22;border:1px solid #2f5a3c;border-radius:12px;padding:12px 14px;margin-bottom:12px;font-weight:600;display:grid;gap:8px}
+  .sp-off .btn{justify-self:start;padding:8px 14px;font-size:14px}
+  .off-warn{color:#e0bc4a;font-weight:500;font-size:13px}
+  .sp-offbtn{margin-bottom:12px;padding:9px 14px;font-size:14px}
+  .svc.star,.tile.star{border:2px solid var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.12),0 10px 30px rgba(201,162,39,.12);background:linear-gradient(180deg,#262214,var(--card) 60%)}
+  .svc.star{position:relative}
+  .star-badge{align-self:flex-start;display:inline-flex;align-items:center;gap:4px;background:var(--gold);color:#171310;font-size:11px;font-weight:800;letter-spacing:.02em;padding:3px 9px;border-radius:999px;margin-bottom:2px;white-space:nowrap}
+  .tile .star-badge{font-size:10px;padding:2px 7px;color:#171310;font-weight:800;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+  .tile .star-badge .lbl{color:inherit;font-size:inherit;font-weight:inherit}
+  @media(max-width:520px){.tile .star-badge .lbl{display:none}.tile .star-badge{font-size:12px;padding:1px 7px}}
   .tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
   .tile{aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;text-align:left;gap:6px;padding:14px;border-radius:14px;background:var(--card);border:1px solid var(--line);color:var(--text);font:inherit;cursor:pointer;transition:.15s}
   .tile:hover{border-color:#4a5263;transform:translateY(-1px)}
@@ -465,7 +511,7 @@ const T = {
     save:"Ruaj",noTimes:"Nuk ka kohë të lirë për këtë berber në këtë ditë.",
     saved:"U ruajt, ora tani shfaqet e zënë online",deleted:"Rezervimi u fshi, ora u lirua",
     del:"Fshij rezervimin",dClient:"Klienti",dSrc:"Burimi",
-    walkinName:"Klient pa termin",breakName:"Pauzë",takenErr:"Kjo orë sapo u zu. Ju lutem zgjidhni një tjetër.",netErr:"Nuk u lidh dot. Kontrolloni internetin dhe provoni sërish.",
+    walkinName:"Klient pa termin",breakName:"Pauzë",popular:"Më e preferuara",dayOffBtn:"Ditë pushimi",offBanner:"Ditë pushimi: nuk pranohen rezervime.",offUndo:"Anulo pushimin",offWarn:"Kujdes: këtë ditë ka {n} termine. Njoftoni klientët ose fshijini.",offSet:"Dita u shënua si pushim",offRemoved:"Pushimi u anulua",custOff:"{b} nuk punon këtë ditë. Zgjidhni një ditë tjetër.",offPick:"Zgjidhni një berber më sipër për t'i shënuar ditë pushimi.",waitH:"Presin konfirmim",waitHint:"Konfirmo hap WhatsApp me mesazhin gati për klientin.",listH:"Terminet",noAppts:"Nuk ka termine për këtë ditë.",addAppt:"+ Shto termin",brkToggle:"Pauzë (bllokoje orën)",callBtn:"Thirr",delBtn:"Fshij",delSure:"Po, fshije",allB:"Të gjithë",tomorrowL:"Nesër",formName:"Emri (opsional)",cancelF:"Anulo",okBtn:"Konfirmo",resendShort:"Dërgo sërish në WhatsApp",takenErr:"Kjo orë sapo u zu. Ju lutem zgjidhni një tjetër.",netErr:"Nuk u lidh dot. Kontrolloni internetin dhe provoni sërish.",
     stL:"Statusi",stPending:"Në pritje",stConfirmed:"Konfirmuar",clientLang:"Gjuha e klientit",confirmBtn:"Konfirmo & dërgo në {app}",sendVia:"Dërgo mesazhin me",viberNote:"Me Viber mesazhi kopjohet edhe automatikisht. Nëse nuk shfaqet në bisedë, thjesht ngjiteni (Paste).",declineBtn:"Refuzo",resend:"Dërgo sërish konfirmimin",msgIn:"Mesazhi do të jetë në",confirmedToast:"U konfirmua, WhatsApp u hap me mesazhin",declinedToast:"U refuzua, ora u lirua",msgOk:"Përshëndetje {name}! Termini juaj në Barbershop Bingo është konfirmuar.\n\nData: {date}, ora {time}\nShërbimi: {service} te {barber}\nAdresa: Rr. Kerem Lewton, Prishtinë\n\nJu lutem ejani 5 minuta më herët. Për ndryshime: +383 44 907 755",msgNo:"Përshëndetje {name}, na vjen keq, termini {date}, ora {time} te {barber} nuk është më i lirë. Ju lutem zgjidhni një orë tjetër në faqen tonë ose na telefononi: +383 44 907 755. Barbershop Bingo",months:["janar","shkurt","mars","prill","maj","qershor","korrik","gusht","shtator","tetor","nëntor","dhjetor"],resetDemo:"Rivendos të dhënat demo",resetDone:"Të dhënat demo u rivendosën",
     nNew:"Rezervim i ri online",nH:"Njoftimet",nEmpty:"Nuk ka njoftime ende.",nNow:"tani",nView:"Shiko",nBadge:"E RE",nInfo:"Barberi merr njoftim në telefon për çdo rezervim online."
   },
@@ -507,7 +553,7 @@ const T = {
     save:"Save",noTimes:"No free time for this barber on this day.",
     saved:"Saved, that time now shows as busy online",deleted:"Booking deleted, the time is free again",
     del:"Delete booking",dClient:"Client",dSrc:"Source",
-    walkinName:"Walk-in client",breakName:"Break",takenErr:"That time was just taken. Please pick another.",netErr:"Couldn't connect. Check your internet and try again.",
+    walkinName:"Walk-in client",breakName:"Break",popular:"Most popular",dayOffBtn:"Day off",offBanner:"Day off: no bookings accepted.",offUndo:"Cancel day off",offWarn:"Careful: there are {n} appointments on this day. Let the clients know or delete them.",offSet:"Marked as a day off",offRemoved:"Day off cancelled",custOff:"{b} isn't working on this day. Please pick another day.",offPick:"Pick a barber above to mark a day off.",waitH:"Waiting for confirmation",waitHint:"Confirm opens WhatsApp with the message ready for the client.",listH:"Appointments",noAppts:"No appointments for this day.",addAppt:"+ Add appointment",brkToggle:"Break (block this time)",callBtn:"Call",delBtn:"Delete",delSure:"Yes, delete",allB:"All",tomorrowL:"Tomorrow",formName:"Name (optional)",cancelF:"Cancel",okBtn:"Confirm",resendShort:"Send again on WhatsApp",takenErr:"That time was just taken. Please pick another.",netErr:"Couldn't connect. Check your internet and try again.",
     stL:"Status",stPending:"Waiting",stConfirmed:"Confirmed",clientLang:"Client's language",confirmBtn:"Confirm & send on {app}",sendVia:"Send the message with",viberNote:"With Viber the message is also copied automatically. If it doesn't appear in the chat, just paste it.",declineBtn:"Decline",resend:"Send confirmation again",msgIn:"The message will be in",confirmedToast:"Confirmed, WhatsApp opened with the message",declinedToast:"Declined, the time is free again",msgOk:"Hi {name}! Your appointment at Barbershop Bingo is confirmed.\n\nDate: {date}, {time}\nService: {service} with {barber}\nAddress: Rr. Kerem Lewton, Prishtina\n\nPlease arrive 5 minutes early. To change it: +383 44 907 755",msgNo:"Hi {name}, sorry, the time {date}, {time} with {barber} is no longer available. Please pick another time on our website or call us: +383 44 907 755. Barbershop Bingo",months:["January","February","March","April","May","June","July","August","September","October","November","December"],resetDemo:"Reset demo data",resetDone:"Demo data reset",
     nNew:"New online booking",nH:"Notifications",nEmpty:"No notifications yet.",nNow:"now",nView:"View",nBadge:"NEW",nInfo:"The barber gets a phone notification for every online booking."
   },
@@ -549,7 +595,7 @@ const T = {
     save:"Speichern",noTimes:"Keine freie Zeit für diesen Barber an diesem Tag.",
     saved:"Gespeichert, die Zeit ist online jetzt belegt",deleted:"Termin gelöscht, die Zeit ist wieder frei",
     del:"Termin löschen",dClient:"Kunde",dSrc:"Quelle",
-    walkinName:"Laufkunde",breakName:"Pause",takenErr:"Diese Zeit wurde gerade vergeben. Bitte wähle eine andere.",netErr:"Keine Verbindung. Bitte Internet prüfen und erneut versuchen.",
+    walkinName:"Laufkunde",breakName:"Pause",popular:"Am beliebtesten",dayOffBtn:"Freier Tag",offBanner:"Freier Tag: keine Buchungen möglich.",offUndo:"Freien Tag aufheben",offWarn:"Achtung: An diesem Tag gibt es {n} Termine. Informiere die Kunden oder lösche sie.",offSet:"Als freier Tag markiert",offRemoved:"Freier Tag aufgehoben",custOff:"{b} arbeitet an diesem Tag nicht. Bitte wähle einen anderen Tag.",offPick:"Wähle oben einen Barber, um einen freien Tag einzutragen.",waitH:"Warten auf Bestätigung",waitHint:"Bestätigen öffnet WhatsApp mit der fertigen Nachricht für den Kunden.",listH:"Termine",noAppts:"Keine Termine an diesem Tag.",addAppt:"+ Termin eintragen",brkToggle:"Pause (Zeit blockieren)",callBtn:"Anrufen",delBtn:"Löschen",delSure:"Ja, löschen",allB:"Alle",tomorrowL:"Morgen",formName:"Name (optional)",cancelF:"Abbrechen",okBtn:"Bestätigen",resendShort:"Erneut per WhatsApp senden",takenErr:"Diese Zeit wurde gerade vergeben. Bitte wähle eine andere.",netErr:"Keine Verbindung. Bitte Internet prüfen und erneut versuchen.",
     stL:"Status",stPending:"Wartet",stConfirmed:"Bestätigt",clientLang:"Sprache des Kunden",confirmBtn:"Bestätigen & per {app} senden",sendVia:"Nachricht senden über",viberNote:"Bei Viber wird die Nachricht auch automatisch kopiert. Falls sie nicht im Chat erscheint, einfach einfügen.",declineBtn:"Ablehnen",resend:"Bestätigung erneut senden",msgIn:"Die Nachricht ist auf",confirmedToast:"Bestätigt, WhatsApp mit der Nachricht geöffnet",declinedToast:"Abgelehnt, die Zeit ist wieder frei",msgOk:"Hallo {name}! Dein Termin bei Barbershop Bingo ist bestätigt.\n\nDatum: {date}, {time} Uhr\nLeistung: {service} bei {barber}\nAdresse: Rr. Kerem Lewton, Prishtina\n\nBitte 5 Minuten früher da sein. Für Änderungen: +383 44 907 755",msgNo:"Hallo {name}, leider ist der Termin {date}, {time} Uhr bei {barber} nicht mehr frei. Bitte wähle eine andere Zeit auf unserer Website oder ruf uns an: +383 44 907 755. Barbershop Bingo",months:["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],resetDemo:"Demo-Daten zurücksetzen",resetDone:"Demo-Daten zurückgesetzt",
     nNew:"Neue Online-Buchung",nH:"Benachrichtigungen",nEmpty:"Noch keine Benachrichtigungen.",nNow:"jetzt",nView:"Ansehen",nBadge:"NEU",nInfo:"Der Barber bekommt für jede Online-Buchung eine Push-Nachricht aufs Handy."
   }
@@ -565,6 +611,8 @@ const TIMES=[];for(let m=600;m<=1230;m+=30)TIMES.push(String(Math.floor(m/60)).p
 const slotsLen=svc=>Math.ceil(SVC[svc][1]/30);
 const priceHTML=i=>SVC[i][2]?`€${SVC[i][0]} <s>€${SVC[i][2]}</s>`:`€${SVC[i][0]}`;
 const saveHTML=i=>'';
+const SVC_ORDER=[6,0,1,2,3,4,5,7];   // order shown to clients; 6 = Prerja + Rregullimi (most popular)
+const STAR=6;
 const HIDE_TIME=[2];   // Larja e flokëve: no time shown
 const durTxt=i=>HIDE_TIME.includes(i)?'':SVC[i][1]>=60?(SVC[i][1]/60)+' h':SVC[i][1]+' '+t('min');
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -578,6 +626,12 @@ let bookings=[];let nextId=1;
 function key(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 function fromKey(k){return new Date(k+'T00:00')}
 function dayList(n=14){const a=[];const b=new Date();b.setHours(0,0,0,0);for(let i=0;i<n;i++){const d=new Date(b);d.setDate(b.getDate()+i);a.push(d)}return a}
+function isOff(barber,day){return bookings.some(b=>b.barber===barber&&b.day===day&&b.src==='off')}
+function setDayOff(barber,day,on){   // offline demo version (shared-database version below)
+  bookings=bookings.filter(b=>!(b.barber===barber&&b.day===day&&b.src==='off'));
+  if(on)bookings.push({id:nextId++,barber,day,slot:0,len:TIMES.length,svc:null,name:'',tel:'',notes:'',src:'off',status:'confirmed'});
+  persist();adm.open=null;renderAdmin();toast(on?t('offSet'):t('offRemoved'));
+}
 function covering(barber,day,idx){return bookings.find(b=>b.barber===barber&&b.day===day&&idx>=b.slot&&idx<b.slot+b.len)}
 function isPast(day,idx){const d=fromKey(day);const [h,m]=TIMES[idx].split(':');d.setHours(+h,+m);return d<=new Date()}
 function canFit(barber,day,idx,len,checkPast=true){
@@ -617,8 +671,8 @@ function applyLang(){
 document.querySelectorAll('.lang button').forEach(b=>b.onclick=()=>{lang=b.dataset.l;try{localStorage.setItem('bb_lang',lang)}catch(e){};applyLang()});
 
 function renderServices(){
-  document.getElementById('svcGrid').innerHTML=t('svcs').map((s,i)=>`
-    <div class="svc ${SVC[i][2]?'deal':''}"><div class="top"><h3>${s[0]}</h3><span class="price">${priceHTML(i)}</span></div>
+  document.getElementById('svcGrid').innerHTML=SVC_ORDER.map(i=>[t('svcs')[i],i]).map(([s,i])=>`
+    <div class="svc ${SVC[i][2]?'deal':''} ${i===STAR?'star':''}">${i===STAR?`<span class="star-badge">★ ${t('popular')}</span>`:''}<div class="top"><h3>${s[0]}</h3><span class="price">${priceHTML(i)}</span></div>
     ${saveHTML(i)}<p>${s[1]}</p><span class="dur">${durTxt(i)}</span>
     <button onclick="openBook({svc:${i}})">${t('book')} →</button></div>`).join('');
 }
@@ -721,8 +775,8 @@ function renderStep(){
     return;
   }
   if(st.step===0){
-    body.innerHTML=`<div class="step-title">${t('s1')}</div><div class="tiles">`+t('svcs').map((s,i)=>`
-      <button class="tile ${st.svc===i?'sel':''} ${SVC[i][2]?'deal':''}" onclick="pick('svc',${i})"><b>${s[0]}</b>${saveHTML(i)}<small>${durTxt(i)}</small><span>${priceHTML(i)}</span></button>`).join('')+`</div>`;
+    body.innerHTML=`<div class="step-title">${t('s1')}</div><div class="tiles">`+SVC_ORDER.map(i=>[t('svcs')[i],i]).map(([s,i])=>`
+      <button class="tile ${st.svc===i?'sel':''} ${SVC[i][2]?'deal':''} ${i===STAR?'star':''}" onclick="pick('svc',${i})">${i===STAR?`<span class="star-badge">★<span class="lbl"> ${t('popular')}</span></span>`:''}<b>${s[0]}</b>${saveHTML(i)}<small>${durTxt(i)}</small><span>${priceHTML(i)}</span></button>`).join('')+`</div>`;
     next.disabled=st.svc===null;
   }
   if(st.step===1){
@@ -735,10 +789,10 @@ function renderStep(){
     const days=dayList();if(!st.day)st.day=key(days[0]);
     const slots=customerSlots(st.day);
     body.innerHTML=`<div class="step-title">${t('s3')}</div>
-      <div class="days">`+days.map((d,i)=>`<button class="day ${key(d)===st.day?'sel':''}" onclick="st.day='${key(d)}';st.time=null;renderStep()"><small>${i===0?t('today'):fmtDay(d,{weekday:'short'})}</small><b>${d.getDate()}</b><small>${fmtDay(d,{month:'short'})}</small></button>`).join('')+`</div>
-      ${slots.every(s=>s.taken)?`<p class="note">${t('noSlots')}</p>`:''}
-      <div class="slots">`+slots.map(s=>`<button class="slot ${st.time===s.idx?'sel':''}" ${s.taken?'disabled':''} onclick="st.time=${s.idx};renderStep()">${s.time}</button>`).join('')+`</div>
-      <div class="legend"><span>▢ ${t('free')}</span><span style="text-decoration:line-through">${t('taken')}</span></div>`;
+      <div class="days">`+days.map((d,i)=>`<button class="day ${key(d)===st.day?'sel':''} ${(st.barber===-1?BARBERS.every((_,b)=>isOff(b,key(d))):isOff(st.barber,key(d)))?'off':''}" onclick="st.day='${key(d)}';st.time=null;renderStep()"><small>${i===0?t('today'):fmtDay(d,{weekday:'short'})}</small><b>${d.getDate()}</b><small>${fmtDay(d,{month:'short'})}</small></button>`).join('')+`</div>
+      ${st.barber>=0&&isOff(st.barber,st.day)?`<p class="note off-note">${t('custOff').replace('{b}',BARBERS[st.barber].n)}</p>`:slots.every(s=>s.taken)?`<p class="note">${t('noSlots')}</p>`:''}
+      `+(st.barber>=0&&isOff(st.barber,st.day)?'':`<div class="slots">`+slots.map(s=>`<button class="slot ${st.time===s.idx?'sel':''}" ${s.taken?'disabled':''} onclick="st.time=${s.idx};renderStep()">${s.time}</button>`).join('')+`</div>`)+`
+      <div class="legend" ${st.barber>=0&&isOff(st.barber,st.day)?'hidden':''}><span>▢ ${t('free')}</span><span style="text-decoration:line-through">${t('taken')}</span></div>`;
     next.disabled=st.time===null;
   }
   if(st.step===3){
@@ -800,7 +854,7 @@ function openFromPush(){
   closeAll();openOwner();adm.day=b.day;
   if(adm.auth&&!mine(b)){adm.auth=false;adm.user=null}
   if(!adm.auth)adm.pick=b.barber;
-  if(adm.auth){adm.sel=b.id;adm.view='detail';markRead(b.id)}
+  if(adm.auth){adm.open=b.id;adm.view='grid';markRead(b.id)}
   renderAdmin();
 }
 function markRead(id){notifs.forEach(n=>{if(n.bid===id)n.read=true});persist()}
@@ -911,100 +965,97 @@ function renderAdmin(){
       <p class="note">${t('pinHint')}</p></div>`;
     setTimeout(()=>document.getElementById('pinIn')?.focus(),50);return;
   }
-  if(adm.view==='notifs'){
-    const items=notifs.map(n=>({n,b:bookings.find(x=>x.id===n.bid)})).filter(o=>o.b&&mine(o.b));
-    el.innerHTML=`<button class="owner-link" style="margin-bottom:14px" onclick="adm.view='grid';renderAdmin()">${t('editBack')}</button>
-      <h3 class="serif" style="font-size:22px;margin-bottom:6px">${t('nH')}</h3><p class="note" style="margin:0 0 14px">${t('nInfo')}</p>
-      <div class="nlist">${items.length?items.map(({n,b})=>`<button class="nitem ${n.read?'':'unread'}" onclick="adm.day='${b.day}';adm.sel=${b.id};adm.view='detail';markRead(${b.id});renderAdmin()">
-        <div class="avatar">${BARBERS[b.barber].i}</div><div><b>${t('nNew')} · ${BARBERS[b.barber].n}</b>
-        <small>${esc(b.name)} · ${t('svcs')[b.svc][0]} · ${fmtDay(fromKey(b.day),{weekday:'short',day:'numeric',month:'short'})} ${TIMES[b.slot]}</small>
-        <small>${n.at.toLocaleTimeString(LOC[lang],{hour:'2-digit',minute:'2-digit'})}</small></div></button>`).join(''):`<div class="empty">${t('nEmpty')}</div>`}</div>`;
-    return;
-  }
-  if(adm.view==='detail'){
-    const b=bookings.find(x=>x.id===adm.sel);if(!b||!mine(b)){adm.view='grid';return renderAdmin()}
-    const end=b.slot+b.len<TIMES.length?TIMES[b.slot+b.len]:'21:00';
-    el.innerHTML=`<button class="owner-link" style="margin-bottom:14px" onclick="adm.view='grid';renderAdmin()">${t('editBack')}</button>
-      <div class="detail">
-        <div><span>${t('fBarber')}</span><b>${BARBERS[b.barber].n}</b></div>
-        <div><span>${t('fDate')}</span><b>${fmtDay(fromKey(b.day),{weekday:'long',day:'numeric',month:'long'})}</b></div>
-        <div><span>${t('time')}</span><b>${TIMES[b.slot]} – ${end}</b></div>
-        ${b.src==='brk'?'':`<div><span>${t('fSvc')}</span><b>${t('svcs')[b.svc][0]}</b></div>
-        <div><span>${t('dClient')}</span><b>${esc(b.name)||'–'}</b></div>
-        <div><span>${t('phone')}</span><b>${b.tel?`<a href="tel:${esc(b.tel.replace(/\s/g,''))}" style="color:var(--gold2)">${esc(b.tel)}</a>`:'–'}</b></div>`}
-        <div><span>${t('dSrc')}</span><b>${t('src')[b.src]}</b></div>
-        ${b.src==='web'?`<div><span>${t('stL')}</span><b style="color:${b.status==='pending'?'var(--gold2)':'var(--ok)'}">${b.status==='pending'?'⏳ '+t('stPending'):'✓ '+t('stConfirmed')}</b></div>
-        <div><span>${t('clientLang')}</span><b>${LANG_NAME[b.lang||'sq']}</b></div>`:''}
-        ${b.notes?`<div><span>${t('notes')}</span><b>${esc(b.notes)}</b></div>`:''}
-      </div>
+  // ---------- simple staff panel: waiting bookings on top, then the day's list ----------
+  if(adm.view!=='form')adm.view='grid';
+  const owner=adm.user===-1;
+  const filt=owner?(adm.filter??-1):adm.user;
+  const vis=b=>mine(b)&&(filt===-1||b.barber===filt);
+  const svcName=b=>b.svc==null?'':t('svcs')[b.svc][0];
+  const endTime=b=>b.slot+b.len<TIMES.length?TIMES[b.slot+b.len]:'21:00';
 
-      ${b.src==='web'&&b.status==='pending'?`
-        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:16px">
-          <button class="btn btn-ok" onclick="confirmBooking(${b.id})">✓ ${t('confirmBtn').replace('{app}',APP_NAME[msgApp])}</button>
-          <button class="btn btn-danger" onclick="declineBooking(${b.id})">✕ ${t('declineBtn')}</button>
-        </div>
-        <p class="note" style="margin-top:8px">${t('msgIn')} <b style="font-style:normal">${LANG_NAME[b.lang||'sq']}</b>:</p>
-        <div class="wa-prev">${esc(clientMsg(b,'ok')).replace(/\n/g,'<br>')}</div>`
-      :`${b.src==='web'&&b.tel?`<button class="owner-link" style="margin-top:14px;display:block" onclick="openWhatsApp(bookings.find(x=>x.id===${b.id}),'ok')">${t('resend')} (${APP_NAME[msgApp]} · ${LANG_NAME[b.lang||'sq']})</button>`:''}
-      <button class="btn btn-danger" style="margin-top:16px" onclick="delBooking(${b.id})">${t('del')}</button>`}`;
-    return;
-  }
   if(adm.view==='form'){
-    const f=adm.f,len=formLen();
-    const free=TIMES.map((tm,i)=>({tm,i})).filter(o=>canFit(f.barber,f.day,o.i,len,false));
+    const f=adm.f,len=formLen(),brk=f.src==='brk';
+    if(!owner)f.barber=adm.user;
+    const free=TIMES.map((tm,i)=>({tm,i})).filter(o=>canFit(f.barber,f.day,o.i,len,false)&&!isPast(f.day,o.i));
     if(f.slot!==null&&!free.some(o=>o.i===f.slot))f.slot=null;
     if(f.slot===null&&free.length)f.slot=free[0].i;
-    const days=dayList(30);
-    const srcBtns=['phone','walkin','insta','brk'].map(s=>`<button class="${f.src===s?'on':''}" onclick="adm.f.src='${s}';renderAdmin()">${t('src')[s]}</button>`).join('');
-    el.innerHTML=`<button class="owner-link" style="margin-bottom:14px" onclick="adm.view='grid';renderAdmin()">${t('editBack')}</button>
-      <h3 class="serif" style="font-size:22px;margin-bottom:14px">${t('addH')}</h3>
-      <div class="field"><label>${t('fSrc')}</label><div class="seg">${srcBtns}</div></div>
+    el.innerHTML=`<div class="sp-form">
+      <h3 class="serif" style="font-size:22px;margin-bottom:16px">${t('addAppt').replace('+ ','')}</h3>
+      <label class="sp-switch"><input type="checkbox" ${brk?'checked':''} onchange="adm.f.src=this.checked?'brk':'phone';renderAdmin()"><span></span>${t('brkToggle')}</label>
       <div class="aform">
-        <div class="field"><label>${t('fBarber')}</label><select ${adm.user>=0?'disabled':''} onchange="adm.f.barber=+this.value;renderAdmin()">${BARBERS.map((b,i)=>`<option value="${i}" ${i===f.barber?'selected':''}>${b.n}</option>`).join('')}</select></div>
-        <div class="field"><label>${t('fDate')}</label><select onchange="adm.f.day=this.value;renderAdmin()">${days.map((d,i)=>`<option value="${key(d)}" ${key(d)===f.day?'selected':''}>${i===0?t('today')+' · ':''}${fmtDay(d,{weekday:'short',day:'numeric',month:'short'})}</option>`).join('')}</select></div>
-        ${f.src==='brk'
+        ${owner?`<div class="field"><label>${t('fBarber')}</label><select onchange="adm.f.barber=+this.value;renderAdmin()">${BARBERS.map((b,i)=>`<option value="${i}" ${i===f.barber?'selected':''}>${b.n}</option>`).join('')}</select></div>`:''}
+        <div class="field"><label>${t('fDate')}</label><select onchange="adm.f.day=this.value;renderAdmin()">${dayList(30).map((d,i)=>`<option value="${key(d)}" ${key(d)===f.day?'selected':''}>${i===0?t('today')+' · ':i===1?t('tomorrowL')+' · ':''}${fmtDay(d,{weekday:'short',day:'numeric',month:'short'})}</option>`).join('')}</select></div>
+        ${brk
           ?`<div class="field"><label>${t('fDur')}</label><select onchange="adm.f.brkLen=+this.value;renderAdmin()">${[1,2,3,4].map(n=>`<option value="${n}" ${n===f.brkLen?'selected':''}>${n*30} ${t('min')}</option>`).join('')}</select></div>`
-          :`<div class="field"><label>${t('fSvc')}</label><select onchange="adm.f.svc=+this.value;renderAdmin()">${t('svcs').map((s,i)=>`<option value="${i}" ${i===f.svc?'selected':''}>${s[0]} · ${SVC[i][1]} ${t('min')}</option>`).join('')}</select></div>`}
+          :`<div class="field"><label>${t('fSvc')}</label><select onchange="adm.f.svc=+this.value;renderAdmin()">${t('svcs').map((s,i)=>`<option value="${i}" ${i===f.svc?'selected':''}>${s[0]}</option>`).join('')}</select></div>`}
         <div class="field"><label>${t('fTime')}</label>${free.length?`<select onchange="adm.f.slot=+this.value">${free.map(o=>`<option value="${o.i}" ${o.i===f.slot?'selected':''}>${o.tm}</option>`).join('')}</select>`:`<p class="err">${t('noTimes')}</p>`}</div>
-        ${f.src==='brk'?'':`
-        <div class="field"><label>${t('fName')}${f.src==='walkin'?' ('+t('optional')+')':''}</label><input value="${esc(f.name)}" oninput="adm.f.name=this.value"></div>
-        <div class="field"><label>${t('fTel')}</label><input value="${esc(f.tel)}" oninput="adm.f.tel=this.value" inputmode="tel" placeholder="+383 4x xxx xxx"></div>`}
-        <div class="field full"><label>${t('notes')}</label><input value="${esc(f.notes)}" oninput="adm.f.notes=this.value"></div>
+        ${brk?'':`
+        <div class="field"><label>${t('formName')}</label><input value="${esc(f.name)}" oninput="adm.f.name=this.value"></div>
+        <div class="field"><label>${t('fTel')}</label><input value="${esc(f.tel)}" oninput="adm.f.tel=this.value" inputmode="tel" placeholder="+383 44 123 456"></div>`}
       </div>
-      <button class="btn btn-gold" ${free.length?'':'disabled style="opacity:.4"'} onclick="saveAdd()">${t('save')}</button>`;
+      <div class="sp-btns"><button class="btn btn-gold" ${free.length?'':'disabled style="opacity:.4"'} onclick="saveAdd()">${t('save')}</button><button class="btn btn-ghost" onclick="adm.view='grid';renderAdmin()">${t('cancelF')}</button></div>
+    </div>`;
     return;
   }
-  // grid view
-  const d=fromKey(adm.day),isToday=adm.day===key(new Date());
-  const cols=adm.user>=0?[adm.user]:BARBERS.map((_,i)=>i);
-  const dayCount=bookings.filter(x=>x.day===adm.day&&x.src!=='brk'&&cols.includes(x.barber)).length;
-  let rows='';
-  TIMES.forEach((tm,idx)=>{
-    rows+=`<tr><td>${tm}</td>`;
-    cols.forEach(b=>{
-      const bk=covering(b,adm.day,idx);
-      if(bk){
-        if(bk.slot!==idx)return; // covered by rowspan above
-        const label=(bk.status==='pending'?'⏳ ':'')+(bk.src==='brk'?t('breakName'):esc(bk.name)||t('src')[bk.src]);
-        const sub=bk.src==='brk'?'':`${t('svcs')[bk.svc][0]} · ${t('src')[bk.src]}`;
-        rows+=`<td rowspan="${bk.len}"><button class="bkc src-${bk.src} ${isNew(bk.id)?'new':''} ${bk.status==='pending'?'pending':''}" onclick="adm.sel=${bk.id};adm.view='detail';markRead(${bk.id});renderAdmin()"><b>${isNew(bk.id)?`<span class='nb'>${t('nBadge')}</span>`:''}${label}</b><span>${sub}</span></button></td>`;
-      }else if(isPast(adm.day,idx)){
-        rows+=`<td><div class="cell-past"></div></td>`;
-      }else{
-        rows+=`<td><button class="cell-free" title="${t('addBk')}" onclick="startAdd(${b},${idx})">+</button></td>`;
-      }
-    });
-    rows+='</tr>';
-  });
-  el.innerHTML=`<div class="abar">
-      <div class="dnav"><button onclick="shiftDay(-1)" aria-label="prev">‹</button><b>${isToday?t('today')+' · ':''}${fmtDay(d,{weekday:'short',day:'numeric',month:'short'})}</b><button onclick="shiftDay(1)" aria-label="next">›</button></div>
-      <div style="display:flex;gap:8px"><button class="bell" title="${t('nH')}" onclick="adm.view='notifs';renderAdmin()">🔔${unread()?`<em>${unread()}</em>`:''}</button><button class="btn btn-gold" onclick="startAdd()">${t('addBk')}</button><button class="btn btn-ghost" onclick="logout()">${t('logout')}</button></div>
+
+  // waiting online bookings (all days) – confirm / decline right here
+  const pending=bookings.filter(b=>vis(b)&&b.src==='web'&&b.status==='pending'&&!isPast(b.day,b.slot)).sort((a,b)=>(a.day+String(a.slot).padStart(2,'0')).localeCompare(b.day+String(b.slot).padStart(2,'0')));
+  const pendHTML=pending.length?`<div class="sp-wait">
+      <h4>⏳ ${t('waitH')} <em>${pending.length}</em></h4><p class="note" style="margin:0 0 10px">${t('waitHint')}</p>
+      ${pending.map(b=>`<div class="pcard">
+        <div class="pinfo"><b>${esc(b.name)}</b><span>${svcName(b)}${owner?' · '+BARBERS[b.barber].n:''}</span><span class="pwhen">${fmtDay(fromKey(b.day),{weekday:'short',day:'numeric',month:'short'})} · ${TIMES[b.slot]}</span></div>
+        <div class="pact"><button class="btn btn-ok" onclick="confirmBooking(${b.id})">✓ ${t('okBtn')}</button><button class="btn btn-danger" onclick="declineBooking(${b.id})">✕ ${t('declineBtn')}</button></div>
+      </div>`).join('')}
+    </div>`:'';
+
+  // day chips
+  const days=dayList(14);
+  if(!days.some(d=>key(d)===adm.day))adm.day=key(days[0]);
+  const chips=days.map((d,i)=>`<button class="day ${key(d)===adm.day?'sel':''} ${(owner?(filt>=0&&isOff(filt,key(d))):isOff(adm.user,key(d)))?'off':''}" onclick="adm.day='${key(d)}';adm.open=null;renderAdmin()"><small>${i===0?t('today'):i===1?t('tomorrowL'):fmtDay(d,{weekday:'short'})}</small><b>${d.getDate()}</b><small>${fmtDay(d,{month:'short'})}</small></button>`).join('');
+
+  // the day's appointments
+  const list=bookings.filter(b=>b.day===adm.day&&vis(b)&&b.src!=='off').sort((a,b)=>a.slot-b.slot||a.barber-b.barber);
+  const rows=list.map(b=>{
+    const brk=b.src==='brk',open=adm.open===b.id,past=isPast(b.day,b.slot+b.len-1),pend=b.src==='web'&&b.status==='pending';
+    return `<div class="srow ${past?'past':''} ${open?'open':''} ${brk?'brk':''}" onclick="adm.open=${open?'null':b.id};adm.del=null;renderAdmin()">
+      <div class="rt">${TIMES[b.slot]}<small>${endTime(b)}</small></div>
+      <div class="rb"><b>${brk?t('breakName'):(esc(b.name)||'—')}</b><span>${brk?'':svcName(b)}</span></div>
+      ${pend?`<em class="tag">${t('stPending')}</em>`:''}${owner?`<em class="who b${b.barber}">${BARBERS[b.barber].n}</em>`:''}
     </div>
-    <p class="note" style="margin:0 0 12px"><b style="font-style:normal;color:var(--text)">${dayCount} ${t('nBk')}</b> · ${t('admNote')}</p>
-    <div class="agrid"><table class="${cols.length===1?'one':''}"><thead><tr><th>${t('time')}</th>${cols.map(b=>`<th>${BARBERS[b].n}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div>
-    ${adm.user===-1?`<button class="owner-link" style="margin-top:12px;font-size:13px" onclick="resetDemo()">${t('resetDemo')}</button>`:''}
-    <div class="alegend">${['web','phone','walkin','insta','brk'].map(s=>`<span><i class="src-${s}"></i>${t('src')[s]}</span>`).join('')}</div>`;
-  if(isToday){const now=new Date(),mins=now.getHours()*60+now.getMinutes();const i=Math.max(0,Math.floor((mins-600)/30)-1);const g=el.querySelector('.agrid');if(g)g.scrollTop=i*42}
+    ${open?`<div class="ract">
+      ${b.tel?`<a class="btn btn-ghost" href="tel:${esc(b.tel.replace(/\s/g,''))}">📞 ${t('callBtn')}</a>`:''}
+      ${pend?`<button class="btn btn-ok" onclick="confirmBooking(${b.id})">✓ ${t('okBtn')}</button><button class="btn btn-danger" onclick="declineBooking(${b.id})">✕ ${t('declineBtn')}</button>`
+            :(b.src==='web'&&b.tel?`<button class="btn btn-ghost" onclick="openWhatsApp(bookings.find(x=>x.id===${b.id}),'ok')">📲 ${t('resendShort')}</button>`:'')}
+      <button class="btn btn-danger" onclick="${adm.del===b.id?`delBooking(${b.id})`:`adm.del=${b.id};renderAdmin()`}">${adm.del===b.id?t('delSure'):t('delBtn')}</button>
+    </div>`:''}`;
+  }).join('');
+
+  const d=fromKey(adm.day),isToday=adm.day===key(new Date());
+  // day off for the selected day (barber: himself; owner: the barber picked in the filter)
+  const offWho=owner?filt:adm.user;
+  const offersOff=offWho>=0;
+  const offNow=offersOff&&isOff(offWho,adm.day);
+  const offList=owner&&filt===-1?BARBERS.map((b,i)=>isOff(i,adm.day)?b.n:null).filter(Boolean):[];
+  const offBlock=offersOff
+    ?(offNow
+      ?`<div class="sp-off">${owner?BARBERS[offWho].n+' · ':''}${t('offBanner')}
+          ${list.length?`<p class="off-warn">${t('offWarn').replace('{n}',list.length)}</p>`:''}
+          <button class="btn btn-ghost" onclick="setDayOff(${offWho},'${adm.day}',false)">${t('offUndo')}</button></div>`
+      :`<button class="btn btn-ghost sp-offbtn" onclick="setDayOff(${offWho},'${adm.day}',true)">${t('dayOffBtn')}${owner?' · '+BARBERS[offWho].n:''}</button>`)
+    :(offList.length?`<div class="sp-off">${t('dayOffBtn')}: ${offList.join(', ')}</div>`:`<p class="note" style="margin:0 0 10px">${t('offPick')}</p>`);
+  el.innerHTML=`
+    <div class="sp-top">
+      <button class="btn btn-gold" onclick="startAdd(${owner?(filt>=0?filt:0):adm.user},null)">${t('addAppt')}</button>
+      <button class="btn btn-ghost" onclick="logout()">${t('logout')}</button>
+    </div>
+    ${owner?`<div class="seg sp-filter">${[-1,0,1,2].map(i=>`<button class="${filt===i?'on':''}" onclick="adm.filter=${i};adm.open=null;renderAdmin()">${i===-1?t('allB'):BARBERS[i].n}</button>`).join('')}</div>`:''}
+    ${pendHTML}
+    <h4 class="sp-h">${t('listH')} · ${isToday?t('today'):fmtDay(d,{weekday:'long'})}, ${fmtDay(d,{day:'numeric',month:'long'})}</h4>
+    <div class="days sp-days">${chips}</div>
+    ${offBlock}
+    <div class="slist">${rows||`<div class="empty">${t('noAppts')}</div>`}</div>
+    ${owner?`<button class="owner-link" style="margin-top:18px;font-size:13px" onclick="resetDemo()">${t('resetDemo')}</button>`:''}`;
+  const sel=el.querySelector('.sp-days .day.sel');if(sel)sel.scrollIntoView({block:'nearest',inline:'center'});
 }
 
 /* ---------- demo data store ----------
@@ -1050,7 +1101,7 @@ if(API_URL){
 
   /* public page: only busy times, no names or phone numbers */
   window.refreshSlots=async function(){
-    try{const d=await api('/slots?'+range());if(!isStaff())bookings=d.slots.map(x=>({...x}));}catch(e){}
+    try{const d=await api('/slots?'+range());if(!isStaff())bookings=d.slots.map(x=>({...x,src:x.off?'off':undefined}));}catch(e){}
     if(document.getElementById('bookOv').classList.contains('show')&&!st.done&&!st.sending)renderStep();
   };
   const _openBook=openBook;
@@ -1129,6 +1180,10 @@ if(API_URL){
         name:f.name.trim()||(f.src==='walkin'?t('walkinName'):''),tel:f.tel.trim(),notes:f.notes}});
       adm.day=f.day;adm.view='grid';toast(t('saved'));await loadStaff();
     }catch(e){toast(e.status===409?t('takenErr'):t('netErr'));loadStaff()}
+  };
+  setDayOff=async function(barber,day,on){
+    try{await api('/staff/dayoff',{method:'POST',staff:true,body:{barber,day,off:on}});toast(on?t('offSet'):t('offRemoved'))}catch(e){toast(t('netErr'))}
+    adm.open=null;await loadStaff();
   };
   resetDemo=async function(){
     try{await api('/staff/reset',{method:'POST',body:{},staff:true});adm.view='grid';toast(t('resetDone'))}catch(e){toast(t('netErr'))}
