@@ -184,6 +184,15 @@
   .phone-row select:focus{outline:none;border-color:var(--gold)}
   /* simple staff panel */
   .sp-top{display:flex;gap:10px;margin-bottom:14px}
+  .sp-push{display:flex;align-items:center;gap:12px;border:1px solid var(--line);background:var(--bg2);border-radius:14px;padding:12px 14px;margin-bottom:14px;font-size:14px;color:var(--muted)}
+  .sp-push svg{flex:none;width:22px;height:22px;color:var(--gold2)}
+  .sp-push p{margin:0;flex:1;line-height:1.4}
+  .sp-push b{color:var(--text);font-weight:600}
+  .sp-push .btn{flex:none;padding:9px 14px;font-size:14px}
+  .sp-push.on{padding:8px 14px;font-size:13px;border-color:rgba(95,182,122,.35)}
+  .sp-push.on svg{color:var(--ok)}
+  .sp-push .owner-link{margin:0;flex:none}
+  @media(max-width:420px){.sp-push:not(.on){flex-wrap:wrap}.sp-push:not(.on) .btn{width:100%;justify-content:center}}
   .sp-top .btn-gold{flex:1;justify-content:center}
   .sp-filter{margin-bottom:14px}
   .sp-wait{background:#231f14;border:1px solid rgba(201,162,39,.45);border-radius:16px;padding:14px;margin-bottom:18px}
@@ -548,7 +557,7 @@ const T = {
     today:"Sot",
     /* staff panel */
     admH:"Paneli i stafit",pinH:"Kush jeni?",pinFor:"PIN-i për",owner:"Pronari",ownerSub:"Të gjithë berberët",pinHint:"PIN demo: Albini 1111 · Redoni 2222 · Lorisi 3333 · Pronari 1234",switchU:"Ndërro",nBk:"rezervime",myPanel:"Paneli im",pinBtn:"Hyr",pinErr:"PIN i gabuar",
-    addBk:"+ Shto rezervim",logout:"Dil",time:"Ora",
+    addBk:"+ Shto rezervim",logout:"Dil",pushBtn:"Aktivizo njoftimet",pushWhy:"Merrni njoftim në këtë telefon sa herë që dikush rezervon online.",pushOn:"Njoftimet janë aktive në këtë telefon",pushTest:"Provo",pushTestSent:"Njoftimi provë u dërgua",pushBlocked:"Njoftimet janë bllokuar. Lejojini te Settings › Notifications › Bingo Staff.",pushInstall:"Për njoftime në iPhone: prekni Share, pastaj Add to Home Screen, dhe hapeni panelin nga ikona Bingo Staff.",pushFail:"Njoftimet nuk u aktivizuan. Provoni përsëri.",time:"Ora",
     src:{web:"Online",phone:"Telefon",walkin:"Pa termin",insta:"Instagram",brk:"Pauzë / e bllokuar"},
     admNote:"Çdo rezervim që shtoni këtu shfaqet menjëherë si i zënë në faqe.",
     addH:"Shto rezervim",editBack:"← Kthehu te orari",
@@ -590,7 +599,7 @@ const T = {
     days:["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
     today:"Today",
     admH:"Staff panel",pinH:"Who are you?",pinFor:"PIN for",owner:"Owner",ownerSub:"All barbers",pinHint:"Demo PINs: Albini 1111 · Redoni 2222 · Lorisi 3333 · Owner 1234",switchU:"Switch",nBk:"bookings",myPanel:"My panel",pinBtn:"Sign in",pinErr:"Wrong PIN",
-    addBk:"+ Add booking",logout:"Sign out",time:"Time",
+    addBk:"+ Add booking",logout:"Sign out",pushBtn:"Turn on notifications",pushWhy:"Get a notification on this phone every time someone books online.",pushOn:"Notifications are on for this phone",pushTest:"Test",pushTestSent:"Test notification sent",pushBlocked:"Notifications are blocked. Allow them in Settings › Notifications › Bingo Staff.",pushInstall:"For notifications on iPhone: tap Share, then Add to Home Screen, and open the panel from the Bingo Staff icon.",pushFail:"Couldn't turn on notifications. Please try again.",time:"Time",
     src:{web:"Online",phone:"Phone call",walkin:"Walk-in",insta:"Instagram",brk:"Break / blocked"},
     admNote:"Anything you add here shows as busy on the website straight away.",
     addH:"Add a booking",editBack:"← Back to schedule",
@@ -632,7 +641,7 @@ const T = {
     days:["Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag","Sonntag"],
     today:"Heute",
     admH:"Mitarbeiter-Bereich",pinH:"Wer bist du?",pinFor:"PIN für",owner:"Inhaber",ownerSub:"Alle Barber",pinHint:"Demo-PINs: Albini 1111 · Redoni 2222 · Lorisi 3333 · Inhaber 1234",switchU:"Wechseln",nBk:"Termine",myPanel:"Mein Bereich",pinBtn:"Anmelden",pinErr:"Falscher PIN",
-    addBk:"+ Termin eintragen",logout:"Abmelden",time:"Zeit",
+    addBk:"+ Termin eintragen",logout:"Abmelden",pushBtn:"Benachrichtigungen aktivieren",pushWhy:"Bei jeder Online-Buchung eine Benachrichtigung auf diesem Handy erhalten.",pushOn:"Benachrichtigungen sind auf diesem Handy aktiv",pushTest:"Testen",pushTestSent:"Test-Benachrichtigung gesendet",pushBlocked:"Benachrichtigungen sind blockiert. Erlaube sie unter Einstellungen › Mitteilungen › Bingo Staff.",pushInstall:"Für Benachrichtigungen auf dem iPhone: Teilen, dann Zum Home-Bildschirm, und das Panel über das Bingo-Staff-Symbol öffnen.",pushFail:"Benachrichtigungen konnten nicht aktiviert werden. Bitte erneut versuchen.",time:"Zeit",
     src:{web:"Online",phone:"Telefon",walkin:"Laufkundschaft",insta:"Instagram",brk:"Pause / blockiert"},
     admNote:"Alles, was du hier einträgst, erscheint sofort als belegt auf der Website.",
     addH:"Termin eintragen",editBack:"← Zurück zum Plan",
@@ -1095,6 +1104,7 @@ function renderAdmin(){
       <button class="btn btn-gold" onclick="startAdd(${owner?(filt>=0?filt:0):adm.user},null)">${t('addAppt')}</button>
       <button class="btn btn-ghost" onclick="logout()">${t('logout')}</button>
     </div>
+    ${typeof pushBarHTML==='function'?pushBarHTML():''}
     ${owner?`<div class="seg sp-filter">${[-1,0,1,2].map(i=>`<button class="${filt===i?'on':''}" onclick="adm.filter=${i};adm.open=null;renderAdmin()">${i===-1?t('allB'):BARBERS[i].n}</button>`).join('')}</div>`:''}
     ${pendHTML}
     <h4 class="sp-h">${t('listH')} · ${isToday?t('today'):fmtDay(d,{weekday:'long'})}, ${fmtDay(d,{day:'numeric',month:'long'})}</h4>
@@ -1135,7 +1145,7 @@ if(API_URL){
   const apiUrl=path=>{if(!/\.php$/i.test(API_URL))return API_URL+path;const [p,qs]=path.split('?');return API_URL+'?r='+encodeURIComponent(p)+(qs?'&'+qs:'')};
   const api=async(path,opt={})=>{
     const headers={'Content-Type':'application/json'};
-    if(opt.staff&&adm.cred)headers['X-Staff']=adm.cred;
+    if(opt.staff&&(opt.cred||adm.cred))headers['X-Staff']=opt.cred||adm.cred;
     const r=await fetch(apiUrl(path),{method:opt.method||'GET',headers,body:opt.body?JSON.stringify(opt.body):undefined});
     let data={};try{data=await r.json()}catch(e){}
     if(!r.ok){const e=new Error(data.error||String(r.status));e.status=r.status;throw e}
@@ -1192,9 +1202,7 @@ if(API_URL){
     adm.cred=(adm.pick===-1?'owner':WHO[adm.pick])+':'+v;
     try{
       await api('/staff/login',{method:'POST',body:{},staff:true});
-      adm.auth=true;adm.user=adm.pick;adm.view='grid';known=null;bookings=[];
-      renderAdmin();await loadStaff();
-      clearInterval(window.__poll);window.__poll=setInterval(loadStaff,8000);
+      await startSession();
     }catch(e){adm.cred=null;const pe=document.getElementById('pinErr');if(pe)pe.textContent=e.status===401?t('pinErr'):t('netErr')}
   };
   markRead=function(id){
@@ -1236,12 +1244,97 @@ if(API_URL){
     try{await api('/staff/reset',{method:'POST',body:{},staff:true});adm.view='grid';toast(t('resetDone'))}catch(e){toast(t('netErr'))}
     known=null;await loadStaff();
   };
+
+  /* ---------- staff app: stays signed in on this phone + phone notifications ---------- */
+  const SKEY='bb_staff';
+  const saveCred=()=>{try{localStorage.setItem(SKEY,JSON.stringify({cred:adm.cred,pick:adm.pick}))}catch(e){}};
+  const loadCred=()=>{try{return JSON.parse(localStorage.getItem(SKEY)||'null')}catch(e){return null}};
+  const clearCred=()=>{try{localStorage.removeItem(SKEY)}catch(e){}};
+  const rr=()=>{if(adm.auth&&adm.view==='grid')renderAdmin()};
+  async function startSession(){
+    adm.auth=true;adm.user=adm.pick;adm.view='grid';known=null;bookings=[];saveCred();
+    renderAdmin();pushSync();await loadStaff();
+    clearInterval(window.__poll);window.__poll=setInterval(loadStaff,8000);
+  }
+  // opening the staff page again signs the barber straight back in (no automatic sign-out)
+  const _openOwner=openOwner;
+  openOwner=function(){
+    const s=loadCred();
+    if(!adm.auth&&s&&s.cred){adm.cred=s.cred;adm.pick=s.pick;startSession()}
+    _openOwner();
+  };
+  const _logout=logout;
+  logout=function(){clearCred();pushOff();_logout()};   // only the "Dil" button (or a changed PIN) signs out
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&adm.auth)loadStaff()});
+
+  const canPush=()=>'serviceWorker' in navigator&&'PushManager' in window&&'Notification' in window;
+  const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  const isApp=()=>navigator.standalone===true||matchMedia('(display-mode: standalone)').matches;
+  const keyBytes=k=>{const s=atob(k.replace(/-/g,'+').replace(/_/g,'/')+'='.repeat((4-k.length%4)%4));return Uint8Array.from(s,c=>c.charCodeAt(0))};
+  const sameKey=(a,b)=>{if(!a)return false;a=new Uint8Array(a);return a.length===b.length&&a.every((x,i)=>x===b[i])};
+  const regSW=async()=>{await navigator.serviceWorker.register('sw.js',{scope:'./'});return navigator.serviceWorker.ready};
+  if('serviceWorker' in navigator)navigator.serviceWorker.addEventListener('message',()=>{if(adm.auth)loadStaff()});
+  let pushState='';   // '' · install · off · on · blocked
+  async function pushSync(){          // after sign-in: link this phone to whoever is signed in
+    if(!canPush()){pushState=isIOS&&!isApp()?'install':'';rr();return}
+    if(Notification.permission==='denied'){pushState='blocked';rr();return}
+    try{
+      const reg=await regSW();const sub=await reg.pushManager.getSubscription();
+      if(sub&&Notification.permission==='granted'){await api('/staff/push/subscribe',{method:'POST',body:sub.toJSON(),staff:true});pushState='on'}
+      else pushState='off';
+    }catch(e){pushState='off'}
+    rr();
+  }
+  window.pushEnable=async function(){
+    let perm;try{perm=await Notification.requestPermission()}catch(e){perm=Notification.permission}   // asked right inside the tap (iPhone rule)
+    if(perm!=='granted'){pushState=perm==='denied'?'blocked':'off';rr();if(perm!=='denied')toast(t('pushFail'));return}
+    try{
+      const reg=await regSW();
+      const key=keyBytes((await api('/staff/push/key',{staff:true})).key);
+      let sub=await reg.pushManager.getSubscription();
+      if(sub&&!sameKey(sub.options&&sub.options.applicationServerKey,key)){await sub.unsubscribe();sub=null}
+      if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:key});
+      await api('/staff/push/subscribe',{method:'POST',body:sub.toJSON(),staff:true});
+      pushState='on';rr();toast(t('pushOn'));
+    }catch(e){pushState='off';rr();toast(t('pushFail'))}
+  };
+  window.pushTest=async function(){
+    try{const d=await api('/staff/push/test',{method:'POST',body:{},staff:true});toast(d.ok?t('pushTestSent'):t('pushFail'))}catch(e){toast(t('netErr'))}
+  };
+  async function pushOff(){            // signing out: this phone stops getting notifications
+    const cred=adm.cred;pushState='';
+    if(!canPush()||!cred)return;
+    try{
+      const reg=await navigator.serviceWorker.getRegistration();const sub=reg&&await reg.pushManager.getSubscription();
+      if(sub){await api('/staff/push/unsubscribe',{method:'POST',body:{endpoint:sub.endpoint},staff:true,cred}).catch(()=>{});await sub.unsubscribe().catch(()=>{})}
+    }catch(e){}
+  }
+  const bell='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>';
+  window.pushBarHTML=function(){
+    if(pushState==='install')return `<div class="sp-push">${bell}<p>${t('pushInstall')}</p></div>`;
+    if(pushState==='off')return `<div class="sp-push">${bell}<p>${t('pushWhy')}</p><button class="btn btn-gold" onclick="pushEnable()">${t('pushBtn')}</button></div>`;
+    if(pushState==='blocked')return `<div class="sp-push">${bell}<p>${t('pushBlocked')}</p></div>`;
+    if(pushState==='on')return `<div class="sp-push on">${bell}<p>${t('pushOn')}</p><button class="owner-link" onclick="pushTest()">${t('pushTest')}</button></div>`;
+    return '';
+  };
+}
+
+/* the staff page can be saved to the home screen as its own app ("Bingo Staff"); the public page never is */
+function staffApp(){
+  if(document.getElementById('staffManifest'))return;
+  const add=(tag,a)=>{const e=document.createElement(tag);for(const k in a)e.setAttribute(k,a[k]);document.head.appendChild(e)};
+  add('link',{id:'staffManifest',rel:'manifest',href:'staff.webmanifest'});
+  add('link',{rel:'apple-touch-icon',href:'apple-touch-icon.png'});
+  add('meta',{name:'apple-mobile-web-app-capable',content:'yes'});
+  add('meta',{name:'mobile-web-app-capable',content:'yes'});
+  add('meta',{name:'apple-mobile-web-app-title',content:'Bingo Staff'});
+  add('meta',{name:'apple-mobile-web-app-status-bar-style',content:'black'});
 }
 
 function checkStaff(){
   const on=location.hash==='#staff'||/[?&]staff\b/.test(location.search);
   document.body.classList.toggle('staff-mode',on);
-  if(on){document.title='Barbershop Bingo · Staff';openOwner()}
+  if(on){document.title='Bingo Staff';staffApp();openOwner()}
   else{document.getElementById('ownerOv').classList.remove('show');document.body.style.overflow=''}
 }
 window.addEventListener('hashchange',checkStaff);
