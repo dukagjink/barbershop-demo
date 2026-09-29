@@ -184,6 +184,15 @@
   .phone-row select:focus{outline:none;border-color:var(--gold)}
   /* simple staff panel */
   .sp-top{display:flex;gap:10px;margin-bottom:14px}
+  #askOv{z-index:80}
+  .modal.ask{max-width:420px;padding:26px 22px 22px;text-align:center}
+  .modal.ask h3{font-size:21px;margin-bottom:6px}
+  .ask-who{color:var(--muted);font-size:14px;margin-bottom:14px}
+  .ask-who b{color:var(--text)}
+  .ask-q{margin-bottom:18px;line-height:1.45}
+  .ask-btns{display:flex;flex-direction:column;gap:10px}
+  .ask-btns .btn{width:100%;justify-content:center;padding:14px}
+  .ask-btns .owner-link{margin:4px auto 0}
   .sp-push{display:flex;align-items:center;gap:12px;border:1px solid var(--line);background:var(--bg2);border-radius:14px;padding:12px 14px;margin-bottom:14px;font-size:14px;color:var(--muted)}
   .sp-push svg{flex:none;width:22px;height:22px;color:var(--gold2)}
   .sp-push p{margin:0;flex:1;line-height:1.4}
@@ -567,7 +576,7 @@ const T = {
     saved:"U ruajt, ora tani shfaqet e zënë online",deleted:"Rezervimi u fshi, ora u lirua",
     del:"Fshij rezervimin",dClient:"Klienti",dSrc:"Burimi",
     walkinName:"Klient pa termin",breakName:"Pauzë",revEyebrow:"Vlerësime",revH:"Çfarë thonë klientët",revCount:"96 vlerësime në Google",revAll:"Shiko të gjitha vlerësimet",revVia:"Vlerësim në Google · 2 muaj më parë",revTag1:"Berberë profesionalë",revTag2:"Atmosferë mikpritëse",revTag3:"Prerje të pastra",revWrite:"Na lini një vlerësim në Google",revBadge:"96 vlerësime në Google",nRev:"Vlerësimet",popular:"Më e preferuara",dayOffBtn:"Ditë pushimi",offBanner:"Ditë pushimi: nuk pranohen rezervime.",offUndo:"Anulo pushimin",offWarn:"Kujdes: këtë ditë ka {n} termine. Njoftoni klientët ose fshijini.",offSet:"Dita u shënua si pushim",offRemoved:"Pushimi u anulua",custOff:"{b} nuk punon këtë ditë. Zgjidhni një ditë tjetër.",offPick:"Zgjidhni një berber më sipër për t'i shënuar ditë pushimi.",waitH:"Presin konfirmim",waitHint:"Konfirmo hap WhatsApp me mesazhin gati për klientin.",listH:"Terminet",noAppts:"Nuk ka termine për këtë ditë.",addAppt:"+ Shto termin",brkToggle:"Pauzë (bllokoje orën)",callBtn:"Thirr",delBtn:"Fshij",delSure:"Po, fshije",allB:"Të gjithë",tomorrowL:"Nesër",formName:"Emri (opsional)",cancelF:"Anulo",okBtn:"Konfirmo",resendShort:"Dërgo sërish në WhatsApp",takenErr:"Kjo orë sapo u zu. Ju lutem zgjidhni një tjetër.",netErr:"Nuk u lidh dot. Kontrolloni internetin dhe provoni sërish.",
-    stL:"Statusi",stPending:"Në pritje",stConfirmed:"Konfirmuar",clientLang:"Gjuha e klientit",confirmBtn:"Konfirmo & dërgo në {app}",sendVia:"Dërgo mesazhin me",viberNote:"Me Viber mesazhi kopjohet edhe automatikisht. Nëse nuk shfaqet në bisedë, thjesht ngjiteni (Paste).",declineBtn:"Refuzo",resend:"Dërgo sërish konfirmimin",msgIn:"Mesazhi do të jetë në",confirmedToast:"U konfirmua, WhatsApp u hap me mesazhin",declinedToast:"U refuzua, ora u lirua",msgOk:"Përshëndetje {name}! Termini juaj në Barbershop Bingo është konfirmuar.\n\nData: {date}, ora {time}\nShërbimi: {service} te {barber}\nAdresa: Rr. Kerem Lewton, Prishtinë\n\nJu lutem ejani 5 minuta më herët. Për ndryshime: +383 44 907 755",msgNo:"Përshëndetje {name}, na vjen keq, termini {date}, ora {time} te {barber} nuk është më i lirë. Ju lutem zgjidhni një orë tjetër në faqen tonë ose na telefononi: +383 44 907 755. Barbershop Bingo",months:["janar","shkurt","mars","prill","maj","qershor","korrik","gusht","shtator","tetor","nëntor","dhjetor"],resetDemo:"Rivendos të dhënat demo",resetDone:"Të dhënat demo u rivendosën",
+    stL:"Statusi",stPending:"Në pritje",stConfirmed:"Konfirmuar",clientLang:"Gjuha e klientit",confirmBtn:"Konfirmo & dërgo në {app}",sendVia:"Dërgo mesazhin me",viberNote:"Me Viber mesazhi kopjohet edhe automatikisht. Nëse nuk shfaqet në bisedë, thjesht ngjiteni (Paste).",declineBtn:"Refuzo",resend:"Dërgo sërish konfirmimin",msgIn:"Mesazhi do të jetë në",confirmedToast:"Termini u konfirmua",askOkH:"Termini u konfirmua",askOkQ:"Dërgo konfirmimin edhe në WhatsApp te {name}?",askYesWa:"Po, dërgo në WhatsApp",askNoWa:"Jo",askNoH:"Refuzo terminin?",askNoWaBtn:"Refuzo dhe njofto në WhatsApp",askOnlyNo:"Vetëm refuzo",askCancel:"Anulo",declinedToast:"U refuzua, ora u lirua",msgOk:"Përshëndetje {name}! Termini juaj në Barbershop Bingo është konfirmuar.\n\nData: {date}, ora {time}\nShërbimi: {service} te {barber}\nAdresa: Rr. Kerem Lewton, Prishtinë\n\nJu lutem ejani 5 minuta më herët. Për ndryshime: +383 44 907 755",msgNo:"Përshëndetje {name}, na vjen keq, termini {date}, ora {time} te {barber} nuk është më i lirë. Ju lutem zgjidhni një orë tjetër në faqen tonë ose na telefononi: +383 44 907 755. Barbershop Bingo",months:["janar","shkurt","mars","prill","maj","qershor","korrik","gusht","shtator","tetor","nëntor","dhjetor"],resetDemo:"Rivendos të dhënat demo",resetDone:"Të dhënat demo u rivendosën",
     nNew:"Rezervim i ri online",nH:"Njoftimet",nEmpty:"Nuk ka njoftime ende.",nNow:"tani",nView:"Shiko",nBadge:"E RE",nInfo:"Barberi merr njoftim në telefon për çdo rezervim online."
   },
   en:{
@@ -609,7 +618,7 @@ const T = {
     saved:"Saved, that time now shows as busy online",deleted:"Booking deleted, the time is free again",
     del:"Delete booking",dClient:"Client",dSrc:"Source",
     walkinName:"Walk-in client",breakName:"Break",revEyebrow:"Reviews",revH:"What our clients say",revCount:"96 reviews on Google",revAll:"See all reviews",revVia:"Google review · 2 months ago",revTag1:"Professional barbers",revTag2:"Welcoming atmosphere",revTag3:"Clean cuts",revWrite:"Leave us a review on Google",revBadge:"96 Google reviews",nRev:"Reviews",popular:"Most popular",dayOffBtn:"Day off",offBanner:"Day off: no bookings accepted.",offUndo:"Cancel day off",offWarn:"Careful: there are {n} appointments on this day. Let the clients know or delete them.",offSet:"Marked as a day off",offRemoved:"Day off cancelled",custOff:"{b} isn't working on this day. Please pick another day.",offPick:"Pick a barber above to mark a day off.",waitH:"Waiting for confirmation",waitHint:"Confirm opens WhatsApp with the message ready for the client.",listH:"Appointments",noAppts:"No appointments for this day.",addAppt:"+ Add appointment",brkToggle:"Break (block this time)",callBtn:"Call",delBtn:"Delete",delSure:"Yes, delete",allB:"All",tomorrowL:"Tomorrow",formName:"Name (optional)",cancelF:"Cancel",okBtn:"Confirm",resendShort:"Send again on WhatsApp",takenErr:"That time was just taken. Please pick another.",netErr:"Couldn't connect. Check your internet and try again.",
-    stL:"Status",stPending:"Waiting",stConfirmed:"Confirmed",clientLang:"Client's language",confirmBtn:"Confirm & send on {app}",sendVia:"Send the message with",viberNote:"With Viber the message is also copied automatically. If it doesn't appear in the chat, just paste it.",declineBtn:"Decline",resend:"Send confirmation again",msgIn:"The message will be in",confirmedToast:"Confirmed, WhatsApp opened with the message",declinedToast:"Declined, the time is free again",msgOk:"Hi {name}! Your appointment at Barbershop Bingo is confirmed.\n\nDate: {date}, {time}\nService: {service} with {barber}\nAddress: Rr. Kerem Lewton, Prishtina\n\nPlease arrive 5 minutes early. To change it: +383 44 907 755",msgNo:"Hi {name}, sorry, the time {date}, {time} with {barber} is no longer available. Please pick another time on our website or call us: +383 44 907 755. Barbershop Bingo",months:["January","February","March","April","May","June","July","August","September","October","November","December"],resetDemo:"Reset demo data",resetDone:"Demo data reset",
+    stL:"Status",stPending:"Waiting",stConfirmed:"Confirmed",clientLang:"Client's language",confirmBtn:"Confirm & send on {app}",sendVia:"Send the message with",viberNote:"With Viber the message is also copied automatically. If it doesn't appear in the chat, just paste it.",declineBtn:"Decline",resend:"Send confirmation again",msgIn:"The message will be in",confirmedToast:"Appointment confirmed",askOkH:"Appointment confirmed",askOkQ:"Also send the confirmation to {name} on WhatsApp?",askYesWa:"Yes, send on WhatsApp",askNoWa:"No",askNoH:"Decline this appointment?",askNoWaBtn:"Decline and tell them on WhatsApp",askOnlyNo:"Just decline",askCancel:"Cancel",declinedToast:"Declined, the time is free again",msgOk:"Hi {name}! Your appointment at Barbershop Bingo is confirmed.\n\nDate: {date}, {time}\nService: {service} with {barber}\nAddress: Rr. Kerem Lewton, Prishtina\n\nPlease arrive 5 minutes early. To change it: +383 44 907 755",msgNo:"Hi {name}, sorry, the time {date}, {time} with {barber} is no longer available. Please pick another time on our website or call us: +383 44 907 755. Barbershop Bingo",months:["January","February","March","April","May","June","July","August","September","October","November","December"],resetDemo:"Reset demo data",resetDone:"Demo data reset",
     nNew:"New online booking",nH:"Notifications",nEmpty:"No notifications yet.",nNow:"now",nView:"View",nBadge:"NEW",nInfo:"The barber gets a phone notification for every online booking."
   },
   de:{
@@ -651,7 +660,7 @@ const T = {
     saved:"Gespeichert, die Zeit ist online jetzt belegt",deleted:"Termin gelöscht, die Zeit ist wieder frei",
     del:"Termin löschen",dClient:"Kunde",dSrc:"Quelle",
     walkinName:"Laufkunde",breakName:"Pause",revEyebrow:"Bewertungen",revH:"Das sagen unsere Kunden",revCount:"96 Bewertungen auf Google",revAll:"Alle Bewertungen ansehen",revVia:"Google-Bewertung · vor 2 Monaten",revTag1:"Professionelle Barber",revTag2:"Einladende Atmosphäre",revTag3:"Saubere Schnitte",revWrite:"Bewerte uns auf Google",revBadge:"96 Google-Bewertungen",nRev:"Bewertungen",popular:"Am beliebtesten",dayOffBtn:"Freier Tag",offBanner:"Freier Tag: keine Buchungen möglich.",offUndo:"Freien Tag aufheben",offWarn:"Achtung: An diesem Tag gibt es {n} Termine. Informiere die Kunden oder lösche sie.",offSet:"Als freier Tag markiert",offRemoved:"Freier Tag aufgehoben",custOff:"{b} arbeitet an diesem Tag nicht. Bitte wähle einen anderen Tag.",offPick:"Wähle oben einen Barber, um einen freien Tag einzutragen.",waitH:"Warten auf Bestätigung",waitHint:"Bestätigen öffnet WhatsApp mit der fertigen Nachricht für den Kunden.",listH:"Termine",noAppts:"Keine Termine an diesem Tag.",addAppt:"+ Termin eintragen",brkToggle:"Pause (Zeit blockieren)",callBtn:"Anrufen",delBtn:"Löschen",delSure:"Ja, löschen",allB:"Alle",tomorrowL:"Morgen",formName:"Name (optional)",cancelF:"Abbrechen",okBtn:"Bestätigen",resendShort:"Erneut per WhatsApp senden",takenErr:"Diese Zeit wurde gerade vergeben. Bitte wähle eine andere.",netErr:"Keine Verbindung. Bitte Internet prüfen und erneut versuchen.",
-    stL:"Status",stPending:"Wartet",stConfirmed:"Bestätigt",clientLang:"Sprache des Kunden",confirmBtn:"Bestätigen & per {app} senden",sendVia:"Nachricht senden über",viberNote:"Bei Viber wird die Nachricht auch automatisch kopiert. Falls sie nicht im Chat erscheint, einfach einfügen.",declineBtn:"Ablehnen",resend:"Bestätigung erneut senden",msgIn:"Die Nachricht ist auf",confirmedToast:"Bestätigt, WhatsApp mit der Nachricht geöffnet",declinedToast:"Abgelehnt, die Zeit ist wieder frei",msgOk:"Hallo {name}! Dein Termin bei Barbershop Bingo ist bestätigt.\n\nDatum: {date}, {time} Uhr\nLeistung: {service} bei {barber}\nAdresse: Rr. Kerem Lewton, Prishtina\n\nBitte 5 Minuten früher da sein. Für Änderungen: +383 44 907 755",msgNo:"Hallo {name}, leider ist der Termin {date}, {time} Uhr bei {barber} nicht mehr frei. Bitte wähle eine andere Zeit auf unserer Website oder ruf uns an: +383 44 907 755. Barbershop Bingo",months:["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],resetDemo:"Demo-Daten zurücksetzen",resetDone:"Demo-Daten zurückgesetzt",
+    stL:"Status",stPending:"Wartet",stConfirmed:"Bestätigt",clientLang:"Sprache des Kunden",confirmBtn:"Bestätigen & per {app} senden",sendVia:"Nachricht senden über",viberNote:"Bei Viber wird die Nachricht auch automatisch kopiert. Falls sie nicht im Chat erscheint, einfach einfügen.",declineBtn:"Ablehnen",resend:"Bestätigung erneut senden",msgIn:"Die Nachricht ist auf",confirmedToast:"Termin bestätigt",askOkH:"Termin bestätigt",askOkQ:"Bestätigung auch per WhatsApp an {name} senden?",askYesWa:"Ja, per WhatsApp senden",askNoWa:"Nein",askNoH:"Termin ablehnen?",askNoWaBtn:"Ablehnen und per WhatsApp informieren",askOnlyNo:"Nur ablehnen",askCancel:"Abbrechen",declinedToast:"Abgelehnt, die Zeit ist wieder frei",msgOk:"Hallo {name}! Dein Termin bei Barbershop Bingo ist bestätigt.\n\nDatum: {date}, {time} Uhr\nLeistung: {service} bei {barber}\nAdresse: Rr. Kerem Lewton, Prishtina\n\nBitte 5 Minuten früher da sein. Für Änderungen: +383 44 907 755",msgNo:"Hallo {name}, leider ist der Termin {date}, {time} Uhr bei {barber} nicht mehr frei. Bitte wähle eine andere Zeit auf unserer Website oder ruf uns an: +383 44 907 755. Barbershop Bingo",months:["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],resetDemo:"Demo-Daten zurücksetzen",resetDone:"Demo-Daten zurückgesetzt",
     nNew:"Neue Online-Buchung",nH:"Benachrichtigungen",nEmpty:"Noch keine Benachrichtigungen.",nNow:"jetzt",nView:"Ansehen",nBadge:"NEU",nInfo:"Der Barber bekommt für jede Online-Buchung eine Push-Nachricht aufs Handy."
   }
 };
@@ -959,13 +968,44 @@ function openWhatsApp(b,kind){
     window.__lastWa=url;
     const a=document.createElement('a');a.href=url;a.rel='noopener';document.body.appendChild(a);a.click();a.remove();
   }else{
-    const url='https://wa.me/'+num+'?text='+encodeURIComponent(text);
-    window.__lastWa=url; try{window.open(url,'_blank')}catch(e){}
+    const phone=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+    if(phone){   // straight into the WhatsApp app: the staff page stays as it is (no blank page when coming back)
+      const url='whatsapp://send?phone='+num+'&text='+encodeURIComponent(text);
+      window.__lastWa=url;location.href=url;
+    }else{
+      const url='https://wa.me/'+num+'?text='+encodeURIComponent(text);
+      window.__lastWa=url; try{window.open(url,'_blank','noopener')}catch(e){}
+    }
   }
 }
 
-function confirmBooking(id){const b=bookings.find(x=>x.id===id);if(!b)return;b.status='confirmed';markRead(id);persist();openWhatsApp(b,'ok');renderAdmin();toast(t('confirmedToast'))}
-function declineBooking(id){const b=bookings.find(x=>x.id===id);if(!b)return;openWhatsApp(b,'no');bookings=bookings.filter(x=>x.id!==id);persist();adm.view='grid';renderAdmin();toast(t('declinedToast'))}
+function doConfirm(id){const b=bookings.find(x=>x.id===id);if(!b)return;b.status='confirmed';markRead(id);persist();renderAdmin();toast(t('confirmedToast'))}
+function doDecline(id){bookings=bookings.filter(x=>x.id!==id);persist();adm.view='grid';renderAdmin();toast(t('declinedToast'))}
+/* Konfirmo: confirms right away, then asks about WhatsApp. Refuzo: asks first (with or without a WhatsApp message). */
+let askB=null;
+function askSheet(html){
+  let ov=document.getElementById('askOv');
+  if(!ov){ov=document.createElement('div');ov.id='askOv';ov.className='overlay';ov.onclick=e=>{if(e.target===ov)closeAsk()};ov.innerHTML='<div class="modal ask"></div>';document.body.appendChild(ov)}
+  ov.querySelector('.modal').innerHTML=html;ov.classList.add('show');
+}
+function closeAsk(){const ov=document.getElementById('askOv');if(ov)ov.classList.remove('show');askB=null}
+function askWho(b){return `<p class="ask-who"><b>${esc(b.name)}</b> · ${fmtDay(fromKey(b.day),{weekday:'short',day:'numeric',month:'short'})} · ${TIMES[b.slot]}</p>`}
+function confirmBooking(id){
+  const b=bookings.find(x=>x.id===id);if(!b)return;
+  askB={...b};doConfirm(id);
+  if(!askB.tel){askB=null;return}
+  askSheet(`<h3>${t('askOkH')}</h3>${askWho(askB)}<p class="ask-q">${t('askOkQ').replace('{name}',esc(askB.name.split(' ')[0]))}</p>
+    <div class="ask-btns"><button class="btn btn-ok" onclick="const b=askB;closeAsk();openWhatsApp(b,'ok')">${t('askYesWa')}</button>
+    <button class="btn btn-ghost" onclick="closeAsk()">${t('askNoWa')}</button></div>`);
+}
+function declineBooking(id){
+  const b=bookings.find(x=>x.id===id);if(!b)return;
+  askB={...b};
+  askSheet(`<h3>${t('askNoH')}</h3>${askWho(askB)}
+    <div class="ask-btns">${askB.tel?`<button class="btn btn-danger" onclick="const b=askB;closeAsk();doDecline(b.id);openWhatsApp(b,'no')">${t('askNoWaBtn')}</button>`:''}
+    <button class="btn btn-ghost" onclick="const b=askB;closeAsk();doDecline(b.id)">${t('askOnlyNo')}</button>
+    <button class="owner-link" onclick="closeAsk()">${t('askCancel')}</button></div>`);
+}
 
 /* ---------- staff panel ---------- */
 let adm={auth:false,user:null,pick:null,day:null,view:'grid',sel:null,f:{}};
@@ -1210,15 +1250,12 @@ if(API_URL){
     b.read=true;notifs.forEach(n=>{if(n.bid===id)n.read=true});
     api('/staff/bookings/'+id,{method:'PATCH',body:{read:1},staff:true}).catch(()=>{});
   };
-  confirmBooking=function(id){
+  doConfirm=function(id){
     const b=bookings.find(x=>x.id===id);if(!b)return;
-    openWhatsApp(b,'ok');                                 // open WhatsApp / Viber right away (inside the tap)
     b.status='confirmed';b.read=true;renderAdmin();
     api('/staff/bookings/'+id,{method:'PATCH',body:{status:'confirmed'},staff:true}).then(()=>toast(t('confirmedToast'))).catch(()=>toast(t('netErr'))).finally(loadStaff);
   };
-  declineBooking=function(id){
-    const b=bookings.find(x=>x.id===id);if(!b)return;
-    openWhatsApp(b,'no');
+  doDecline=function(id){
     bookings=bookings.filter(x=>x.id!==id);adm.view='grid';renderAdmin();
     api('/staff/bookings/'+id,{method:'DELETE',staff:true}).then(()=>toast(t('declinedToast'))).catch(()=>toast(t('netErr'))).finally(loadStaff);
   };
