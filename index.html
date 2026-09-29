@@ -306,6 +306,7 @@
   .staff-mode #ownerOv{position:static;display:flex;background:none;backdrop-filter:none;min-height:100vh;align-items:flex-start;padding:28px 16px}
   .staff-mode #ownerOv .modal{max-height:none;border-radius:20px}
   .staff-mode #ownerOv .x{display:none}
+  body.staff-mode{overflow:auto!important}
   .staff-top{display:none}
   .staff-mode .staff-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;color:var(--gold2)}
   @media(max-width:600px){.staff-mode #ownerOv{padding:0}.staff-mode #ownerOv .modal{border-radius:0;border:0;min-height:100vh}}
@@ -919,7 +920,8 @@ function openOwner(){
   if(!adm.day)adm.day=key(new Date());
   if(!adm.auth)adm.pick=null;
   adm.view='grid';
-  document.getElementById('ownerOv').classList.add('show');document.body.style.overflow='hidden';
+  document.getElementById('ownerOv').classList.add('show');
+  document.body.style.overflow=isStaff()?'':'hidden';   // the staff page must scroll normally
   renderAdmin();
 }
 function shiftDay(n){const d=fromKey(adm.day);d.setDate(d.getDate()+n);adm.day=key(d);renderAdmin()}
