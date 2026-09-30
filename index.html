@@ -184,6 +184,28 @@
   .phone-row select:focus{outline:none;border-color:var(--gold)}
   /* simple staff panel */
   .sp-top{display:flex;gap:10px;margin-bottom:14px}
+  .ppl{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+  .ppl>span{font-weight:600}
+  .ppl-seg{display:flex;gap:6px}
+  .ppl-seg button{width:46px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--text);font:600 17px Archivo,Verdana,sans-serif;cursor:pointer}
+  .ppl-seg button.on{border-color:var(--gold);background:#2b2512;color:var(--gold2)}
+  .modes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+  .mode{text-align:left;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:12px;padding:11px 12px;cursor:pointer;display:flex;flex-direction:column;gap:2px;font:inherit}
+  .mode b{font-size:14px}.mode small{color:var(--muted);font-size:12px}
+  .mode.sel{border-color:var(--gold);background:#2b2512}
+  .pchips{display:flex;gap:8px;margin-bottom:14px;overflow-x:auto}
+  .pchip{flex:1;min-width:0;text-align:left;border:1px dashed var(--line);background:none;color:var(--text);border-radius:12px;padding:8px 10px;cursor:pointer;font:inherit}
+  .pchip small{display:block;color:var(--muted);font-size:11px}
+  .pchip b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:12px;line-height:1.3}
+  .pchip.set{border-style:solid}
+  .pchip.on{border:1px solid var(--gold);background:#2b2512}
+  .summary .pline b{text-align:right}
+  .summary .pline span{white-space:nowrap}
+  .summary .ptotal{border-top:1px solid var(--line);padding-top:6px;margin-top:4px}
+  .gtag{font-style:normal;font-size:11px;font-weight:600;color:var(--gold2);background:#2b2512;border:1px solid rgba(201,162,39,.4);border-radius:999px;padding:2px 8px;white-space:nowrap}
+  .pinfo .gtag{margin-left:6px;vertical-align:middle}
+  .offday{font-size:13px;color:var(--muted);margin-top:-4px}
+  .legend[hidden]{display:none!important}
   #askOv{z-index:80}
   .modal.ask{max-width:420px;padding:26px 22px 22px;text-align:center}
   .modal.ask h3{font-size:21px;margin-bottom:6px}
@@ -579,8 +601,8 @@ const T = {
     save:"Ruaj",noTimes:"Nuk ka kohë të lirë për këtë berber në këtë ditë.",
     saved:"U ruajt, ora tani shfaqet e zënë online",deleted:"Rezervimi u fshi, ora u lirua",
     del:"Fshij rezervimin",dClient:"Klienti",dSrc:"Burimi",
-    walkinName:"Klient pa termin",breakName:"Pauzë",revEyebrow:"Vlerësime",revH:"Çfarë thonë klientët",revCount:"96 vlerësime në Google",revAll:"Shiko të gjitha vlerësimet",revVia:"Vlerësim në Google · 2 muaj më parë",revTag1:"Berberë profesionalë",revTag2:"Atmosferë mikpritëse",revTag3:"Prerje të pastra",revWrite:"Na lini një vlerësim në Google",revBadge:"96 vlerësime në Google",nRev:"Vlerësimet",popular:"Më e preferuara",dayOffBtn:"Ditë pushimi",offBanner:"Ditë pushimi: nuk pranohen rezervime.",offUndo:"Anulo pushimin",offWarn:"Kujdes: këtë ditë ka {n} termine. Njoftoni klientët ose fshijini.",offSet:"Dita u shënua si pushim",offRemoved:"Pushimi u anulua",custOff:"{b} nuk punon këtë ditë. Zgjidhni një ditë tjetër.",offPick:"Zgjidhni një berber më sipër për t'i shënuar ditë pushimi.",waitH:"Presin konfirmim",waitHint:"Konfirmo hap WhatsApp me mesazhin gati për klientin.",listH:"Terminet",noAppts:"Nuk ka termine për këtë ditë.",addAppt:"+ Shto termin",brkToggle:"Pauzë (bllokoje orën)",callBtn:"Thirr",delBtn:"Fshij",delSure:"Po, fshije",allB:"Të gjithë",tomorrowL:"Nesër",formName:"Emri (opsional)",cancelF:"Anulo",okBtn:"Konfirmo",resendShort:"Dërgo sërish në WhatsApp",takenErr:"Kjo orë sapo u zu. Ju lutem zgjidhni një tjetër.",netErr:"Nuk u lidh dot. Kontrolloni internetin dhe provoni sërish.",
-    stL:"Statusi",stPending:"Në pritje",stConfirmed:"Konfirmuar",clientLang:"Gjuha e klientit",confirmBtn:"Konfirmo & dërgo në {app}",sendVia:"Dërgo mesazhin me",viberNote:"Me Viber mesazhi kopjohet edhe automatikisht. Nëse nuk shfaqet në bisedë, thjesht ngjiteni (Paste).",declineBtn:"Refuzo",resend:"Dërgo sërish konfirmimin",msgIn:"Mesazhi do të jetë në",confirmedToast:"Termini u konfirmua",askOkH:"Konfirmo terminin?",askYesWa:"Konfirmo dhe dërgo në WhatsApp",askOnlyOk:"Vetëm konfirmo",askNoWa:"Jo",askNoH:"Refuzo terminin?",askNoWaBtn:"Refuzo dhe njofto në WhatsApp",askOnlyNo:"Vetëm refuzo",askCancel:"Anulo",declinedToast:"U refuzua, ora u lirua",msgOk:"Përshëndetje {name}! Termini juaj në Barbershop Bingo është konfirmuar.\n\nData: {date}, ora {time}\nShërbimi: {service} te {barber}\nAdresa: Rr. Kerem Lewton, Prishtinë\n\nJu lutem ejani 5 minuta më herët. Për ndryshime: +383 44 907 755",msgNo:"Përshëndetje {name}, na vjen keq, termini {date}, ora {time} te {barber} nuk është më i lirë. Ju lutem zgjidhni një orë tjetër në faqen tonë ose na telefononi: +383 44 907 755. Barbershop Bingo",months:["janar","shkurt","mars","prill","maj","qershor","korrik","gusht","shtator","tetor","nëntor","dhjetor"],resetDemo:"Rivendos të dhënat demo",resetDone:"Të dhënat demo u rivendosën",
+    walkinName:"Klient pa termin",breakName:"Pauzë",revEyebrow:"Vlerësime",revH:"Çfarë thonë klientët",revCount:"96 vlerësime në Google",revAll:"Shiko të gjitha vlerësimet",revVia:"Vlerësim në Google · 2 muaj më parë",revTag1:"Berberë profesionalë",revTag2:"Atmosferë mikpritëse",revTag3:"Prerje të pastra",revWrite:"Na lini një vlerësim në Google",revBadge:"96 vlerësime në Google",nRev:"Vlerësimet",popular:"Më e preferuara",dayOffBtn:"Ditë pushimi",offBanner:"Ditë pushimi: nuk pranohen rezervime.",offWeekly:"Pushim çdo javë ({d}): nuk pranohen rezervime.",offDayL:"Ditë pushimi: {d}",offUndo:"Anulo pushimin",offWarn:"Kujdes: këtë ditë ka {n} termine. Njoftoni klientët ose fshijini.",offSet:"Dita u shënua si pushim",offRemoved:"Pushimi u anulua",custOff:"{b} nuk punon këtë ditë. Zgjidhni një ditë tjetër.",offPick:"Zgjidhni një berber më sipër për t'i shënuar ditë pushimi.",waitH:"Presin konfirmim",waitHint:"Konfirmo hap WhatsApp me mesazhin gati për klientin.",listH:"Terminet",noAppts:"Nuk ka termine për këtë ditë.",addAppt:"+ Shto termin",brkToggle:"Pauzë (bllokoje orën)",callBtn:"Thirr",delBtn:"Fshij",delSure:"Po, fshije",allB:"Të gjithë",tomorrowL:"Nesër",formName:"Emri (opsional)",cancelF:"Anulo",okBtn:"Konfirmo",resendShort:"Dërgo sërish në WhatsApp",takenErr:"Kjo orë sapo u zu. Ju lutem zgjidhni një tjetër.",netErr:"Nuk u lidh dot. Kontrolloni internetin dhe provoni sërish.",
+    stL:"Statusi",stPending:"Në pritje",stConfirmed:"Konfirmuar",clientLang:"Gjuha e klientit",confirmBtn:"Konfirmo & dërgo në {app}",sendVia:"Dërgo mesazhin me",viberNote:"Me Viber mesazhi kopjohet edhe automatikisht. Nëse nuk shfaqet në bisedë, thjesht ngjiteni (Paste).",declineBtn:"Refuzo",resend:"Dërgo sërish konfirmimin",msgIn:"Mesazhi do të jetë në",confirmedToast:"Termini u konfirmua",askOkH:"Konfirmo terminin?",askYesWa:"Konfirmo dhe dërgo në WhatsApp",askOnlyOk:"Vetëm konfirmo",askNoWa:"Jo",askNoH:"Refuzo terminin?",askNoWaBtn:"Refuzo dhe njofto në WhatsApp",askOnlyNo:"Vetëm refuzo",askCancel:"Anulo",declinedToast:"U refuzua, ora u lirua",msgOk:"Përshëndetje {name}! Termini juaj në Barbershop Bingo është konfirmuar.\n\nData: {date}, ora {time}\nShërbimi: {service} te {barber}\nAdresa: Rr. Kerem Lewton, Prishtinë\n\nJu lutem ejani 5 minuta më herët. Për ndryshime: +383 44 907 755",msgNo:"Përshëndetje {name}, na vjen keq, termini {date}, ora {time} te {barber} nuk është më i lirë. Ju lutem zgjidhni një orë tjetër në faqen tonë ose na telefononi: +383 44 907 755. Barbershop Bingo",msgOkG:"Përshëndetje {name}! Terminet tuaja në Barbershop Bingo janë konfirmuar ({n} persona).\n\nData: {date}\n{lines}\nAdresa: Rr. Kerem Lewton, Prishtinë\n\nJu lutem ejani 5 minuta më herët. Për ndryshime: +383 44 907 755",msgNoG:"Përshëndetje {name}, na vjen keq, terminet për {n} persona më {date} ({times}) nuk janë më të lira. Ju lutem zgjidhni një orë tjetër në faqen tonë ose na telefononi: +383 44 907 755. Barbershop Bingo",pplQ:"Sa persona?",modeTog:"Në të njëjtën kohë",modeTogS:"Te berberë të ndryshëm",modeSeq:"Njëri pas tjetrit",modeSeqS:"Te i njëjti berber",person:"Personi {n}",svcFor:"Shërbimi për personin {n}",s2Tog:"Zgjidhni berberin për personin 1",s2TogS:"Të tjerët caktohen automatikisht te berberët e lirë.",custFew:"Këtë ditë nuk ka mjaft berberë për {n} persona në të njëjtën kohë. Zgjidhni një ditë tjetër ose \"Njëri pas tjetrit\".",sumTotal:"Gjithsej",grpTag:"Grup · {n} persona",grpShort:"Grup {i}/{n}",months:["janar","shkurt","mars","prill","maj","qershor","korrik","gusht","shtator","tetor","nëntor","dhjetor"],resetDemo:"Rivendos të dhënat demo",resetDone:"Të dhënat demo u rivendosën",
     nNew:"Rezervim i ri online",nH:"Njoftimet",nEmpty:"Nuk ka njoftime ende.",nNow:"tani",nView:"Shiko",nBadge:"E RE",nInfo:"Barberi merr njoftim në telefon për çdo rezervim online."
   },
   en:{
@@ -621,8 +643,8 @@ const T = {
     save:"Save",noTimes:"No free time for this barber on this day.",
     saved:"Saved, that time now shows as busy online",deleted:"Booking deleted, the time is free again",
     del:"Delete booking",dClient:"Client",dSrc:"Source",
-    walkinName:"Walk-in client",breakName:"Break",revEyebrow:"Reviews",revH:"What our clients say",revCount:"96 reviews on Google",revAll:"See all reviews",revVia:"Google review · 2 months ago",revTag1:"Professional barbers",revTag2:"Welcoming atmosphere",revTag3:"Clean cuts",revWrite:"Leave us a review on Google",revBadge:"96 Google reviews",nRev:"Reviews",popular:"Most popular",dayOffBtn:"Day off",offBanner:"Day off: no bookings accepted.",offUndo:"Cancel day off",offWarn:"Careful: there are {n} appointments on this day. Let the clients know or delete them.",offSet:"Marked as a day off",offRemoved:"Day off cancelled",custOff:"{b} isn't working on this day. Please pick another day.",offPick:"Pick a barber above to mark a day off.",waitH:"Waiting for confirmation",waitHint:"Confirm opens WhatsApp with the message ready for the client.",listH:"Appointments",noAppts:"No appointments for this day.",addAppt:"+ Add appointment",brkToggle:"Break (block this time)",callBtn:"Call",delBtn:"Delete",delSure:"Yes, delete",allB:"All",tomorrowL:"Tomorrow",formName:"Name (optional)",cancelF:"Cancel",okBtn:"Confirm",resendShort:"Send again on WhatsApp",takenErr:"That time was just taken. Please pick another.",netErr:"Couldn't connect. Check your internet and try again.",
-    stL:"Status",stPending:"Waiting",stConfirmed:"Confirmed",clientLang:"Client's language",confirmBtn:"Confirm & send on {app}",sendVia:"Send the message with",viberNote:"With Viber the message is also copied automatically. If it doesn't appear in the chat, just paste it.",declineBtn:"Decline",resend:"Send confirmation again",msgIn:"The message will be in",confirmedToast:"Appointment confirmed",askOkH:"Confirm this appointment?",askYesWa:"Confirm and send on WhatsApp",askOnlyOk:"Just confirm",askNoWa:"No",askNoH:"Decline this appointment?",askNoWaBtn:"Decline and tell them on WhatsApp",askOnlyNo:"Just decline",askCancel:"Cancel",declinedToast:"Declined, the time is free again",msgOk:"Hi {name}! Your appointment at Barbershop Bingo is confirmed.\n\nDate: {date}, {time}\nService: {service} with {barber}\nAddress: Rr. Kerem Lewton, Prishtina\n\nPlease arrive 5 minutes early. To change it: +383 44 907 755",msgNo:"Hi {name}, sorry, the time {date}, {time} with {barber} is no longer available. Please pick another time on our website or call us: +383 44 907 755. Barbershop Bingo",months:["January","February","March","April","May","June","July","August","September","October","November","December"],resetDemo:"Reset demo data",resetDone:"Demo data reset",
+    walkinName:"Walk-in client",breakName:"Break",revEyebrow:"Reviews",revH:"What our clients say",revCount:"96 reviews on Google",revAll:"See all reviews",revVia:"Google review · 2 months ago",revTag1:"Professional barbers",revTag2:"Welcoming atmosphere",revTag3:"Clean cuts",revWrite:"Leave us a review on Google",revBadge:"96 Google reviews",nRev:"Reviews",popular:"Most popular",dayOffBtn:"Day off",offBanner:"Day off: no bookings accepted.",offWeekly:"Weekly day off ({d}): no bookings accepted.",offDayL:"Day off: {d}",offUndo:"Cancel day off",offWarn:"Careful: there are {n} appointments on this day. Let the clients know or delete them.",offSet:"Marked as a day off",offRemoved:"Day off cancelled",custOff:"{b} isn't working on this day. Please pick another day.",offPick:"Pick a barber above to mark a day off.",waitH:"Waiting for confirmation",waitHint:"Confirm opens WhatsApp with the message ready for the client.",listH:"Appointments",noAppts:"No appointments for this day.",addAppt:"+ Add appointment",brkToggle:"Break (block this time)",callBtn:"Call",delBtn:"Delete",delSure:"Yes, delete",allB:"All",tomorrowL:"Tomorrow",formName:"Name (optional)",cancelF:"Cancel",okBtn:"Confirm",resendShort:"Send again on WhatsApp",takenErr:"That time was just taken. Please pick another.",netErr:"Couldn't connect. Check your internet and try again.",
+    stL:"Status",stPending:"Waiting",stConfirmed:"Confirmed",clientLang:"Client's language",confirmBtn:"Confirm & send on {app}",sendVia:"Send the message with",viberNote:"With Viber the message is also copied automatically. If it doesn't appear in the chat, just paste it.",declineBtn:"Decline",resend:"Send confirmation again",msgIn:"The message will be in",confirmedToast:"Appointment confirmed",askOkH:"Confirm this appointment?",askYesWa:"Confirm and send on WhatsApp",askOnlyOk:"Just confirm",askNoWa:"No",askNoH:"Decline this appointment?",askNoWaBtn:"Decline and tell them on WhatsApp",askOnlyNo:"Just decline",askCancel:"Cancel",declinedToast:"Declined, the time is free again",msgOk:"Hi {name}! Your appointment at Barbershop Bingo is confirmed.\n\nDate: {date}, {time}\nService: {service} with {barber}\nAddress: Rr. Kerem Lewton, Prishtina\n\nPlease arrive 5 minutes early. To change it: +383 44 907 755",msgNo:"Hi {name}, sorry, the time {date}, {time} with {barber} is no longer available. Please pick another time on our website or call us: +383 44 907 755. Barbershop Bingo",msgOkG:"Hi {name}! Your appointments at Barbershop Bingo are confirmed ({n} people).\n\nDate: {date}\n{lines}\nAddress: Rr. Kerem Lewton, Prishtina\n\nPlease arrive 5 minutes early. To change it: +383 44 907 755",msgNoG:"Hi {name}, sorry, the times for {n} people on {date} ({times}) are no longer available. Please pick another time on our website or call us: +383 44 907 755. Barbershop Bingo",pplQ:"How many people?",modeTog:"At the same time",modeTogS:"With different barbers",modeSeq:"One after another",modeSeqS:"With the same barber",person:"Person {n}",svcFor:"Service for person {n}",s2Tog:"Choose the barber for person 1",s2TogS:"The others get the free barbers automatically.",custFew:"Not enough barbers this day for {n} people at the same time. Pick another day or \"One after another\".",sumTotal:"Total",grpTag:"Group · {n} people",grpShort:"Group {i}/{n}",months:["January","February","March","April","May","June","July","August","September","October","November","December"],resetDemo:"Reset demo data",resetDone:"Demo data reset",
     nNew:"New online booking",nH:"Notifications",nEmpty:"No notifications yet.",nNow:"now",nView:"View",nBadge:"NEW",nInfo:"The barber gets a phone notification for every online booking."
   },
   de:{
@@ -663,8 +685,8 @@ const T = {
     save:"Speichern",noTimes:"Keine freie Zeit für diesen Barber an diesem Tag.",
     saved:"Gespeichert, die Zeit ist online jetzt belegt",deleted:"Termin gelöscht, die Zeit ist wieder frei",
     del:"Termin löschen",dClient:"Kunde",dSrc:"Quelle",
-    walkinName:"Laufkunde",breakName:"Pause",revEyebrow:"Bewertungen",revH:"Das sagen unsere Kunden",revCount:"96 Bewertungen auf Google",revAll:"Alle Bewertungen ansehen",revVia:"Google-Bewertung · vor 2 Monaten",revTag1:"Professionelle Barber",revTag2:"Einladende Atmosphäre",revTag3:"Saubere Schnitte",revWrite:"Bewerte uns auf Google",revBadge:"96 Google-Bewertungen",nRev:"Bewertungen",popular:"Am beliebtesten",dayOffBtn:"Freier Tag",offBanner:"Freier Tag: keine Buchungen möglich.",offUndo:"Freien Tag aufheben",offWarn:"Achtung: An diesem Tag gibt es {n} Termine. Informiere die Kunden oder lösche sie.",offSet:"Als freier Tag markiert",offRemoved:"Freier Tag aufgehoben",custOff:"{b} arbeitet an diesem Tag nicht. Bitte wähle einen anderen Tag.",offPick:"Wähle oben einen Barber, um einen freien Tag einzutragen.",waitH:"Warten auf Bestätigung",waitHint:"Bestätigen öffnet WhatsApp mit der fertigen Nachricht für den Kunden.",listH:"Termine",noAppts:"Keine Termine an diesem Tag.",addAppt:"+ Termin eintragen",brkToggle:"Pause (Zeit blockieren)",callBtn:"Anrufen",delBtn:"Löschen",delSure:"Ja, löschen",allB:"Alle",tomorrowL:"Morgen",formName:"Name (optional)",cancelF:"Abbrechen",okBtn:"Bestätigen",resendShort:"Erneut per WhatsApp senden",takenErr:"Diese Zeit wurde gerade vergeben. Bitte wähle eine andere.",netErr:"Keine Verbindung. Bitte Internet prüfen und erneut versuchen.",
-    stL:"Status",stPending:"Wartet",stConfirmed:"Bestätigt",clientLang:"Sprache des Kunden",confirmBtn:"Bestätigen & per {app} senden",sendVia:"Nachricht senden über",viberNote:"Bei Viber wird die Nachricht auch automatisch kopiert. Falls sie nicht im Chat erscheint, einfach einfügen.",declineBtn:"Ablehnen",resend:"Bestätigung erneut senden",msgIn:"Die Nachricht ist auf",confirmedToast:"Termin bestätigt",askOkH:"Termin bestätigen?",askYesWa:"Bestätigen und per WhatsApp senden",askOnlyOk:"Nur bestätigen",askNoWa:"Nein",askNoH:"Termin ablehnen?",askNoWaBtn:"Ablehnen und per WhatsApp informieren",askOnlyNo:"Nur ablehnen",askCancel:"Abbrechen",declinedToast:"Abgelehnt, die Zeit ist wieder frei",msgOk:"Hallo {name}! Dein Termin bei Barbershop Bingo ist bestätigt.\n\nDatum: {date}, {time} Uhr\nLeistung: {service} bei {barber}\nAdresse: Rr. Kerem Lewton, Prishtina\n\nBitte 5 Minuten früher da sein. Für Änderungen: +383 44 907 755",msgNo:"Hallo {name}, leider ist der Termin {date}, {time} Uhr bei {barber} nicht mehr frei. Bitte wähle eine andere Zeit auf unserer Website oder ruf uns an: +383 44 907 755. Barbershop Bingo",months:["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],resetDemo:"Demo-Daten zurücksetzen",resetDone:"Demo-Daten zurückgesetzt",
+    walkinName:"Laufkunde",breakName:"Pause",revEyebrow:"Bewertungen",revH:"Das sagen unsere Kunden",revCount:"96 Bewertungen auf Google",revAll:"Alle Bewertungen ansehen",revVia:"Google-Bewertung · vor 2 Monaten",revTag1:"Professionelle Barber",revTag2:"Einladende Atmosphäre",revTag3:"Saubere Schnitte",revWrite:"Bewerte uns auf Google",revBadge:"96 Google-Bewertungen",nRev:"Bewertungen",popular:"Am beliebtesten",dayOffBtn:"Freier Tag",offBanner:"Freier Tag: keine Buchungen möglich.",offWeekly:"Wöchentlicher freier Tag ({d}): keine Buchungen möglich.",offDayL:"Freier Tag: {d}",offUndo:"Freien Tag aufheben",offWarn:"Achtung: An diesem Tag gibt es {n} Termine. Informiere die Kunden oder lösche sie.",offSet:"Als freier Tag markiert",offRemoved:"Freier Tag aufgehoben",custOff:"{b} arbeitet an diesem Tag nicht. Bitte wähle einen anderen Tag.",offPick:"Wähle oben einen Barber, um einen freien Tag einzutragen.",waitH:"Warten auf Bestätigung",waitHint:"Bestätigen öffnet WhatsApp mit der fertigen Nachricht für den Kunden.",listH:"Termine",noAppts:"Keine Termine an diesem Tag.",addAppt:"+ Termin eintragen",brkToggle:"Pause (Zeit blockieren)",callBtn:"Anrufen",delBtn:"Löschen",delSure:"Ja, löschen",allB:"Alle",tomorrowL:"Morgen",formName:"Name (optional)",cancelF:"Abbrechen",okBtn:"Bestätigen",resendShort:"Erneut per WhatsApp senden",takenErr:"Diese Zeit wurde gerade vergeben. Bitte wähle eine andere.",netErr:"Keine Verbindung. Bitte Internet prüfen und erneut versuchen.",
+    stL:"Status",stPending:"Wartet",stConfirmed:"Bestätigt",clientLang:"Sprache des Kunden",confirmBtn:"Bestätigen & per {app} senden",sendVia:"Nachricht senden über",viberNote:"Bei Viber wird die Nachricht auch automatisch kopiert. Falls sie nicht im Chat erscheint, einfach einfügen.",declineBtn:"Ablehnen",resend:"Bestätigung erneut senden",msgIn:"Die Nachricht ist auf",confirmedToast:"Termin bestätigt",askOkH:"Termin bestätigen?",askYesWa:"Bestätigen und per WhatsApp senden",askOnlyOk:"Nur bestätigen",askNoWa:"Nein",askNoH:"Termin ablehnen?",askNoWaBtn:"Ablehnen und per WhatsApp informieren",askOnlyNo:"Nur ablehnen",askCancel:"Abbrechen",declinedToast:"Abgelehnt, die Zeit ist wieder frei",msgOk:"Hallo {name}! Dein Termin bei Barbershop Bingo ist bestätigt.\n\nDatum: {date}, {time} Uhr\nLeistung: {service} bei {barber}\nAdresse: Rr. Kerem Lewton, Prishtina\n\nBitte 5 Minuten früher da sein. Für Änderungen: +383 44 907 755",msgNo:"Hallo {name}, leider ist der Termin {date}, {time} Uhr bei {barber} nicht mehr frei. Bitte wähle eine andere Zeit auf unserer Website oder ruf uns an: +383 44 907 755. Barbershop Bingo",msgOkG:"Hallo {name}! Eure Termine bei Barbershop Bingo sind bestätigt ({n} Personen).\n\nDatum: {date}\n{lines}\nAdresse: Rr. Kerem Lewton, Prishtina\n\nBitte 5 Minuten früher da sein. Für Änderungen: +383 44 907 755",msgNoG:"Hallo {name}, leider sind die Termine für {n} Personen am {date} ({times}) nicht mehr frei. Bitte wähle eine andere Zeit auf unserer Website oder ruf uns an: +383 44 907 755. Barbershop Bingo",pplQ:"Wie viele Personen?",modeTog:"Gleichzeitig",modeTogS:"Bei verschiedenen Barbern",modeSeq:"Nacheinander",modeSeqS:"Beim selben Barber",person:"Person {n}",svcFor:"Leistung für Person {n}",s2Tog:"Barber für Person 1 wählen",s2TogS:"Die anderen bekommen automatisch freie Barber.",custFew:"An diesem Tag gibt es nicht genug Barber für {n} Personen gleichzeitig. Wähle einen anderen Tag oder \"Nacheinander\".",sumTotal:"Gesamt",grpTag:"Gruppe · {n} Personen",grpShort:"Gruppe {i}/{n}",months:["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],resetDemo:"Demo-Daten zurücksetzen",resetDone:"Demo-Daten zurückgesetzt",
     nNew:"Neue Online-Buchung",nH:"Benachrichtigungen",nEmpty:"Noch keine Benachrichtigungen.",nNow:"jetzt",nView:"Ansehen",nBadge:"NEU",nInfo:"Der Barber bekommt für jede Online-Buchung eine Push-Nachricht aufs Handy."
   }
 };
@@ -673,10 +695,13 @@ const LANG_NAME={sq:"Shqip",en:"English",de:"Deutsch"};
 // sample price (€) & duration (min)
 // [price €, minutes, normal price € (packages only)]
 const SVC=[[6,30],[3,15],[2,10],[5,15],[5,15],[10,30],[8,45,9],[28,120,31]];
-const BARBERS=[{n:"Albini",i:"A"},{n:"Redoni",i:"R"},{n:"Lorisi",i:"L"}];
+// wd = weekly day off (0 Sunday … 6 Saturday): Albini Saturdays, Redoni Mondays, Lorisi Wednesdays (same list in api.php)
+const BARBERS=[{n:"Albini",i:"A",wd:6},{n:"Redoni",i:"R",wd:1},{n:"Lorisi",i:"L",wd:3}];
 // 30-minute slots, 10:00 – 20:30 start (closes 21:00)
 const TIMES=[];for(let m=600;m<=1230;m+=30)TIMES.push(String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0'));
-const slotsLen=svc=>Math.ceil(SVC[svc][1]/30);
+// Prerja + Rregullimi counts as one half-hour appointment: booked at 10:00, the next client can come at 10:30 (same in api.php)
+const SLOT_LEN={6:1};
+const slotsLen=svc=>SLOT_LEN[svc]??Math.ceil(SVC[svc][1]/30);
 const priceHTML=i=>SVC[i][2]?`€${SVC[i][0]} <s>€${SVC[i][2]}</s>`:`€${SVC[i][0]}`;
 const saveHTML=i=>'';
 const SVC_ORDER=[6,0,1,2,3,4,5,7];   // order shown to clients; 6 = Prerja + Rregullimi (most popular)
@@ -694,7 +719,9 @@ let bookings=[];let nextId=1;
 function key(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 function fromKey(k){return new Date(k+'T00:00')}
 function dayList(n=14){const a=[];const b=new Date();b.setHours(0,0,0,0);for(let i=0;i<n;i++){const d=new Date(b);d.setDate(b.getDate()+i);a.push(d)}return a}
-function isOff(barber,day){return bookings.some(b=>b.barber===barber&&b.day===day&&b.src==='off')}
+function weeklyOff(barber,day){return BARBERS[barber]&&fromKey(day).getDay()===BARBERS[barber].wd}
+function isOff(barber,day){return weeklyOff(barber,day)||bookings.some(b=>b.barber===barber&&b.day===day&&b.src==='off')}
+const offDayName=barber=>t('days')[(BARBERS[barber].wd+6)%7];
 function setDayOff(barber,day,on){   // offline demo version (shared-database version below)
   bookings=bookings.filter(b=>!(b.barber===barber&&b.day===day&&b.src==='off'));
   if(on)bookings.push({id:nextId++,barber,day,slot:0,len:TIMES.length,svc:null,name:'',tel:'',notes:'',src:'off',status:'confirmed'});
@@ -704,6 +731,7 @@ function covering(barber,day,idx){return bookings.find(b=>b.barber===barber&&b.d
 function isPast(day,idx){const d=fromKey(day);const [h,m]=TIMES[idx].split(':');d.setHours(+h,+m);return d<=new Date()}
 function canFit(barber,day,idx,len,checkPast=true){
   if(idx+len>TIMES.length)return false;
+  if(weeklyOff(barber,day))return false;
   if(checkPast&&isPast(day,idx))return false;
   for(let i=idx;i<idx+len;i++)if(covering(barber,day,i))return false;
   return true;
@@ -748,7 +776,7 @@ function renderTeam(){
   document.getElementById('teamGrid').innerHTML=BARBERS.map((b,i)=>`
     <div class="svc" style="align-items:center;text-align:center">
       <div class="avatar" style="width:84px;height:84px;font-size:30px;margin-bottom:6px">${b.i}</div>
-      <h3>${b.n}</h3><span class="dur">Barber</span>
+      <h3>${b.n}</h3><span class="dur">Barber</span><span class="offday">${t('offDayL').replace('{d}',offDayName(i))}</span>
       <button style="align-self:center" onclick="openBook({barber:${i}})">${t('bookWith')} ${b.n} →</button></div>`).join('');
 }
 function renderHours(){
@@ -809,18 +837,46 @@ function fullPhone(){
 }
 
 function openBook(pre={}){
-  st={step:0,svc:null,barber:null,day:null,time:null,name:"",tel:"",cc:"+383",notes:"",done:false,skipBarber:false};
-  if(pre.svc!==undefined){st.svc=pre.svc;st.step=1}
+  st={step:0,people:1,svcs:[null],cur:0,mode:'together',barber:null,day:null,time:null,name:"",tel:"",cc:"+383",notes:"",done:false,skipBarber:false};
+  if(pre.svc!==undefined)st.svcs=[pre.svc];   // stays on the first step so a group can still be chosen
   if(pre.barber!==undefined){st.barber=pre.barber;st.skipBarber=true}
   document.getElementById('bookOv').classList.add('show');document.body.style.overflow='hidden';
   renderStep();
 }
-function customerSlots(day){
-  const len=slotsLen(st.svc);
-  return TIMES.map((time,idx)=>{
-    const ok=st.barber===-1?BARBERS.some((_,b)=>canFit(b,day,idx,len)):canFit(st.barber,day,idx,len);
-    return {time,idx,taken:!ok};
-  });
+function customerSlots(day){return TIMES.map((time,idx)=>({time,idx,taken:!groupPlan(day,idx)}))}
+/* who sits where at a chosen time, for 1–3 people: [{barber,slot,svc}] or null (same rules in api.php)
+   together: same time, different barbers · seq: one after another with the same barber */
+const PERMS=[[0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]];
+function groupPlan(day,idx){
+  const svcs=st.svcs,lens=svcs.map(slotsLen);
+  if(svcs.length===1||st.mode==='seq'){
+    const total=lens.reduce((a,c)=>a+c,0);
+    const cands=st.barber>=0?[st.barber]:BARBERS.map((_,i)=>i);
+    for(const b of cands)if(canFit(b,day,idx,total)){let at=idx;return svcs.map((svc,k)=>{const r={barber:b,slot:at,svc};at+=lens[k];return r})}
+    return null;
+  }
+  for(const p of PERMS){
+    if(st.barber>=0&&p[0]!==st.barber)continue;
+    if(svcs.every((svc,k)=>canFit(p[k],day,idx,lens[k])))return svcs.map((svc,k)=>({barber:p[k],slot:idx,svc}));
+  }
+  return null;
+}
+function dayClosed(k){   // no times possible at all on this day for this booking
+  if(st.people>1&&st.mode==='together'){
+    if(st.barber>=0&&isOff(st.barber,k))return true;
+    return BARBERS.filter((_,b)=>!isOff(b,k)).length<st.people;
+  }
+  return st.barber===-1?BARBERS.every((_,b)=>isOff(b,k)):isOff(st.barber,k);
+}
+function setPeople(k){
+  const a=st.svcs.slice(0,k);while(a.length<k)a.push(null);
+  st.people=k;st.svcs=a;st.cur=Math.max(0,a.findIndex(v=>v===null));st.time=null;renderStep();
+}
+function pickSvc(i){
+  st.svcs[st.cur]=i;st.time=null;
+  const nxt=st.svcs.findIndex(v=>v===null);
+  if(nxt>=0){st.cur=nxt;renderStep();const m=document.querySelector('#bookOv .modal');if(m)m.scrollTop=0;return}
+  renderStep();clearTimeout(pick.h);pick.h=setTimeout(()=>go(1),220);
 }
 function pick(field,val){
   st[field]=val;st.time=null;renderStep();
@@ -833,23 +889,28 @@ function renderStep(){
   foot.style.display=st.done?'none':'flex';
   back.style.visibility=st.step===0?'hidden':'visible';
   next.textContent=st.step===3?t('confirm'):t('next');
-  next.style.visibility=st.step<2?'hidden':'visible';
+  next.style.visibility=(st.step===1||(st.step===0&&!st.svcs.every(v=>v!==null)))?'hidden':'visible';
   if(st.done){
-    const b=st.done;
+    const rows=[].concat(st.done),b=rows[0];
     body.innerHTML=`<div class="done"><div class="check">✓</div><h3 class="serif" style="font-size:26px">${t('doneH')}</h3>
-      <p>${t('svcs')[b.svc][0]} · ${BARBERS[b.barber].n}<br>${fmtDay(fromKey(b.day),{weekday:'long',day:'numeric',month:'long'})} · ${TIMES[b.slot]}</p>
+      <p>${fmtDay(fromKey(b.day),{weekday:'long',day:'numeric',month:'long'})}<br>${rows.map(r=>`${TIMES[r.slot]} · ${t('svcs')[r.svc][0]} · ${BARBERS[r.barber].n}`).join('<br>')}</p>
       <p>${t('doneP')}</p><p style="font-size:13px">${t('cancelInfo')}</p>
       <button class="btn btn-gold" style="margin-top:14px" onclick="closeAll()">${t('doneBtn')}</button></div>`;
     return;
   }
   if(st.step===0){
-    body.innerHTML=`<div class="step-title">${t('s1')}</div><div class="tiles">`+SVC_ORDER.map(i=>[t('svcs')[i],i]).map(([s,i])=>`
-      <button class="tile ${st.svc===i?'sel':''} ${SVC[i][2]?'deal':''} ${i===STAR?'star':''}" onclick="pick('svc',${i})">${i===STAR?`<span class="star-badge">★<span class="lbl"> ${t('popular')}</span></span>`:''}<b>${s[0]}</b>${saveHTML(i)}<small>${durTxt(i)}</small><span>${priceHTML(i)}</span></button>`).join('')+`</div>`;
-    next.disabled=st.svc===null;
+    const n=st.people;
+    body.innerHTML=`<div class="ppl"><span>${t('pplQ')}</span><div class="ppl-seg">${[1,2,3].map(k=>`<button class="${n===k?'on':''}" onclick="setPeople(${k})" aria-label="${k}">${k}</button>`).join('')}</div></div>
+      ${n>1?`<div class="modes">${['together','seq'].map(m=>`<button class="mode ${st.mode===m?'sel':''}" onclick="st.mode='${m}';st.time=null;renderStep()"><b>${t(m==='together'?'modeTog':'modeSeq')}</b><small>${t(m==='together'?'modeTogS':'modeSeqS')}</small></button>`).join('')}</div>
+      <div class="pchips">${st.svcs.map((v,k)=>`<button class="pchip ${k===st.cur?'on':''} ${v!==null?'set':''}" onclick="st.cur=${k};renderStep()"><small>${t('person').replace('{n}',k+1)}</small><b>${v===null?'—':t('svcs')[v][0]}</b></button>`).join('')}</div>`:''}
+      <div class="step-title">${n>1?t('svcFor').replace('{n}',st.cur+1):t('s1')}</div><div class="tiles">`+SVC_ORDER.map(i=>[t('svcs')[i],i]).map(([s,i])=>`
+      <button class="tile ${st.svcs[st.cur]===i?'sel':''} ${SVC[i][2]?'deal':''} ${i===STAR?'star':''}" onclick="pickSvc(${i})">${i===STAR?`<span class="star-badge">★<span class="lbl"> ${t('popular')}</span></span>`:''}<b>${s[0]}</b>${saveHTML(i)}<small>${durTxt(i)}</small><span>${priceHTML(i)}</span></button>`).join('')+`</div>`;
+    next.disabled=!st.svcs.every(v=>v!==null);
   }
   if(st.step===1){
     const opts=[{i:-1,n:t('any'),s:t('anySub'),a:'★'}].concat(BARBERS.map((b,i)=>({i,n:b.n,s:'Barber',a:b.i})));
-    body.innerHTML=`<div class="step-title">${t('s2')}</div><div class="opts">`+opts.map(o=>`
+    const tog=st.people>1&&st.mode==='together';
+    body.innerHTML=`<div class="step-title">${tog?t('s2Tog'):t('s2')}</div>${tog?`<p class="note" style="margin:-6px 0 12px">${t('s2TogS')}</p>`:''}<div class="opts">`+opts.map(o=>`
       <button class="opt ${st.barber===o.i?'sel':''}" onclick="pick('barber',${o.i})"><div class="l"><div class="avatar">${o.a}</div><div><b>${o.n}</b><br><small>${o.s}</small></div></div></button>`).join('')+`</div>`;
     next.disabled=st.barber===null;
   }
@@ -857,20 +918,24 @@ function renderStep(){
     const days=dayList();if(!st.day)st.day=key(days[0]);
     const slots=customerSlots(st.day);
     body.innerHTML=`<div class="step-title">${t('s3')}</div>
-      <div class="days">`+days.map((d,i)=>`<button class="day ${key(d)===st.day?'sel':''} ${(st.barber===-1?BARBERS.every((_,b)=>isOff(b,key(d))):isOff(st.barber,key(d)))?'off':''}" onclick="st.day='${key(d)}';st.time=null;renderStep()"><small>${i===0?t('today'):fmtDay(d,{weekday:'short'})}</small><b>${d.getDate()}</b><small>${fmtDay(d,{month:'short'})}</small></button>`).join('')+`</div>
-      ${st.barber>=0&&isOff(st.barber,st.day)?`<p class="note off-note">${t('custOff').replace('{b}',BARBERS[st.barber].n)}</p>`:slots.every(s=>s.taken)?`<p class="note">${t('noSlots')}</p>`:''}
-      `+(st.barber>=0&&isOff(st.barber,st.day)?'':`<div class="slots">`+slots.map(s=>`<button class="slot ${st.time===s.idx?'sel':''}" ${s.taken?'disabled':''} onclick="st.time=${s.idx};renderStep()">${s.time}</button>`).join('')+`</div>`)+`
-      <div class="legend" ${st.barber>=0&&isOff(st.barber,st.day)?'hidden':''}><span>▢ ${t('free')}</span><span style="text-decoration:line-through">${t('taken')}</span></div>`;
+      <div class="days">`+days.map((d,i)=>`<button class="day ${key(d)===st.day?'sel':''} ${dayClosed(key(d))?'off':''}" onclick="st.day='${key(d)}';st.time=null;renderStep()"><small>${i===0?t('today'):fmtDay(d,{weekday:'short'})}</small><b>${d.getDate()}</b><small>${fmtDay(d,{month:'short'})}</small></button>`).join('')+`</div>
+      ${st.barber>=0&&isOff(st.barber,st.day)?`<p class="note off-note">${t('custOff').replace('{b}',BARBERS[st.barber].n)}</p>`:dayClosed(st.day)?`<p class="note off-note">${t('custFew').replace('{n}',st.people)}</p>`:slots.every(s=>s.taken)?`<p class="note">${t('noSlots')}</p>`:''}
+      `+(dayClosed(st.day)?'':`<div class="slots">`+slots.map(s=>`<button class="slot ${st.time===s.idx?'sel':''}" ${s.taken?'disabled':''} onclick="st.time=${s.idx};renderStep()">${s.time}</button>`).join('')+`</div>`)+`
+      <div class="legend" ${dayClosed(st.day)?'hidden':''}><span>▢ ${t('free')}</span><span style="text-decoration:line-through">${t('taken')}</span></div>`;
     next.disabled=st.time===null;
   }
   if(st.step===3){
     body.innerHTML=`<div class="step-title">${t('s4')}</div>
-      <div class="summary">
-        <div><span>${t('sum').svc}</span><b>${t('svcs')[st.svc][0]}</b></div>
+      ${st.people===1?`<div class="summary">
+        <div><span>${t('sum').svc}</span><b>${t('svcs')[st.svcs[0]][0]}</b></div>
         <div><span>${t('sum').barber}</span><b>${barberName(st.barber)}</b></div>
         <div><span>${t('sum').when}</span><b>${fmtDay(fromKey(st.day),{weekday:'short',day:'numeric',month:'short'})} · ${TIMES[st.time]}</b></div>
-        <div><span>${t('sum').price}</span><b>€${SVC[st.svc][0]}</b></div>
-      </div>
+        <div><span>${t('sum').price}</span><b>€${SVC[st.svcs[0]][0]}</b></div>
+      </div>`:`<div class="summary">
+        <div><span>${t('sum').when}</span><b>${fmtDay(fromKey(st.day),{weekday:'short',day:'numeric',month:'short'})}</b></div>
+        ${(groupPlan(st.day,st.time)||[]).map((p,k)=>`<div class="pline"><span>${t('person').replace('{n}',k+1)}</span><b>${TIMES[p.slot]} · ${t('svcs')[p.svc][0]} · ${BARBERS[p.barber].n}</b></div>`).join('')}
+        <div class="ptotal"><span>${t('sumTotal')}</span><b>€${st.svcs.reduce((a,v)=>a+SVC[v][0],0)}</b></div>
+      </div>`}
       <div class="field"><label>${t('name')}</label><input id="fName" value="${esc(st.name)}" oninput="st.name=this.value" autocomplete="name"></div>
       <div class="field"><label>${t('tel')}</label>
         <div class="phone-row">
@@ -887,11 +952,11 @@ function go(dir){
   if(dir>0&&st.step===3){
     if(st.name.trim().length<2){document.getElementById('err').textContent=t('errNameOnly');return}
     if(!fullPhone()){document.getElementById('err').textContent=t('errPhone');return}
-    const len=slotsLen(st.svc);
-    const barber=st.barber===-1?BARBERS.findIndex((_,b)=>canFit(b,st.day,st.time,len)):st.barber;
-    if(barber<0||!canFit(barber,st.day,st.time,len)){st.step=2;st.time=null;renderStep();return}
-    const b={id:nextId++,barber,day:st.day,slot:st.time,len,svc:st.svc,name:st.name.trim(),tel:fullPhone(),notes:st.notes,src:"web",status:"pending",lang};
-    bookings.push(b);persist();st.done=b;renderStep();notify(b);sendTelegram(b);return;
+    const plan=groupPlan(st.day,st.time);
+    if(!plan){st.step=2;st.time=null;renderStep();return}
+    const gid=plan.length>1?nextId:null;
+    const rows=plan.map((p,k)=>({id:nextId++,barber:p.barber,day:st.day,slot:p.slot,len:slotsLen(p.svc),svc:p.svc,name:st.name.trim(),tel:fullPhone(),notes:st.notes,src:"web",status:"pending",lang,grp:gid,gi:k+1,gn:plan.length}));
+    bookings.push(...rows);persist();st.done=rows;renderStep();rows.forEach(notify);sendTelegram(rows[0]);return;
   }
   let s=st.step+dir;
   if(st.skipBarber&&s===1)s+=dir;
@@ -975,8 +1040,19 @@ function clientDate(day,L){
   const d=fromKey(day),T2=T[L],w=T2.days[(d.getDay()+6)%7],m=T2.months[d.getMonth()];
   return L==='de'?`${w}, ${d.getDate()}. ${m}`:L==='en'?`${w}, ${d.getDate()} ${m}`:`${w}, ${d.getDate()} ${m}`;
 }
+function groupOf(b){   // every booking of the same group (a barber's panel only loads his own, so the server sends the full list)
+  if(b.group&&b.group.length)return b.group;
+  return b.grp?bookings.filter(x=>x.grp===b.grp).map(x=>({slot:x.slot,svc:x.svc,barber:x.barber})):[b];
+}
 function clientMsg(b,kind){
   const L=b.lang||'sq',T2=T[L];
+  const g=groupOf(b);
+  if(g.length>1){
+    const gs=[...g].sort((a,c)=>a.slot-c.slot||a.barber-c.barber);
+    const lines=gs.map(x=>'• '+TIMES[x.slot]+' · '+T2.svcs[x.svc][0]+' · '+BARBERS[x.barber].n).join('\n');
+    return T2[kind==='ok'?'msgOkG':'msgNoG'].replace('{name}',b.name.split(' ')[0]).replace('{n}',gs.length)
+      .replace('{date}',clientDate(b.day,L)).replace('{lines}',lines).replace('{times}',[...new Set(gs.map(x=>TIMES[x.slot]))].join(', '));
+  }
   return T2[kind==='ok'?'msgOk':'msgNo']
     .replace('{name}',b.name.split(' ')[0]).replace('{barber}',BARBERS[b.barber].n)
     .replace('{date}',clientDate(b.day,L))
@@ -1005,8 +1081,9 @@ function openWhatsApp(b,kind){
   }
 }
 
-function doConfirm(id){const b=bookings.find(x=>x.id===id);if(!b)return;b.status='confirmed';markRead(id);persist();renderAdmin();toast(t('confirmedToast'))}
-function doDecline(id){bookings=bookings.filter(x=>x.id!==id);persist();adm.view='grid';renderAdmin();toast(t('declinedToast'))}
+const sameGroup=(b,x)=>x.id===b.id||(b.grp&&x.grp===b.grp);
+function doConfirm(id){const b=bookings.find(x=>x.id===id);if(!b)return;bookings.filter(x=>sameGroup(b,x)).forEach(x=>{x.status='confirmed';markRead(x.id)});persist();renderAdmin();toast(t('confirmedToast'))}
+function doDecline(id){const b=bookings.find(x=>x.id===id);if(!b)return;bookings=bookings.filter(x=>!sameGroup(b,x));persist();adm.view='grid';renderAdmin();toast(t('declinedToast'))}
 /* Konfirmo: confirms right away, then asks about WhatsApp. Refuzo: asks first (with or without a WhatsApp message). */
 let askB=null;
 function askSheet(html){
@@ -1015,7 +1092,11 @@ function askSheet(html){
   ov.querySelector('.modal').innerHTML=html;ov.classList.add('show');
 }
 function closeAsk(){const ov=document.getElementById('askOv');if(ov)ov.classList.remove('show');askB=null}
-function askWho(b){return `<p class="ask-who"><b>${esc(b.name)}</b> · ${fmtDay(fromKey(b.day),{weekday:'short',day:'numeric',month:'short'})} · ${TIMES[b.slot]}</p>`}
+function askWho(b){
+  const g=groupOf(b);
+  if(g.length>1)return `<p class="ask-who"><b>${esc(b.name)}</b> · ${t('grpTag').replace('{n}',g.length)} · ${fmtDay(fromKey(b.day),{weekday:'short',day:'numeric',month:'short'})}<br>${[...g].sort((a,c)=>a.slot-c.slot||a.barber-c.barber).map(x=>`${TIMES[x.slot]} · ${t('svcs')[x.svc][0]} · ${BARBERS[x.barber].n}`).join('<br>')}</p>`;
+  return `<p class="ask-who"><b>${esc(b.name)}</b> · ${fmtDay(fromKey(b.day),{weekday:'short',day:'numeric',month:'short'})} · ${TIMES[b.slot]}</p>`;
+}
 function confirmBooking(id){   // asks first: tapping outside or "Anulo" changes nothing
   const b=bookings.find(x=>x.id===id);if(!b)return;
   askB={...b};
@@ -1122,10 +1203,15 @@ function renderAdmin(){
 
   // waiting online bookings (all days) – confirm / decline right here
   const pending=bookings.filter(b=>vis(b)&&b.src==='web'&&b.status==='pending'&&!isPast(b.day,b.slot)).sort((a,b)=>(a.day+String(a.slot).padStart(2,'0')).localeCompare(b.day+String(b.slot).padStart(2,'0')));
+  const seenGrp=new Set();
+  const pend1=pending.filter(b=>{if(!b.grp)return true;if(seenGrp.has(b.grp))return false;seenGrp.add(b.grp);return true});
+  pending.length=0;pending.push(...pend1);
   const pendHTML=pending.length?`<div class="sp-wait">
       <h4>⏳ ${t('waitH')} <em>${pending.length}</em></h4><p class="note" style="margin:0 0 10px">${t('waitHint')}</p>
       ${pending.map(b=>`<div class="pcard">
-        <div class="pinfo"><b>${esc(b.name)}</b><span>${svcName(b)}${owner?' · '+BARBERS[b.barber].n:''}</span><span class="pwhen">${fmtDay(fromKey(b.day),{weekday:'short',day:'numeric',month:'short'})} · ${TIMES[b.slot]}</span></div>
+        ${groupOf(b).length>1
+          ?`<div class="pinfo"><b>${esc(b.name)} <em class="gtag">${t('grpTag').replace('{n}',groupOf(b).length)}</em></b><span class="pwhen">${fmtDay(fromKey(b.day),{weekday:'short',day:'numeric',month:'short'})}</span>${[...groupOf(b)].sort((a,c)=>a.slot-c.slot||a.barber-c.barber).map(x=>`<span>${TIMES[x.slot]} · ${t('svcs')[x.svc][0]} · ${BARBERS[x.barber].n}</span>`).join('')}</div>`
+          :`<div class="pinfo"><b>${esc(b.name)}</b><span>${svcName(b)}${owner?' · '+BARBERS[b.barber].n:''}</span><span class="pwhen">${fmtDay(fromKey(b.day),{weekday:'short',day:'numeric',month:'short'})} · ${TIMES[b.slot]}</span></div>`}
         <div class="pact"><button class="btn btn-ok" onclick="confirmBooking(${b.id})">✓ ${t('okBtn')}</button><button class="btn btn-danger" onclick="declineBooking(${b.id})">✕ ${t('declineBtn')}</button></div>
       </div>`).join('')}
     </div>`:'';
@@ -1142,7 +1228,7 @@ function renderAdmin(){
     return `<div class="srow ${past?'past':''} ${open?'open':''} ${brk?'brk':''}" onclick="adm.open=${open?'null':b.id};adm.del=null;renderAdmin()">
       <div class="rt">${TIMES[b.slot]}<small>${endTime(b)}</small></div>
       <div class="rb"><b>${brk?t('breakName'):(esc(b.name)||'—')}</b><span>${brk?'':svcName(b)}</span></div>
-      ${pend?`<em class="tag">${t('stPending')}</em>`:''}${owner?`<em class="who b${b.barber}">${BARBERS[b.barber].n}</em>`:''}
+      ${b.gn>1?`<em class="tag gtag">${t('grpShort').replace('{i}',b.gi).replace('{n}',b.gn)}</em>`:''}${pend?`<em class="tag">${t('stPending')}</em>`:''}${owner?`<em class="who b${b.barber}">${BARBERS[b.barber].n}</em>`:''}
     </div>
     ${open?`<div class="ract">
       ${b.tel?`<a class="btn btn-ghost" href="tel:${esc(b.tel.replace(/\s/g,''))}">📞 ${t('callBtn')}</a>`:''}
@@ -1157,12 +1243,13 @@ function renderAdmin(){
   const offWho=owner?filt:adm.user;
   const offersOff=offWho>=0;
   const offNow=offersOff&&isOff(offWho,adm.day);
+  const offWeek=offersOff&&weeklyOff(offWho,adm.day);
   const offList=owner&&filt===-1?BARBERS.map((b,i)=>isOff(i,adm.day)?b.n:null).filter(Boolean):[];
   const offBlock=offersOff
     ?(offNow
-      ?`<div class="sp-off">${owner?BARBERS[offWho].n+' · ':''}${t('offBanner')}
+      ?`<div class="sp-off">${owner?BARBERS[offWho].n+' · ':''}${offWeek?t('offWeekly').replace('{d}',offDayName(offWho).toLowerCase()):t('offBanner')}
           ${list.length?`<p class="off-warn">${t('offWarn').replace('{n}',list.length)}</p>`:''}
-          <button class="btn btn-ghost" onclick="setDayOff(${offWho},'${adm.day}',false)">${t('offUndo')}</button></div>`
+          ${offWeek?'':`<button class="btn btn-ghost" onclick="setDayOff(${offWho},'${adm.day}',false)">${t('offUndo')}</button>`}</div>`
       :`<button class="btn btn-ghost sp-offbtn" onclick="setDayOff(${offWho},'${adm.day}',true)">${t('dayOffBtn')}${owner?' · '+BARBERS[offWho].n:''}</button>`)
     :(offList.length?`<div class="sp-off">${t('dayOffBtn')}: ${offList.join(', ')}</div>`:`<p class="note" style="margin:0 0 10px">${t('offPick')}</p>`);
   el.innerHTML=`
@@ -1238,8 +1325,8 @@ if(API_URL){
     if(st.sending)return;
     st.sending=true;const nb=document.getElementById('nextBtn');nb.disabled=true;nb.textContent='…';
     try{
-      const d=await api('/book',{method:'POST',body:{barber:st.barber,day:st.day,slot:st.time,svc:st.svc,name:st.name.trim(),tel:fullPhone(),notes:st.notes,lang}});
-      st.sending=false;st.done={...d.booking,name:st.name.trim(),tel:fullPhone(),lang};renderStep();refreshSlots();
+      const d=await api('/book',{method:'POST',body:{barber:st.barber,day:st.day,slot:st.time,svc:st.svcs[0],people:st.svcs,mode:st.mode,name:st.name.trim(),tel:fullPhone(),notes:st.notes,lang}});
+      st.sending=false;st.done=(d.bookings||[d.booking]).map(r=>({...r,name:st.name.trim(),tel:fullPhone(),lang}));renderStep();refreshSlots();
     }catch(e){
       st.sending=false;
       if(e.status===409){await refreshSlots();st.step=2;st.time=null;renderStep();document.getElementById('err').textContent=t('takenErr')}
@@ -1253,7 +1340,7 @@ if(API_URL){
     if(!adm.auth)return;
     try{
       const d=await api('/staff/bookings?'+range(),{staff:true});
-      bookings=d.bookings.map(r=>({id:r.id,barber:r.barber,day:r.day,slot:r.slot,len:r.len,svc:r.svc,name:r.name||'',tel:r.tel||'',notes:r.notes||'',src:r.src,status:r.status,lang:r.lang||'sq',read:!!r.is_read,at:new Date(r.created_at)}));
+      bookings=d.bookings.map(r=>({id:r.id,barber:r.barber,day:r.day,slot:r.slot,len:r.len,svc:r.svc,name:r.name||'',tel:r.tel||'',notes:r.notes||'',src:r.src,status:r.status,lang:r.lang||'sq',read:!!r.is_read,at:new Date(r.created_at),grp:r.grp||null,gi:r.gi||null,gn:r.gn||null,group:r.group||null}));
       notifs=bookings.filter(b=>b.src==='web').sort((a,b)=>b.at-a.at).map(b=>({bid:b.id,read:b.read,at:b.at}));
       // first load after signing in: pop up the newest unread online booking; afterwards: every new one
       const unreadWeb=bookings.filter(b=>b.src==='web'&&!b.read&&mine(b)).sort((a,b)=>b.at-a.at);
@@ -1279,12 +1366,13 @@ if(API_URL){
   };
   doConfirm=function(id){
     const b=bookings.find(x=>x.id===id);if(!b)return;
-    b.status='confirmed';b.read=true;renderAdmin();
+    bookings.filter(x=>sameGroup(b,x)).forEach(x=>{x.status='confirmed';x.read=true});renderAdmin();   // a group is confirmed together
     api('/staff/bookings/'+id,{method:'PATCH',body:{status:'confirmed'},staff:true}).then(()=>toast(t('confirmedToast'))).catch(()=>toast(t('netErr'))).finally(loadStaff);
   };
   doDecline=function(id){
-    bookings=bookings.filter(x=>x.id!==id);adm.view='grid';renderAdmin();
-    api('/staff/bookings/'+id,{method:'DELETE',staff:true}).then(()=>toast(t('declinedToast'))).catch(()=>toast(t('netErr'))).finally(loadStaff);
+    const b=bookings.find(x=>x.id===id);
+    bookings=bookings.filter(x=>!(b?sameGroup(b,x):x.id===id));adm.view='grid';renderAdmin();
+    api('/staff/bookings/'+id+'?group=1',{method:'DELETE',staff:true}).then(()=>toast(t('declinedToast'))).catch(()=>toast(t('netErr'))).finally(loadStaff);
   };
   delBooking=function(id){
     bookings=bookings.filter(x=>x.id!==id);adm.view='grid';renderAdmin();
