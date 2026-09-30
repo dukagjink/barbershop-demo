@@ -1001,7 +1001,9 @@ function showPush(b){
   setTimeout(()=>{
     const el=document.getElementById('push');
     el.innerHTML=`<div class="ic"><svg viewBox="0 0 201.1578 117.48099" fill="currentColor" style="width:30px"><use href="#bingo-wordmark"/></svg></div><div style="flex:1"><div class="tp"><span>Barbershop Bingo · ${BARBERS[b.barber].n}</span><span>${t('nNow')}</span></div><button class="px" aria-label="Mbyll" onclick="event.stopPropagation();dismissPush(0,-1)">×</button>
-      <b>${t('nNew')}</b><p>${esc(b.name)} · ${t('svcs')[b.svc][0]}<br>${fmtDay(fromKey(b.day),{weekday:'short',day:'numeric',month:'short'})} · ${TIMES[b.slot]}</p></div>`;
+      ${groupOf(b).length>1
+        ?`<b>${t('nNew')} · ${t('grpTag').replace('{n}',groupOf(b).length)}</b><p>${esc(b.name)} · ${fmtDay(fromKey(b.day),{weekday:'short',day:'numeric',month:'short'})}<br>${[...groupOf(b)].sort((a,c)=>a.slot-c.slot||a.barber-c.barber).map(x=>`${TIMES[x.slot]} · ${t('svcs')[x.svc][0]} · ${BARBERS[x.barber].n}`).join('<br>')}</p></div>`
+        :`<b>${t('nNew')}</b><p>${esc(b.name)} · ${t('svcs')[b.svc][0]}<br>${fmtDay(fromKey(b.day),{weekday:'short',day:'numeric',month:'short'})} · ${TIMES[b.slot]}</p></div>`}`;
     el.classList.add('show');clearTimeout(notify.h);notify.h=setTimeout(()=>el.classList.remove('show'),7000);
     if(document.getElementById('ownerOv').classList.contains('show'))renderAdmin();
   },600);
@@ -1371,7 +1373,7 @@ if(API_URL){
       const unreadWeb=bookings.filter(b=>b.src==='web'&&!b.read&&mine(b)).sort((a,b)=>b.at-a.at);
       const fresh=known?unreadWeb.filter(b=>!known.has(b.id)):unreadWeb.slice(0,1);
       known=new Set(bookings.map(b=>b.id));
-      fresh.forEach(showPush);
+      const shownGrp=new Set();fresh.filter(b=>!b.grp||(!shownGrp.has(b.grp)&&shownGrp.add(b.grp))).forEach(showPush);
       if(adm.view==='grid'||adm.view==='notifs')renderAdmin();   // never wipe a form being filled in
     }catch(e){if(e.status===401)pinChanged()}
   };
